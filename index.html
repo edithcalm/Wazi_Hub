@@ -8,7 +8,7 @@
   <meta name="author" content="Wazi Hub" />
   <link rel="icon" href="favicon.ico" />
   <link rel="stylesheet" href="style.css" />
-
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </head>
 <body>
@@ -70,10 +70,13 @@
     </section>
 
     <!-- ===== OPEN BUDGET TRACKER ===== -->
-    <section id="budget-tracker" aria-labelledby="budget-title">
-      <div class="container">
-        <h2 id="budget-title">Open Budget Tracker</h2>
-        <form aria-label="Budget filters" class="grid grid-3" style="align-items:end;">
+    <section id="budget">
+  <h3>Open Budget Tracker</h3>
+  <div class="content">
+    <span class="badge">Budget Transparency</span>
+    <p>Visual dashboards of national & county budgets with planned vs actual spending.</p>
+  </div>
+</section>
           <label>Year
             <select name="year" aria-label="Year">
               <option>2025/26</option>
@@ -251,20 +254,6 @@
       </div>
     </section>
 
-    <!-- ===== BLOCKCHAIN TRANSPARENCY (FUTURE) ===== -->
-    <section id="blockchain" aria-labelledby="blockchain-title">
-      <div class="container">
-        <h2 id="blockchain-title">Blockchain Transparency (Future)</h2>
-        <ol>
-          <li>Budget release recorded on-chain</li>
-          <li>Procurement award hashed & time‑stamped</li>
-          <li>Milestone payments logged immutably</li>
-          <li>Citizen can verify transaction proof for each step</li>
-        </ol>
-        <p class="muted">This section will show a public audit trail and verification badges once integrated.</p>
-      </div>
-    </section>
-
     <!-- ===== ABOUT / FOOTER ===== -->
     <section id="about" aria-labelledby="about-title">
       <div class="container">
@@ -290,9 +279,6 @@
     </footer>
   </main>
 
-  <script>
-    // Simple utility for current year in the footer (no frameworks needed)
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+ <script src="script.js"></script>
 </body>
 </html>
