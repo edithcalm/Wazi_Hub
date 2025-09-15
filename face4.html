@@ -32,10 +32,10 @@
   .mute{ color: black;}
 
   /* ===== HEADER ===== */
-  .site-header{ position:sticky; top:0; z-index:20; background:linear-gradient(90deg,var(--kenya-black) 0 30%, var(--kenya-red) 30% 65%, var(--kenya-green) 65% 100%); }
+  .site-header{ position:sticky; top:0; z-index:20; background:linear-gradient(90deg,var(--kenya-black) 0 30%, var(--kenya-red) 30% 65%, var(--kenya-green) 65% 100%); box-shadow: 0 2px 10px rgba(0,0,0,.12); }
   /*  */
 
-  .brand{ display:flex; align-items:center; gap:.75rem; padding:.4rem 0; }
+  .brand{ display:flex; align-items:center; gap:.5rem; padding:0; }
   .brand .logo{ width:42px; height:28px; border:2px solid #fff; border-radius:4px; display:grid; grid-template-rows:1fr 1fr 1fr; overflow:hidden; }
   .brand .logo span:nth-child(1){ background:var(--kenya-black); }
   .brand .logo span:nth-child(3){ background:var(--kenya-green); }
@@ -43,27 +43,31 @@
   .brand small{ color:#fff; opacity:.9; font-weight:600; font-size:.9rem; }
 
   nav ul{ list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:.25rem .5rem; }
-  nav a{ display:inline-block; padding:.55rem .85rem; font-weight:700; text-decoration:none; background:rgba(255,255,255,.08); color:#fff; border:1px solid rgba(255,255,255,.28); border-radius:999px; }
-  nav a:hover, nav a:focus{ background:#fff; color:var(--kenya-black); outline: none; }
+  nav a{ display:inline-block; padding:.32rem .6rem; font-weight:700; text-decoration:none; background:rgba(255,255,255,.08); color:#fff; border:1px solid rgba(255,255,255,.28); border-radius:999px; transition: background .15s ease, color .15s ease, transform .06s ease; }
+  nav a:hover, nav a:focus{ background:#fff; color:var(--kenya-black); outline: none; transform: translateY(-1px); }
   header h1 {
       display: flex;
       align-items: center;
       gap: 0.5rem;
     }
     header h1 img {
-      width: 35px;
+      width: 24px;
       height: auto;
     }
+  /* Keep header slim without affecting other containers */
+  .site-header .container{ padding-top:6px; padding-bottom:6px; }
   /* ===== HERO ===== */
-  #home{ background: radial-gradient(1200px 350px at 50% -50px, #ffffff 0%, #f3f5f6 60%, #eef1f2 100%); border-bottom:1px solid var(--border);}
+  #home{ background: radial-gradient(1200px 350px at 50% -50px, #ffffff 0%, #f3f5f6 60%, #eef1f2 100%); border-bottom:1px solid var(--border); position: relative; }
   #home h2{ font-size: clamp(1.8rem, 4.5vw, 2.6rem); margin: .5rem 0; }
   .cta-row{ display:flex; flex-wrap:wrap; gap:.75rem; margin-top:.75rem; }
   #home {
       background-image: url('https://i.postimg.cc/CMrR51wd/Chat-GPT-Image-Aug-27-2025-12-07-41-AM.png');
       background-size: cover;
-      background-position: center;
+      background-position: center 35%;
       color: white;
     }
+  #home::before{ content:""; position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.2) 30%, rgba(0,0,0,0.25) 100%); pointer-events:none; }
+  #home .container{ position:relative; z-index:1; padding-top: 2.25rem; padding-bottom:2.25rem; min-height: 48vh; display:flex; flex-direction:column; justify-content:center; }
   /* ===== UTILS ===== */
   .flex{ display:flex; gap:.75rem; align-items:center;}
   .grid{ display:grid; gap:1rem; }
@@ -71,15 +75,16 @@
   .grid-3{ grid-template-columns: repeat(3, minmax(0,1fr)); }
   @media (max-width: 900px){ .grid-3{ grid-template-columns:1fr; } .grid-2{ grid-template-columns:1fr; } nav ul{ justify-content: center; } }
   .btn{ --bg:var(--kenya-green); --fg:#fff;
-    background: var(--bg); color:var(--fg); border:0; border-radius:999px; padding:.85rem 1.1rem; font-weight:800; text-decoration:none; display:inline-flex; gap:.5rem; align-items:center; justify-content:center; cursor:pointer; box-shadow: 0 4px 0 rgba(0,0,0,.2); transform: translateY(0); transition: .15s ease-in-out; }
-  .btn:active{ transform: translateY(2px); box-shadow: 0 2px 0 rgba(0,0,0,.2);}
+    background: var(--bg); color:var(--fg); border:0; border-radius:999px; padding:.85rem 1.1rem; font-weight:800; text-decoration:none; display:inline-flex; gap:.5rem; align-items:center; justify-content:center; cursor:pointer; box-shadow: 0 6px 14px rgba(0,0,0,.18); transform: translateY(0); transition: transform .12s ease, box-shadow .12s ease, filter .12s ease; }
+  .btn:hover{ filter: brightness(1.02); transform: translateY(-1px); box-shadow: 0 10px 18px rgba(0,0,0,.22);} 
+  .btn:active{ transform: translateY(1px); box-shadow: 0 4px 10px rgba(0,0,0,.18);} 
   .btn.secondary{ --bg:#fff; --fg:var(--kenya-black); border:2px solid var(--kenya-black);}
   .badge{ display:inline-block; padding:.2rem .55rem; border-radius:999px; font-weight:700; font-size:.8rem; background:#eee; }
   .badge[data-status="ongoing"]{ background:#e8f6ee; color:#0c7a43; }
   .badge[data-status="awarded"]{ background:#fff1f1; color:#9c1c1c; }
 
   /* ===== CARDS / PANELS ===== */
-  .card{ background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:1rem; }
+  .card{ background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:1rem; box-shadow: 0 2px 10px rgba(0,0,0,.05); }
   .panel-title{ font-size:1.15rem; font-weight:800; margin: 0 0 .5rem; }
 
   /* ===== CHART AREAS ===== */
@@ -89,9 +94,11 @@
   .legend{ display:grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap:.4rem .75rem; margin-top:.5rem; font-size:.95rem; }
 
   /* ===== TABLE ===== */
-  table{ width:100%; border-collapse: collapse; background:#fff; border:1px solid var(--border); border-radius:12px; overflow:hidden; }
-  th, td{ padding:.75rem; border-bottom:1px solid var(--border); text-align:left; font-size:1rem; }
-  thead th{ background:#f3f5f6; font-size:1.05rem; }
+  table{ width:100%; border-collapse: separate; border-spacing:0; background:#fff; border:1px solid var(--border); border-radius:12px; overflow:hidden; }
+  th, td{ padding:.9rem; border-bottom:1px solid var(--border); text-align:left; font-size:1rem; }
+  thead th{ position: sticky; top: 0; background:#f3f5f6; font-size:1.05rem; z-index:1; }
+  tbody tr:nth-child(odd){ background:#fafafa; }
+  tbody tr:hover{ background:#f2f7f4; }
   caption{ padding:.5rem; }
 
   /* ===== FORM ===== */
@@ -113,7 +120,7 @@
   #map{ height:280px; border:1px solid var(--border); border-radius:var(--radius); }
 
   /* ===== FOOTER ===== */
-  footer{ background:#0d0f10; color:#e9eef2; margin-top: 2rem; }
+  footer{ background:#0d0f10; color:#e9eef2; margin-top: 2rem; border-top: 1px solid rgba(255,255,255,.06); }
   footer a{ color:#cfe3ff; }
 </style>
 </head>
@@ -141,9 +148,7 @@
         <li><a href="#budget-tracker" data-i18n="nav.budgets">Budgets</a></li>
         <li><a href="#open-contracting" data-i18n="nav.contracts">Contracts</a></li>
         <li><a href="#projects" data-i18n="nav.projects">Projects</a></li>
-        <li><a href="#channels" data-i18n="nav.channels">USSD & WhatsApp</a></li>
         <li><a href="#report" data-i18n="nav.report">Report</a></li>
-        <li><a href="#about" data-i18n="nav.about">About</a></li>
       </ul>
     </nav>
   </div>
@@ -203,6 +208,7 @@
           <option value="som">Somali</option>
           <option value="tuk">Turkana</option>
           <option value="meru">Kĩmerũ</option>
+
         </select>
         <button class="btn" id="apply-lang" type="button" style="--bg:var(--kenya-black)" data-i18n="lang.apply">Apply</button>
       </div>
@@ -229,7 +235,7 @@
             <select id="budget-year" class="border rounded px-2 py-1">
         <option>2025/26</option><option>2024/25</option><option>2023/24</option>
         <option>2022/23</option><option>2021/22</option><option>2020/21</option>
-        <option>2019/20</option><option>2018/19</option>
+        <option>2019/20</option><option>2018/19</option><option> 2017/18</option>
           </select>
         </label>
         <label><span data-i18n="filters.sector">Sector</span>
@@ -371,6 +377,24 @@
               <td>HealthWorks KE</td>
               <td>340,000,000</td>
               <td>2025-06-02</td>
+              <td><span class="badge" data-status="awarded" data-i18n="status.awarded">Awarded</span></td>
+              <td><a href="#" style="color:var(--kenya-red); font-weight:700;" data-i18n="contracts.report">Report</a></td>
+            </tr>
+            <tr>
+              <td>PPIP-003</td>
+              <td>Garissa Solar Mini-Grid Phase 1</td>
+              <td>SunGrid Africa</td>
+              <td>210,000,000</td>
+              <td>2025-05-18</td>
+              <td><span class="badge" data-status="ongoing" data-i18n="status.ongoing">Ongoing</span></td>
+              <td><a href="#" style="color:var(--kenya-red); font-weight:700;" data-i18n="contracts.report">Report</a></td>
+            </tr>
+            <tr>
+              <td>PPIP-004</td>
+              <td>Kiambu Community Water Project</td>
+              <td>AquaWorks Consortium</td>
+              <td>85,000,000</td>
+              <td>2025-04-11</td>
               <td><span class="badge" data-status="awarded" data-i18n="status.awarded">Awarded</span></td>
               <td><a href="#" style="color:var(--kenya-red); font-weight:700;" data-i18n="contracts.report">Report</a></td>
             </tr>
@@ -764,7 +788,7 @@
 
   // ===== MAP: DUMMY PROJECT PINS =====
   // Map centered roughly on Kenya
-  const map = L.map('map', { zoomControl: true }).setView([0.3, 37.8], 6);
+  const map = L.map('map', { zoomControl: true, scrollWheelZoom: false }).setView([0.3, 37.8], 6);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 18, attribution: '&copy; OpenStreetMap'
   }).addTo(map);
@@ -775,7 +799,10 @@
     { name:"Mombasa Clinic Expansion", sector:"Health", county:"Mombasa", lat:-4.0435, lng:39.6682, budget: 65e6, spent: 58e6, progress:88, status:"Awarded" },
     { name:"Garissa Solar Mini-Grid", sector:"Energy", county:"Garissa", lat:-0.453, lng:39.646, budget: 150e6, spent: 40e6, progress:28, status:"Ongoing" },
     { name:"Nakuru Dispensary", sector:"Health", county:"Nakuru", lat:-0.3031, lng:36.0800, budget: 45e6, spent: 20e6, progress:45, status:"Ongoing" },
-    { name:"Eldoret Agro Park", sector:"Agriculture", county:"Uasin Gishu", lat:0.5143, lng:35.2698, budget: 210e6, spent: 95e6, progress:41, status:"Ongoing" }
+    { name:"Eldoret Agro Park", sector:"Agriculture", county:"Uasin Gishu", lat:0.5143, lng:35.2698, budget: 210e6, spent: 95e6, progress:41, status:"Ongoing" },
+    { name:"Machakos ICT Hub", sector:"Governance", county:"Machakos", lat:-1.5177, lng:37.2634, budget: 80e6, spent: 30e6, progress:35, status:"Ongoing" },
+    { name:"Nyeri Rural Water Scheme", sector:"Water & Sanitation", county:"Nyeri", lat:-0.4200, lng:36.9519, budget: 55e6, spent: 22e6, progress:33, status:"Ongoing" },
+    { name:"Turkana Wind Trial Site", sector:"Energy", county:"Turkana", lat:3.1150, lng:35.5970, budget: 95e6, spent: 50e6, progress:52, status:"Ongoing" }
   ];
 
   projects.forEach(p=>{
