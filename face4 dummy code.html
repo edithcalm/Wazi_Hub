@@ -32,42 +32,38 @@
   .mute{ color: black;}
 
   /* ===== HEADER ===== */
-  .site-header{ position:sticky; top:0; z-index:20; background:linear-gradient(90deg,var(--kenya-black) 0 30%, var(--kenya-red) 30% 65%, var(--kenya-green) 65% 100%); box-shadow: 0 2px 10px rgba(0,0,0,.12); }
+  .site-header{ position:sticky; top:0; z-index:20; background:linear-gradient(90deg,var(--kenya-black) 0 30%, var(--kenya-red) 30% 65%, var(--kenya-green) 65% 100%); }
   /*  */
 
-  .brand{ display:flex; align-items:center; gap:.5rem; padding:0; }
-  .brand .logo{ width:42px; height:28px; border:2px solid #fff; border-radius:4px; display:grid; grid-template-rows:1fr 1fr 1fr; overflow:hidden; }
+  .brand{ display:flex; align-items:center; gap:.75rem; padding:.2rem 0; }
+  .brand .logo{ width:32px; height:22px; border:2px solid #fff; border-radius:4px; display:grid; grid-template-rows:1fr 1fr 1fr; overflow:hidden; }
   .brand .logo span:nth-child(1){ background:var(--kenya-black); }
   .brand .logo span:nth-child(3){ background:var(--kenya-green); }
   .brand h1{ margin:0; font-size: clamp(1.25rem, 3vw, 1.75rem); color:#fff; letter-spacing:.2px; }
   .brand small{ color:#fff; opacity:.9; font-weight:600; font-size:.9rem; }
 
   nav ul{ list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:.25rem .5rem; }
-  nav a{ display:inline-block; padding:.32rem .6rem; font-weight:700; text-decoration:none; background:rgba(255,255,255,.08); color:#fff; border:1px solid rgba(255,255,255,.28); border-radius:999px; transition: background .15s ease, color .15s ease, transform .06s ease; }
-  nav a:hover, nav a:focus{ background:#fff; color:var(--kenya-black); outline: none; transform: translateY(-1px); }
+  nav a{ display:inline-block; padding:.35rem .45rem; font-weight:700; text-decoration:none; background:rgba(255,255,255,.08); color:#fff; border:1px solid rgba(255,255,255,.28); border-radius:999px; }
+  nav a:hover, nav a:focus{ background:#fff; color:var(--kenya-black); outline: none; }
   header h1 {
       display: flex;
       align-items: center;
       gap: 0.5rem;
     }
     header h1 img {
-      width: 24px;
+      width: 25px;
       height: auto;
     }
-  /* Keep header slim without affecting other containers */
-  .site-header .container{ padding-top:6px; padding-bottom:6px; }
   /* ===== HERO ===== */
-  #home{ background: radial-gradient(1200px 350px at 50% -50px, #ffffff 0%, #f3f5f6 60%, #eef1f2 100%); border-bottom:1px solid var(--border); position: relative; }
+  #home{ background: radial-gradient(1200px 350px at 50% -50px, #ffffff 0%, #f3f5f6 60%, #eef1f2 100%); border-bottom:1px solid var(--border);}
   #home h2{ font-size: clamp(1.8rem, 4.5vw, 2.6rem); margin: .5rem 0; }
   .cta-row{ display:flex; flex-wrap:wrap; gap:.75rem; margin-top:.75rem; }
   #home {
       background-image: url('https://i.postimg.cc/CMrR51wd/Chat-GPT-Image-Aug-27-2025-12-07-41-AM.png');
       background-size: cover;
-      background-position: center 35%;
+      background-position: center;
       color: white;
     }
-  #home::before{ content:""; position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.2) 30%, rgba(0,0,0,0.25) 100%); pointer-events:none; }
-  #home .container{ position:relative; z-index:1; padding-top: 2.25rem; padding-bottom:2.25rem; min-height: 48vh; display:flex; flex-direction:column; justify-content:center; }
   /* ===== UTILS ===== */
   .flex{ display:flex; gap:.75rem; align-items:center;}
   .grid{ display:grid; gap:1rem; }
@@ -75,16 +71,15 @@
   .grid-3{ grid-template-columns: repeat(3, minmax(0,1fr)); }
   @media (max-width: 900px){ .grid-3{ grid-template-columns:1fr; } .grid-2{ grid-template-columns:1fr; } nav ul{ justify-content: center; } }
   .btn{ --bg:var(--kenya-green); --fg:#fff;
-    background: var(--bg); color:var(--fg); border:0; border-radius:999px; padding:.85rem 1.1rem; font-weight:800; text-decoration:none; display:inline-flex; gap:.5rem; align-items:center; justify-content:center; cursor:pointer; box-shadow: 0 6px 14px rgba(0,0,0,.18); transform: translateY(0); transition: transform .12s ease, box-shadow .12s ease, filter .12s ease; }
-  .btn:hover{ filter: brightness(1.02); transform: translateY(-1px); box-shadow: 0 10px 18px rgba(0,0,0,.22);} 
-  .btn:active{ transform: translateY(1px); box-shadow: 0 4px 10px rgba(0,0,0,.18);} 
+    background: var(--bg); color:var(--fg); border:0; border-radius:999px; padding:.85rem 1.1rem; font-weight:800; text-decoration:none; display:inline-flex; gap:.5rem; align-items:center; justify-content:center; cursor:pointer; box-shadow: 0 4px 0 rgba(0,0,0,.2); transform: translateY(0); transition: .15s ease-in-out; }
+  .btn:active{ transform: translateY(2px); box-shadow: 0 2px 0 rgba(0,0,0,.2);}
   .btn.secondary{ --bg:#fff; --fg:var(--kenya-black); border:2px solid var(--kenya-black);}
   .badge{ display:inline-block; padding:.2rem .55rem; border-radius:999px; font-weight:700; font-size:.8rem; background:#eee; }
   .badge[data-status="ongoing"]{ background:#e8f6ee; color:#0c7a43; }
   .badge[data-status="awarded"]{ background:#fff1f1; color:#9c1c1c; }
 
   /* ===== CARDS / PANELS ===== */
-  .card{ background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:1rem; box-shadow: 0 2px 10px rgba(0,0,0,.05); }
+  .card{ background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:1rem; }
   .panel-title{ font-size:1.15rem; font-weight:800; margin: 0 0 .5rem; }
 
   /* ===== CHART AREAS ===== */
@@ -94,11 +89,9 @@
   .legend{ display:grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap:.4rem .75rem; margin-top:.5rem; font-size:.95rem; }
 
   /* ===== TABLE ===== */
-  table{ width:100%; border-collapse: separate; border-spacing:0; background:#fff; border:1px solid var(--border); border-radius:12px; overflow:hidden; }
-  th, td{ padding:.9rem; border-bottom:1px solid var(--border); text-align:left; font-size:1rem; }
-  thead th{ position: sticky; top: 0; background:#f3f5f6; font-size:1.05rem; z-index:1; }
-  tbody tr:nth-child(odd){ background:#fafafa; }
-  tbody tr:hover{ background:#f2f7f4; }
+  table{ width:100%; border-collapse: collapse; background:#fff; border:1px solid var(--border); border-radius:12px; overflow:hidden; }
+  th, td{ padding:.75rem; border-bottom:1px solid var(--border); text-align:left; font-size:1rem; }
+  thead th{ background:#f3f5f6; font-size:1.05rem; }
   caption{ padding:.5rem; }
 
   /* ===== FORM ===== */
@@ -120,31 +113,11 @@
   #map{ height:280px; border:1px solid var(--border); border-radius:var(--radius); }
 
   /* ===== FOOTER ===== */
-  footer{ background:#0d0f10; color:#e9eef2; margin-top: 2rem; border-top: 1px solid rgba(255,255,255,.06); }
+  footer{ background:#0d0f10; color:#e9eef2; margin-top: 2rem; }
   footer a{ color:#cfe3ff; }
 
-  /* === Virtual Barazas Section === */
-  #barazas-section { margin-top: 18px; }
-  #barazas-section .small-muted{ color: var(--muted); font-size: .95rem; }
-  #baraza-container { display: flex; flex-direction: column; gap: 12px; }
-  .baraza-item { display: flex; flex-direction: column; gap: 8px; padding: 12px; margin-bottom: 12px; border-radius: 12px; border: 1px solid var(--border); background: linear-gradient(180deg, #fff, #f9fafb); box-shadow: 0 2px 6px rgba(0, 0, 0, .04); transition: transform .15s ease, box-shadow .15s ease; }
-  .baraza-item:hover { transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,.08); }
-  .baraza-meta { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: center; }
-  .baraza-title { font-size: 1.05rem; font-weight: 800; margin: 0; }
-  .baraza-datetime { color: var(--muted); font-size: .9rem; }
-  .baraza-actions { display: flex; gap: 8px; align-items: center; }
-  .join-btn { background: linear-gradient(90deg, var(--kenya-green, #00853F), #0b7a3a); color: #fff; border: 0; padding: 6px 12px; border-radius: 8px; cursor: pointer; font-weight: 700; font-size: .9rem; transition: background .2s ease; }
-  .join-btn:hover { background: var(--kenya-green, #00853F); }
-  .recording-link { background: #fff; border: 1px solid #ddd; padding: 6px 12px; border-radius: 8px; cursor: pointer; font-size: .85rem; text-decoration: none; color: inherit; }
-  .vote-btn { padding: 4px 8px; border-radius: 6px; border: 1px solid #ddd; background: #f3f4f6; cursor: pointer; font-weight: 700; font-size: .9rem; transition: background .2s ease; }
-  .vote-btn:hover { background: #e5e7eb; }
-  .overlay { position: fixed; inset: 0; background: rgba(0,0,0,.6); display: none; align-items: center; justify-content: center; z-index: 3000; padding: 12px; }
-  .overlay.open { display: flex; }
-  .modal { width: min(1000px, 96%); height: min(80vh, 850px); background: #000; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; }
-  .modal .toolbar { display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; color: #fff; background: rgba(255,255,255,.08); }
-  .modal .iframe-wrap { flex: 1; background: #000; }
-  .copy-btn { background: #fff; color: #000; border-radius: 8px; padding: 6px 10px; border: 0; cursor: pointer; }
-  .close-x { background: transparent; color: #fff; border: 0; font-size: 18px; padding: 6px 8px; cursor: pointer; }
+
+
 </style>
 </head>
 <body>
@@ -171,7 +144,9 @@
         <li><a href="#budget-tracker" data-i18n="nav.budgets">Budgets</a></li>
         <li><a href="#open-contracting" data-i18n="nav.contracts">Contracts</a></li>
         <li><a href="#projects" data-i18n="nav.projects">Projects</a></li>
+        <li><a href="#channels" data-i18n="nav.channels">USSD & WhatsApp</a></li>
         <li><a href="#report" data-i18n="nav.report">Report</a></li>
+        <li><a href="#about" data-i18n="nav.about">About</a></li>
       </ul>
     </nav>
   </div>
@@ -231,7 +206,6 @@
           <option value="som">Somali</option>
           <option value="tuk">Turkana</option>
           <option value="meru">Kĩmerũ</option>
-
         </select>
         <button class="btn" id="apply-lang" type="button" style="--bg:var(--kenya-black)" data-i18n="lang.apply">Apply</button>
       </div>
@@ -258,7 +232,7 @@
             <select id="budget-year" class="border rounded px-2 py-1">
         <option>2025/26</option><option>2024/25</option><option>2023/24</option>
         <option>2022/23</option><option>2021/22</option><option>2020/21</option>
-        <option>2019/20</option><option>2018/19</option><option> 2017/18</option>
+        <option>2019/20</option><option>2018/19</option>
           </select>
         </label>
         <label><span data-i18n="filters.sector">Sector</span>
@@ -403,24 +377,6 @@
               <td><span class="badge" data-status="awarded" data-i18n="status.awarded">Awarded</span></td>
               <td><a href="#" style="color:var(--kenya-red); font-weight:700;" data-i18n="contracts.report">Report</a></td>
             </tr>
-            <tr>
-              <td>PPIP-003</td>
-              <td>Garissa Solar Mini-Grid Phase 1</td>
-              <td>SunGrid Africa</td>
-              <td>210,000,000</td>
-              <td>2025-05-18</td>
-              <td><span class="badge" data-status="ongoing" data-i18n="status.ongoing">Ongoing</span></td>
-              <td><a href="#" style="color:var(--kenya-red); font-weight:700;" data-i18n="contracts.report">Report</a></td>
-            </tr>
-            <tr>
-              <td>PPIP-004</td>
-              <td>Kiambu Community Water Project</td>
-              <td>AquaWorks Consortium</td>
-              <td>85,000,000</td>
-              <td>2025-04-11</td>
-              <td><span class="badge" data-status="awarded" data-i18n="status.awarded">Awarded</span></td>
-              <td><a href="#" style="color:var(--kenya-red); font-weight:700;" data-i18n="contracts.report">Report</a></td>
-            </tr>
           </tbody>
         </table>
       </div>
@@ -467,42 +423,6 @@
     </div>
   </section>
 
-  <!-- ===== VIRTUAL BARAZAS: VIEW-ONLY ===== -->
-  <section id="barazas-section" aria-labelledby="barazas-title">
-    <div class="container">
-      <h3 id="barazas-title" class="panel-title" data-i18n="barazas.title">Virtual Barazas — Upcoming Townhalls</h3>
-      <p class="small-muted" data-i18n="barazas.text">
-        Upcoming public barazas scheduled by community organizers. 
-        Click <strong>Join</strong> to open the live meeting, or watch the <strong>Recording</strong> if you missed it. 
-        Upvote or downvote to share feedback.
-      </p>
-
-      <div id="baraza-container" style="margin-top:12px">
-        <div class="card">
-          <div class="small-muted">Loading upcoming barazas…</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Modal for embedded meeting -->
-  <div id="baraza-overlay" class="overlay" aria-hidden="true" role="dialog" aria-modal="true">
-    <div class="modal">
-      <div class="toolbar">
-        <div>
-          <strong id="modal-title" style="color:#fff">Meeting</strong>
-          <div id="modal-meta" style="color:#fff;font-size:0.95rem"></div>
-        </div>
-        <div style="display:flex;gap:8px;align-items:center">
-          <button id="copy-link" class="copy-btn">Copy Link</button>
-          <button id="modal-close" class="close-x" aria-label="Close">✕</button>
-        </div>
-      </div>
-      <div class="iframe-wrap" id="modal-iframe"></div>
-    </div>
-  </div>
-
-  
   <!-- ===== REPORT ===== -->
   <section id="report" aria-labelledby="report-title">
     <div class="container">
@@ -549,10 +469,10 @@
         <div class="channel ussd">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M2 3h20v14H6l-4 4V3zm2 2v12.17L6.17 15H20V5H4zm10 2h2v6h-2V7zm-6 0h2v6H8V7z"/></svg>
           <div>
-            <div class="big" data-i18n="channels.ussdDial">Dial <span style="color:var(--kenya-green)">*</span><span>456</span><span>*11#</span></div>
+            <div class="big" data-i18n="channels.ussdDial">Dial <span style="color:var(--kenya-green)">*</span><span>384</span><span>*11#</span></div>
             <div class="mute" data-i18n="channels.ussdText">Check budgets, projects, and report issues from any phone.</div>
             <div style="margin-top:.5rem;">
-              <button class="btn" type="button" onclick="alert('This is a demo. On a real phone, you would dial *456*11#.');" data-i18n="channels.how">How it works</button>
+              <button class="btn" type="button" onclick="alert('This is a demo. On a real phone, you would dial *384*11#.');" data-i18n="channels.how">How it works</button>
             </div>
           </div>
         </div>
@@ -609,7 +529,7 @@
   const STR = {
     en: {
       "brand.name":"Wazi Hub","brand.tag":"See More • Know More • Do More",
-      "nav.home":"Home","nav.budgets":"Budgets","nav.contracts":"Contracts","nav.projects":"Projects","nav.channels":"USSD & WhatsApp","nav.report":"Report","nav.about":"About",
+      "nav.home":"Home","nav.budgets":"Budgets","nav.contracts":"Contracts","nav.projects":"Projects","nav.barazas":"Virtual Barazas","nav.channels":"USSD & WhatsApp","nav.report":"Report","nav.about":"About",
       "hero.title":"See More. Know More. Do More.",
       "hero.text":"Track budgets, monitor projects, follow contracts, and hold leaders accountable — all in one easy dashboard built for everyone in Kenya.",
       "cta.budgets":"Explore Budgets","cta.contracts":"Open Contracting","cta.report":"Report an Issue",
@@ -625,15 +545,15 @@
       "contracts.title":"Open Contracting Portal","contracts.search":"Search","contracts.filter":"Filter","contracts.caption":"Browse, sort, and flag contracts. (Sample structure)","contracts.tender":"Tender ID","contracts.project":"Project","contracts.contractor":"Contractor","contracts.award":"Award Value (KSh)","contracts.date":"Award Date","contracts.status":"Status","contracts.flags":"Flags","contracts.report":"Report",
       "status.ongoing":"Ongoing","status.awarded":"Awarded",
       "projects.title":"Project Monitoring","projects.updates":"Updates",
-      "channels.title":"USSD & WhatsApp Chatbot","channels.ussdDial":"Dial *456*11#","channels.ussdText":"Check budgets, projects, and report issues from any phone.","channels.how":"How it works","channels.wa":"Chat on WhatsApp:","channels.openChat":"Open Chat","channels.waText":"Save +254 700 000 000 then say “Hello Wazi”.",
-      "barazas.title":"Virtual Barazas — Upcoming Townhalls","barazas.text":"Upcoming public barazas scheduled by community organizers. Click Join to open the live meeting, or watch the Recording if you missed it. Upvote or downvote to share feedback.",
+      "channels.title":"USSD & WhatsApp Chatbot","channels.ussdDial":"Dial *384*11#","channels.ussdText":"Check budgets, projects, and report issues from any phone.","channels.how":"How it works","channels.wa":"Chat on WhatsApp:","channels.openChat":"Open Chat","channels.waText":"Save +254 721606409 then say “Hello WaziHub”.",
+      "barazas.title":"Virtual Barazas-Upcoming Townhalls","barazas.text":"Upcoming public barazas scheduled by community organizers. Click Join to open the live meeting, or watch the Recording if you missed it. Upvote or downvote to share feedback.",
       "report.title":"Report an Issue","report.help":"Report delays, ghost projects, or misuse of funds. A tracking ID will be generated.","report.project":"Project (link or name)","report.location":"Location","report.issueType":"Issue Type","report.details":"Details","report.photo":"Upload Photo (optional)","report.phone":"Phone (optional for follow-up)","report.consent":"I consent to share this information for accountability purposes.","report.submit":"Submit Report",
       "about.title":"About Wazi Hub","about.text":"Wazi Hub is a Kenyan civic tech platform for budget transparency, open contracting, project monitoring, and citizen feedback. Built with the community, for the community.",
       "footer.sources":"Data Sources","footer.privacy":"Privacy","footer.faq":"FAQs"
     },
     sw: { // Kiswahili
       "brand.name":"Wazi Hub","brand.tag":"Ona Zaidi • Fahamu Zaidi • Fanya Zaidi",
-      "nav.home":"Nyumbani","nav.budgets":"Bajeti","nav.contracts":"Mikataba","nav.projects":"Miradi","nav.channels":"USSD & WhatsApp","nav.report":"Ripoti","nav.about":"Kuhusu",
+      "nav.home":"Nyumbani","nav.budgets":"Bajeti","nav.contracts":"Mikataba","nav.projects":"Miradi","nav.barazas":"Baraza za Mitandaoni","nav.channels":"USSD & WhatsApp","nav.report":"Ripoti","nav.about":"Kuhusu",
       "hero.title":"Ona Zaidi. Fahamu Zaidi. Fanya Zaidi.",
       "hero.text":"Fuatilia bajeti, fuatilia miradi, angalia mikataba, na wawajibishe viongozi — kwenye dashibodi rahisi kwa wote nchini Kenya.",
       "cta.budgets":"Chunguza Bajeti","cta.contracts":"Uwazi wa Ununuzi","cta.report":"Toa Taarifa",
@@ -649,20 +569,25 @@
       "contracts.title":"Kituo cha Ununuzi Wazi","contracts.search":"Tafuta","contracts.filter":"Chuja","contracts.caption":"Vinjari, panga na weka alama mikataba. (Mfano)","contracts.tender":"Nambari ya Zabuni","contracts.project":"Mradi","contracts.contractor":"Mkandarasi","contracts.award":"Thamani ya Tuzo (KSh)","contracts.date":"Tarehe ya Tuzo","contracts.status":"Hali","contracts.flags":"Alama","contracts.report":"Ripoti",
       "status.ongoing":"Inaendelea","status.awarded":"Imetunukiwa",
       "projects.title":"Ufuatiliaji wa Miradi","projects.updates":"Taarifa",
-      "channels.title":"USSD & WhatsApp Chatbot","channels.ussdDial":"Piga *456*11#","channels.ussdText":"Angalia bajeti, miradi, na toa taarifa kwa simu yoyote.","channels.how":"Jinsi inavyofanya kazi","channels.wa":"Soga WhatsApp:","channels.openChat":"Fungua Mazungumzo","channels.waText":"Hifadhi +254 700 000 000 kisha sema “Hello Wazi”.",
-      "barazas.title":"Baraza za Mitandaoni — Mikutano Ijayo","barazas.text":"Baraza za umma zijazo zimepangwa na waandaaji wa jamii. Bonyeza Jiunge kufungua kikao, au tazama Rekodi ikiwa ulilikosa. Piga kura juu au chini kutoa maoni.",
+      "channels.title":"USSD & WhatsApp Chatbot","channels.ussdDial":"Piga *384*11#","channels.ussdText":"Angalia bajeti, miradi, na toa taarifa kwa simu yoyote.","channels.how":"Jinsi inavyofanya kazi","channels.wa":"Soga WhatsApp:","channels.openChat":"Fungua Mazungumzo","channels.waText":"Hifadhi +254 721606409 kisha sema “Hello WaziHub”.",
+      "barazas.title":"Baraza za Mitandaoni - Mikutano Ijayo","barazas.text":"Baraza za umma zijazo zimepangwa na waandaaji wa jamii. Bonyeza Jiunge kufungua kikao, au tazama Rekodi ikiwa ulilikosa. Piga kura juu au chini kutoa maoni.",
       "report.title":"Toa Taarifa","report.help":"Ripoti ucheleweshaji, miradi hewa au matumizi mabaya ya fedha. Utapata nambari ya ufuatiliaji.","report.project":"Mradi (kiungo au jina)","report.location":"Eneo","report.issueType":"Aina ya Tatizo","report.details":"Maelezo","report.photo":"Pakia Picha (hiari)","report.phone":"Simu (hiari kwa ufuatiliaji)","report.consent":"Ninakubali kushiriki taarifa hizi kwa uwajibikaji.","report.submit":"Wasilisha",
       "about.title":"Kuhusu Wazi Hub","about.text":"Wazi Hub ni jukwaa la uwazi wa bajeti, ununuzi wazi, ufuatiliaji wa miradi na mrejesho wa wananchi.",
       "footer.sources":"Vyanzo vya Data","footer.privacy":"Faragha","footer.faq":"Maswali"
     },
     // Short community translations (concise; demo scope)
-    ki: { "nav.home":"Mũciĩ","nav.budgets":"Bajeti","nav.contracts":"Mikataba","nav.projects":"Mĩtugo","nav.channels":"USSD & WhatsApp","nav.report":"Rĩpoti","nav.about":"Ũhoro",
+    ki: { "nav.home":"Mũciĩ","nav.budgets":"Bajeti","nav.contracts":"Mikataba","nav.projects":"Mĩtugo","nav.barazas": "Mibaraza ya Rîa","nav.channels":"USSD & WhatsApp","nav.report":"Rĩpoti","nav.about":"Ũhoro",
           "hero.title":"Ona mĩgambo, mũtũgũrũka, kora gũkũ.","cta.budgets":"Tũrone Bajeti","budget.title":"Kĩgũrũkia Bajeti",
           "filters.year":"Mwaka","filters.sector":"Kĩanda","filters.county":"Kaũnti","filters.allSectors":"Ma-anda mothe","filters.allCounties":"Ma-kaũnti mothe","filters.update":"Hũthũria Data",
           "chart.pieTitle":"Kũgawio kwa Ma-anda","chart.barTitle":"Matarĩtũ na Ma-hĩndĩ — Rũbũ","projects.title":"Kũthungatira Mĩtugo",
-          "report.title":"Rĩpoti ĩtua","channels.title":"USSD & WhatsApp"}
+          "report.title":"Rĩpoti ĩtua","barazas.title":"Mibaraza ya Rîa — Ĩgũthondekwa","barazas.text":"Mibaraza ya rîa ĩno yathondekagwo nî arutani a gũthondeka. Thîna na jiunge nîguo uone harĩ mûno, kana thondeka rekodi rĩrĩa ûrathie. Tiga kana onania.",
+          "channels.title":"USSD & WhatsApp"}
     ,
-    luo: {"nav.home":"Od bura","nav.budgets":"Budget","nav.contracts":"Kondract","nav.projects":"Projek","nav.report":"Ripoti","hero.title":"Neno Mabor. Ng’eyo Mabor. Timo Mabor.","cta.budgets":"Nen Budget","budget.title":"Lonyo Budget","filters.year":"Higa","filters.sector":"Secta","filters.county":"County","filters.update":"Yik Data","chart.pieTitle":"Goyo Budget gi Secta","chart.barTitle":"Ma oseyie gi Ma timore — Quarter","projects.title":"Timo Neno Projek"},
+    luo: {"nav.home":"Od bura","nav.budgets":"Budget","nav.contracts":"Kondract","nav.projects":"Projek","nav.barazas":"Baraza mag Intanet","nav.report":"Ripoti","nav.about":"Wach",
+    "hero.title":"Neno Mabor. Ng’eyo Mabor. Timo Mabor.","cta.budgets":"Nen Budget",
+    "budget.title":"Lonyo Budget","filters.year":"Higa","filters.sector":"Secta","filters.county":"County","filters.update":"Yik Data","chart.pieTitle":"Goyo Budget gi Secta","chart.barTitle":"Ma oseyie gi Ma timore — Quarter",
+    "projects.title":"Timo Neno Projek",
+    "barazas.title":"Baraza mag Intanet — Ok nyalo biro","barazas.text":"Baraza man gi ohinga biro timo gi jolupiny. Dhi Join mondo ibi e kom, kata neno Recording ka ne idhi. Chunya to kanyo kaluwore gi upvote kata downvote."},
     kamba: {"nav.home":"Mũkaũ","cta.budgets":"Yona Bajeti","budget.title":"Kiw’ang’a kya Bajeti","filters.year":"Muaka","filters.sector":"Sekta","filters.county":"Kaunti","filters.update":"Sasya Data","chart.pieTitle":"Utethyo wa Bajeti kwa Sekta","chart.barTitle":"Ila Syaikite na Ila Syaikw’ata — Kwetani"},
     luy: {"nav.home":"Ing’anda","filters.year":"Omwaka","filters.sector":"Omusekta","filters.county":"County","filters.update":"Sasula Data","budget.title":"Sikuli ya Budget"},
     kal: {"budget.title":"Budgetit ne Imet","filters.year":"Met","filters.sector":"Sekta","filters.county":"County","filters.update":"Tayin Data","chart.pieTitle":"Tugul Budget ko Setkait"},
@@ -848,7 +773,7 @@
 
   // ===== MAP: DUMMY PROJECT PINS =====
   // Map centered roughly on Kenya
-  const map = L.map('map', { zoomControl: true, scrollWheelZoom: false }).setView([0.3, 37.8], 6);
+  const map = L.map('map', { zoomControl: true }).setView([0.3, 37.8], 6);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 18, attribution: '&copy; OpenStreetMap'
   }).addTo(map);
@@ -859,10 +784,7 @@
     { name:"Mombasa Clinic Expansion", sector:"Health", county:"Mombasa", lat:-4.0435, lng:39.6682, budget: 65e6, spent: 58e6, progress:88, status:"Awarded" },
     { name:"Garissa Solar Mini-Grid", sector:"Energy", county:"Garissa", lat:-0.453, lng:39.646, budget: 150e6, spent: 40e6, progress:28, status:"Ongoing" },
     { name:"Nakuru Dispensary", sector:"Health", county:"Nakuru", lat:-0.3031, lng:36.0800, budget: 45e6, spent: 20e6, progress:45, status:"Ongoing" },
-    { name:"Eldoret Agro Park", sector:"Agriculture", county:"Uasin Gishu", lat:0.5143, lng:35.2698, budget: 210e6, spent: 95e6, progress:41, status:"Ongoing" },
-    { name:"Machakos ICT Hub", sector:"Governance", county:"Machakos", lat:-1.5177, lng:37.2634, budget: 80e6, spent: 30e6, progress:35, status:"Ongoing" },
-    { name:"Nyeri Rural Water Scheme", sector:"Water & Sanitation", county:"Nyeri", lat:-0.4200, lng:36.9519, budget: 55e6, spent: 22e6, progress:33, status:"Ongoing" },
-    { name:"Turkana Wind Trial Site", sector:"Energy", county:"Turkana", lat:3.1150, lng:35.5970, budget: 95e6, spent: 50e6, progress:52, status:"Ongoing" }
+    { name:"Eldoret Agro Park", sector:"Agriculture", county:"Uasin Gishu", lat:0.5143, lng:35.2698, budget: 210e6, spent: 95e6, progress:41, status:"Ongoing" }
   ];
 
   projects.forEach(p=>{
@@ -878,83 +800,8 @@
     L.marker([p.lat,p.lng]).addTo(map).bindPopup(popup);
   });
 
-  // ===== BARAZA LIST & MODAL =====
-  const API_BASE = '/api';
-  const BARAZAS_ENDPOINT = `${API_BASE}/barazas`;
-  const VOTE_ENDPOINT = (id) => `${API_BASE}/barazas/${id}/vote`;
 
-  const barazaContainer = document.getElementById('baraza-container');
-  const overlay = document.getElementById('baraza-overlay');
-  const modalIframe = document.getElementById('modal-iframe');
-  const modalTitle = document.getElementById('modal-title');
-  const modalMeta = document.getElementById('modal-meta');
-  const copyLinkBtn = document.getElementById('copy-link');
-  const modalClose = document.getElementById('modal-close');
 
-  async function loadBarazas(){
-    try {
-      const res = await fetch(BARAZAS_ENDPOINT);
-      if(!res.ok) throw new Error();
-      const data = await res.json();
-      renderBarazas(data);
-    } catch {
-      // Fallback demo data
-      renderBarazas([
-        { id:1, title:"Community Sanitation Forum", county:"Nakuru Town East", datetime:new Date(Date.now()+3600*1000).toISOString(), meeting_link:"https://meet.jit.si/WaziHub-demo-1", recording_link:"", upvotes:12, downvotes:3 },
-        { id:2, title:"Ward Education Baraza", county:"Kiambu Central", datetime:new Date(Date.now()+48*3600*1000).toISOString(), meeting_link:"https://meet.jit.si/WaziHub-demo-2", recording_link:"https://example.com/recording.mp4", upvotes:8, downvotes:1 }
-      ]);
-    }
-  }
-
-  function renderBarazas(list){
-    barazaContainer.innerHTML = '';
-    list.forEach(b => {
-      const item = document.createElement('div');
-      item.className = 'baraza-item card';
-      item.innerHTML = `
-        <div class="baraza-meta">
-          <div>
-            <div class="baraza-title">${b.title}</div>
-            <div class="baraza-datetime">${new Date(b.datetime).toLocaleString()} • ${b.county}</div>
-          </div>
-          <div class="baraza-actions">
-            <button class="join-btn" onclick='openMeeting(${JSON.stringify(b)})'>Join</button>
-            ${b.recording_link ? `<a class="recording-link" href="${b.recording_link}" target="_blank">Recording</a>` : ''}
-            <button class="vote-btn" onclick="voteBaraza(${b.id},1,this)">▲</button>
-            <span>${b.upvotes}</span>
-            <button class="vote-btn" onclick="voteBaraza(${b.id},-1,this)">▼</button>
-            <span>${b.downvotes}</span>
-          </div>
-        </div>`;
-      barazaContainer.appendChild(item);
-    });
-  }
-
-  function voteBaraza(id, value, el){
-    // For demo: update locally
-    const span = el.nextElementSibling;
-    span.textContent = Number(span.textContent) + 1;
-    // TODO: POST to backend when available
-    // fetch(VOTE_ENDPOINT(id), { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({vote:value}) })
-  }
-
-  function openMeeting(baraza){
-    modalTitle.textContent = baraza.title;
-    modalMeta.textContent = new Date(baraza.datetime).toLocaleString() + " • " + baraza.county;
-    modalIframe.innerHTML = `<iframe src="${baraza.meeting_link}" style="width:100%;height:100%;border:0" allow="camera; microphone; fullscreen"></iframe>`;
-    overlay.classList.add('open');
-  }
-
-  modalClose.addEventListener('click', ()=>{ overlay.classList.remove('open'); modalIframe.innerHTML=''; });
-  copyLinkBtn.addEventListener('click', ()=>{
-    const iframe = modalIframe.querySelector('iframe');
-    if(!iframe) return;
-    navigator.clipboard.writeText(iframe.src);
-    copyLinkBtn.textContent = 'Copied!';
-    setTimeout(()=> copyLinkBtn.textContent = 'Copy Link', 1200);
-  });
-
-  document.addEventListener('DOMContentLoaded', loadBarazas);
 
 </script>
 </body>
