@@ -89,8 +89,8 @@
 
   /* ===== CHART AREAS ===== */
   .chart-wrap{ background: #ffffff; border:1px solid var(--border); border-radius: var(--radius); padding: .9rem; }
-  .chart-box{ position:relative; height: 260px; }
-  @media (min-width: 1100px){ .chart-box{ height: 280px; } }
+  .chart-box{ position:relative; height: 220px; }
+  @media (min-width: 1100px){ .chart-box{ height: 260px; } }
   .legend{ display:grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap:.4rem .75rem; margin-top:.5rem; font-size:.95rem; }
 
   /* ===== TABLE ===== */
@@ -117,7 +117,7 @@
   .whatsapp{ background:#f4fff8; border-color:#cfeedd; }
 
   /* ===== MAP ===== */
-  #map{ height:280px; border:1px solid var(--border); border-radius:var(--radius); }
+  #map{ height:280px; border:1px solid var(--border); border-radius:var(--radius); touch-action: pan-y; }
 
   /* ===== FOOTER ===== */
   footer{ background:#0d0f10; color:#e9eef2; margin-top: 2rem; border-top: 1px solid rgba(255,255,255,.06); }
@@ -138,6 +138,22 @@
   .recording-link { background: #fff; border: 1px solid #ddd; padding: 6px 12px; border-radius: 8px; cursor: pointer; font-size: .85rem; text-decoration: none; color: inherit; }
   .vote-btn { padding: 4px 8px; border-radius: 6px; border: 1px solid #ddd; background: #f3f4f6; cursor: pointer; font-weight: 700; font-size: .9rem; transition: background .2s ease; }
   .vote-btn:hover { background: #e5e7eb; }
+  .baraza-controls { display:flex; flex-wrap: wrap; gap:.5rem; align-items: end; margin-top:.5rem; }
+  .tabs { display:flex; gap:.5rem; }
+  .tab-btn { padding:.5rem .8rem; border:1px solid var(--border); background:#fff; border-radius:999px; cursor:pointer; font-weight:700; }
+  .tab-btn.active { background: var(--kenya-green); color:#fff; border-color: transparent; }
+  .chip { display:inline-flex; align-items:center; gap:.35rem; padding:.2rem .6rem; border-radius:999px; background:#eef3f0; color:#0b5130; font-weight:700; font-size:.8rem; }
+  .badge-live { background:#dc2626; color:#fff; padding:.1rem .4rem; border-radius:6px; font-size:.75rem; font-weight:800; }
+  .badge-soon { background:#f59e0b; color:#111; padding:.1rem .4rem; border-radius:6px; font-size:.75rem; font-weight:800; }
+  .baraza-line2 { display:flex; flex-wrap:wrap; gap:.5rem; align-items:center; color:var(--muted); font-size:.9rem; }
+  .baraza-cta { display:flex; flex-wrap:wrap; gap:.4rem; align-items:center; }
+  .small-btn { padding:6px 10px; border-radius:8px; border:1px solid #ddd; background:#fff; cursor:pointer; font-weight:700; font-size:.85rem; }
+  .small-btn.primary { background:#0b7a3a; color:#fff; border:0; }
+  .countdown { font-variant-numeric: tabular-nums; font-weight:800; }
+  .hl-wrap { display:flex; flex-direction:column; gap:.4rem; margin-top:.4rem; }
+  .hl { display:flex; justify-content:space-between; align-items:center; gap:.5rem; padding:.5rem .6rem; border:1px solid var(--border); border-radius:8px; background:#fff; }
+  .hl-text { flex:1; color:#111; }
+  .hl-votes { display:flex; align-items:center; gap:.25rem; }
   .overlay { position: fixed; inset: 0; background: rgba(0,0,0,.6); display: none; align-items: center; justify-content: center; z-index: 3000; padding: 12px; }
   .overlay.open { display: flex; }
   .modal { width: min(1000px, 96%); height: min(80vh, 850px); background: #000; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; }
@@ -171,6 +187,7 @@
         <li><a href="#budget-tracker" data-i18n="nav.budgets">Budgets</a></li>
         <li><a href="#open-contracting" data-i18n="nav.contracts">Contracts</a></li>
         <li><a href="#projects" data-i18n="nav.projects">Projects</a></li>
+        <li><a href="#barazas-section" data-i18n="nav.barazas">Barazas</a></li>
         <li><a href="#report" data-i18n="nav.report">Report</a></li>
       </ul>
     </nav>
@@ -477,6 +494,45 @@
         Upvote or downvote to share feedback.
       </p>
 
+      <div class="card" style="margin-top:.5rem;">
+        <div class="baraza-controls">
+          <label style="flex:2 1 240px; display:flex; flex-direction:column; gap:.3rem;">
+            <span>Search</span>
+            <input type="search" id="bz-search" placeholder="Search title, host, county, tags" />
+          </label>
+          <label style="flex:1 1 160px; display:flex; flex-direction:column; gap:.3rem;">
+            <span>County</span>
+            <select id="bz-county">
+              <option value="">All</option>
+              <option value="Nairobi">Nairobi</option>
+              <option value="Kiambu">Kiambu</option>
+              <option value="Nakuru">Nakuru</option>
+              <option value="Kisumu">Kisumu</option>
+              <option value="Mombasa">Mombasa</option>
+            </select>
+          </label>
+          <!-- <label style="flex:1 1 160px; display:flex; flex-direction:column; gap:.3rem;">
+            <span>From</span>
+            <input type="date" id="bz-from" />
+          </label>
+          <label style="flex:1 1 160px; display:flex; flex-direction:column; gap:.3rem;">
+            <span>To</span>
+            <input type="date" id="bz-to" />
+          </label>
+          <label style="flex:1 1 160px; display:flex; flex-direction:column; gap:.3rem;">
+            <span>Sort</span> -->
+            <!-- <select id="bz-sort"> -->
+              <!-- <option value="time">Start time</option> -->
+              <!-- <option value="popularity">Popularity</option> -->
+            <!-- </select> -->
+          </label>
+        </div>
+        <div class="tabs" style="margin-top:.5rem;">
+          <button class="tab-btn active" data-tab="upcoming">Upcoming</button>
+          <button class="tab-btn" data-tab="past">Past</button>
+        </div>
+      </div>
+
       <div id="baraza-container" style="margin-top:12px">
         <div class="card">
           <div class="small-muted">Loading upcoming barazas…</div>
@@ -549,10 +605,10 @@
         <div class="channel ussd">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M2 3h20v14H6l-4 4V3zm2 2v12.17L6.17 15H20V5H4zm10 2h2v6h-2V7zm-6 0h2v6H8V7z"/></svg>
           <div>
-            <div class="big" data-i18n="channels.ussdDial">Dial <span style="color:var(--kenya-green)">*</span><span>456</span><span>*11#</span></div>
+            <div class="big" data-i18n="channels.ussdDial">Dial <span style="color:var(--kenya-green)">*</span><span>384</span><span>*43258#</span></div>
             <div class="mute" data-i18n="channels.ussdText">Check budgets, projects, and report issues from any phone.</div>
             <div style="margin-top:.5rem;">
-              <button class="btn" type="button" onclick="alert('This is a demo. On a real phone, you would dial *456*11#.');" data-i18n="channels.how">How it works</button>
+              <button class="btn" type="button" onclick="alert('This is a demo. On a real phone, you would dial *384*43258#.');" data-i18n="channels.how">How it works</button>
             </div>
           </div>
         </div>
@@ -610,6 +666,7 @@
     en: {
       "brand.name":"Wazi Hub","brand.tag":"See More • Know More • Do More",
       "nav.home":"Home","nav.budgets":"Budgets","nav.contracts":"Contracts","nav.projects":"Projects","nav.channels":"USSD & WhatsApp","nav.report":"Report","nav.about":"About",
+      "nav.barazas":"Barazas",
       "hero.title":"See More. Know More. Do More.",
       "hero.text":"Track budgets, monitor projects, follow contracts, and hold leaders accountable — all in one easy dashboard built for everyone in Kenya.",
       "cta.budgets":"Explore Budgets","cta.contracts":"Open Contracting","cta.report":"Report an Issue",
@@ -625,7 +682,7 @@
       "contracts.title":"Open Contracting Portal","contracts.search":"Search","contracts.filter":"Filter","contracts.caption":"Browse, sort, and flag contracts. (Sample structure)","contracts.tender":"Tender ID","contracts.project":"Project","contracts.contractor":"Contractor","contracts.award":"Award Value (KSh)","contracts.date":"Award Date","contracts.status":"Status","contracts.flags":"Flags","contracts.report":"Report",
       "status.ongoing":"Ongoing","status.awarded":"Awarded",
       "projects.title":"Project Monitoring","projects.updates":"Updates",
-      "channels.title":"USSD & WhatsApp Chatbot","channels.ussdDial":"Dial *456*11#","channels.ussdText":"Check budgets, projects, and report issues from any phone.","channels.how":"How it works","channels.wa":"Chat on WhatsApp:","channels.openChat":"Open Chat","channels.waText":"Save +254 700 000 000 then say “Hello Wazi”.",
+      "channels.title":"USSD & WhatsApp Chatbot","channels.ussdDial":"Dial *384*43258#","channels.ussdText":"Check budgets, projects, and report issues from any phone.","channels.how":"How it works","channels.wa":"Chat on WhatsApp:","channels.openChat":"Open Chat","channels.waText":"Save +254 700 000 000 then say “Hello Wazi”.",
       "barazas.title":"Virtual Barazas — Upcoming Townhalls","barazas.text":"Upcoming public barazas scheduled by community organizers. Click Join to open the live meeting, or watch the Recording if you missed it. Upvote or downvote to share feedback.",
       "report.title":"Report an Issue","report.help":"Report delays, ghost projects, or misuse of funds. A tracking ID will be generated.","report.project":"Project (link or name)","report.location":"Location","report.issueType":"Issue Type","report.details":"Details","report.photo":"Upload Photo (optional)","report.phone":"Phone (optional for follow-up)","report.consent":"I consent to share this information for accountability purposes.","report.submit":"Submit Report",
       "about.title":"About Wazi Hub","about.text":"Wazi Hub is a Kenyan civic tech platform for budget transparency, open contracting, project monitoring, and citizen feedback. Built with the community, for the community.",
@@ -633,7 +690,7 @@
     },
     sw: { // Kiswahili
       "brand.name":"Wazi Hub","brand.tag":"Ona Zaidi • Fahamu Zaidi • Fanya Zaidi",
-      "nav.home":"Nyumbani","nav.budgets":"Bajeti","nav.contracts":"Mikataba","nav.projects":"Miradi","nav.channels":"USSD & WhatsApp","nav.report":"Ripoti","nav.about":"Kuhusu",
+      "nav.home":"Nyumbani","nav.budgets":"Bajeti","nav.contracts":"Mikataba","nav.projects":"Miradi","nav.channels":"USSD & WhatsApp","nav.report":"Ripoti","nav.about":"Kuhusu","nav.barazas":"Baraza",
       "hero.title":"Ona Zaidi. Fahamu Zaidi. Fanya Zaidi.",
       "hero.text":"Fuatilia bajeti, fuatilia miradi, angalia mikataba, na wawajibishe viongozi — kwenye dashibodi rahisi kwa wote nchini Kenya.",
       "cta.budgets":"Chunguza Bajeti","cta.contracts":"Uwazi wa Ununuzi","cta.report":"Toa Taarifa",
@@ -649,7 +706,7 @@
       "contracts.title":"Kituo cha Ununuzi Wazi","contracts.search":"Tafuta","contracts.filter":"Chuja","contracts.caption":"Vinjari, panga na weka alama mikataba. (Mfano)","contracts.tender":"Nambari ya Zabuni","contracts.project":"Mradi","contracts.contractor":"Mkandarasi","contracts.award":"Thamani ya Tuzo (KSh)","contracts.date":"Tarehe ya Tuzo","contracts.status":"Hali","contracts.flags":"Alama","contracts.report":"Ripoti",
       "status.ongoing":"Inaendelea","status.awarded":"Imetunukiwa",
       "projects.title":"Ufuatiliaji wa Miradi","projects.updates":"Taarifa",
-      "channels.title":"USSD & WhatsApp Chatbot","channels.ussdDial":"Piga *456*11#","channels.ussdText":"Angalia bajeti, miradi, na toa taarifa kwa simu yoyote.","channels.how":"Jinsi inavyofanya kazi","channels.wa":"Soga WhatsApp:","channels.openChat":"Fungua Mazungumzo","channels.waText":"Hifadhi +254 700 000 000 kisha sema “Hello Wazi”.",
+      "channels.title":"USSD & WhatsApp Chatbot","channels.ussdDial":"Piga *384*43258#","channels.ussdText":"Angalia bajeti, miradi, na toa taarifa kwa simu yoyote.","channels.how":"Jinsi inavyofanya kazi","channels.wa":"Soga WhatsApp:","channels.openChat":"Fungua Mazungumzo","channels.waText":"Hifadhi +254 700 000 000 kisha sema “Hello Wazi”.",
       "barazas.title":"Baraza za Mitandaoni — Mikutano Ijayo","barazas.text":"Baraza za umma zijazo zimepangwa na waandaaji wa jamii. Bonyeza Jiunge kufungua kikao, au tazama Rekodi ikiwa ulilikosa. Piga kura juu au chini kutoa maoni.",
       "report.title":"Toa Taarifa","report.help":"Ripoti ucheleweshaji, miradi hewa au matumizi mabaya ya fedha. Utapata nambari ya ufuatiliaji.","report.project":"Mradi (kiungo au jina)","report.location":"Eneo","report.issueType":"Aina ya Tatizo","report.details":"Maelezo","report.photo":"Pakia Picha (hiari)","report.phone":"Simu (hiari kwa ufuatiliaji)","report.consent":"Ninakubali kushiriki taarifa hizi kwa uwajibikaji.","report.submit":"Wasilisha",
       "about.title":"Kuhusu Wazi Hub","about.text":"Wazi Hub ni jukwaa la uwazi wa bajeti, ununuzi wazi, ufuatiliaji wa miradi na mrejesho wa wananchi.",
@@ -764,9 +821,15 @@
       options:{
         responsive:true,
         maintainAspectRatio:false,
+        layout:{ padding:{ top: 8, right: 8, bottom: 0, left: 8 } },
+        plugins:{
+          legend:{ position:'top', labels:{ boxWidth: 12, boxHeight:12, padding:10 } },
+          tooltip:{ padding:8 }
+        },
         interaction:{ mode:'index', intersect:false },
         scales:{
-          y:{ ticks:{ callback:(v)=> (v/1e9)+'B' } }
+          y:{ beginAtZero:true, grace:'1%', ticks:{ callback:(v)=> (v/1e9)+'B' } },
+          x:{ grid:{ display:false } }
         }
       }
     });
@@ -848,7 +911,13 @@
 
   // ===== MAP: DUMMY PROJECT PINS =====
   // Map centered roughly on Kenya
-  const map = L.map('map', { zoomControl: true, scrollWheelZoom: false }).setView([0.3, 37.8], 6);
+  const map = L.map('map', {
+    zoomControl: true,
+    scrollWheelZoom: false,
+    dragging: false,
+    keyboard: false,
+    tap: false
+  }).setView([0.3, 37.8], 6);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 18, attribution: '&copy; OpenStreetMap'
   }).addTo(map);
@@ -878,6 +947,14 @@
     L.marker([p.lat,p.lng]).addTo(map).bindPopup(popup);
   });
 
+  // Enable dragging only while pointer is over the map
+  const mapEl = document.getElementById('map');
+  mapEl.addEventListener('mouseenter', ()=> map.dragging.enable());
+  mapEl.addEventListener('mouseleave', ()=> map.dragging.disable());
+  // On touch, enable dragging for the duration of the interaction only
+  mapEl.addEventListener('touchstart', ()=> map.dragging.enable(), {passive:true});
+  mapEl.addEventListener('touchend',   ()=> map.dragging.disable());
+
   // ===== BARAZA LIST & MODAL =====
   const API_BASE = '/api';
   const BARAZAS_ENDPOINT = `${API_BASE}/barazas`;
@@ -890,20 +967,155 @@
   const modalMeta = document.getElementById('modal-meta');
   const copyLinkBtn = document.getElementById('copy-link');
   const modalClose = document.getElementById('modal-close');
+  const bzSearch = document.getElementById('bz-search');
+  const bzCounty = document.getElementById('bz-county');
+  const bzFrom = document.getElementById('bz-from');
+  const bzTo = document.getElementById('bz-to');
+  const bzSort = document.getElementById('bz-sort');
+  const tabButtons = Array.from(document.querySelectorAll('.tab-btn'));
+  let activeTab = 'upcoming';
+  let barazaList = [];
+
+  // Topic -> recognizable venue mapping (expanded as needed)
+  const TOPIC_LOCATION = {
+    Health: 'Subcounty Hospital',
+    Sanitation: 'Town Social Hall',
+    Water: 'Water Board Offices',
+    Education: 'Teachers Resource Centre',
+    Budget: 'County Treasury Hall',
+    Roads: 'Public Works Yard',
+    Transport: 'Public Works Yard',
+    Energy: 'County Power Offices',
+    Agriculture: 'Agricultural Training Centre',
+    Environment: 'Environmental Resource Centre',
+    Governance: 'County Hall',
+    Trade: 'Main Market Hall',
+    Tourism: 'Tourism Info Centre',
+    Youth: 'Youth Empowerment Centre',
+    Gender: 'Social Services Hall',
+    default: 'County Social Hall'
+  };
+
+  function pickLocation(county, tags){
+    const tagList = Array.isArray(tags) ? tags : [];
+    for(const t of tagList){
+      const key = String(t||'').trim();
+      if(TOPIC_LOCATION[key]) return `${county} ${TOPIC_LOCATION[key]}`;
+    }
+    return `${county} ${TOPIC_LOCATION.default}`;
+  }
 
   async function loadBarazas(){
     try {
       const res = await fetch(BARAZAS_ENDPOINT);
       if(!res.ok) throw new Error();
       const data = await res.json();
-      renderBarazas(data);
+      barazaList = enrichBarazas(data);
+      renderBarazas(applyBarazaFilters());
     } catch {
       // Fallback demo data
-      renderBarazas([
-        { id:1, title:"Community Sanitation Forum", county:"Nakuru Town East", datetime:new Date(Date.now()+3600*1000).toISOString(), meeting_link:"https://meet.jit.si/WaziHub-demo-1", recording_link:"", upvotes:12, downvotes:3 },
-        { id:2, title:"Ward Education Baraza", county:"Kiambu Central", datetime:new Date(Date.now()+48*3600*1000).toISOString(), meeting_link:"https://meet.jit.si/WaziHub-demo-2", recording_link:"https://example.com/recording.mp4", upvotes:8, downvotes:1 }
+      barazaList = enrichBarazas([
+        { id:1, title:"Community Sanitation Forum", county:"Nakuru", datetime:new Date(Date.now()+3600*1000).toISOString(), meeting_link:"https://meet.jit.si/WaziHub-demo-1", recording_link:"", upvotes:12, downvotes:3, host:"Public Health Dept.", participants:42, tags:["Health","Sanitation"], highlights: [] },
+        { id:2, title:"Ward Education Baraza", county:"Kiambu", datetime:new Date(Date.now()+48*3600*1000).toISOString(), meeting_link:"https://meet.jit.si/WaziHub-demo-2", recording_link:"https://example.com/recording.mp4", upvotes:8, downvotes:1, host:"Ward Office", participants:18, tags:["Education","Budget"], highlights: [] },
+        { id:3, title:"Kisumu Water Update", county:"Kisumu", datetime:new Date(Date.now()-26*3600*1000).toISOString(), meeting_link:"https://example.com/live-not-embed", recording_link:"https://example.com/water.mp4", upvotes:25, downvotes:2, host:"Water Board", participants:120, tags:["Water","Projects"], highlights: [
+          { id:"h1", text:"Contractor committed to clear drainage by next week.", up:15, down:2 },
+          { id:"h2", text:"Budget reallocation of KSh 10M to flood-prone wards.", up:22, down:1 },
+          { id:"h3", text:"Community to share geotagged photos via WhatsApp line.", up:8, down:0 }
+        ] }
       ]);
+      renderBarazas(applyBarazaFilters());
     }
+  }
+
+  function enrichBarazas(data){
+    return data.map((b)=>{
+      const tags = Array.isArray(b.tags) ? b.tags : [];
+      const county = b.county || '';
+      const location = b.location || pickLocation(county, tags);
+      return {
+        ...b,
+        tz: b.tz || Intl.DateTimeFormat().resolvedOptions().timeZone,
+        popularity: (b.upvotes||0) - (b.downvotes||0) + (b.participants||0)/50,
+        tags,
+        host: b.host || 'Organizer',
+        participants: Number.isFinite(b.participants) ? b.participants : Math.floor(20+Math.random()*80),
+        location
+      };
+    });
+  }
+
+  function applyBarazaFilters(){
+    const q = (bzSearch?.value||'').trim().toLowerCase();
+    const c = (bzCounty?.value||'').trim().toLowerCase();
+    const from = bzFrom?.value ? new Date(bzFrom.value).getTime() : -Infinity;
+    const to = bzTo?.value ? new Date(bzTo.value).getTime()+24*3600*1000-1 : Infinity;
+    const now = Date.now();
+    let list = barazaList.filter(b=>{
+      const t = new Date(b.datetime).getTime();
+      if(activeTab==='upcoming' && t < now) return false;
+      if(activeTab==='past' && t >= now) return false;
+      if(c && (b.county||'').toLowerCase() !== c) return false;
+      if(!(t>=from && t<=to)) return false;
+      if(q){
+        const hay = [b.title,b.host,b.county,(b.tags||[]).join(' ')].join(' ').toLowerCase();
+        if(!hay.includes(q)) return false;
+      }
+      return true;
+    });
+    const sortBy = bzSort?.value || 'time';
+    list.sort((a,b)=>{
+      if(sortBy==='popularity') return (b.popularity||0) - (a.popularity||0);
+      return new Date(a.datetime) - new Date(b.datetime);
+    });
+    return list;
+  }
+
+  function formatRelative(dt){
+    const d = new Date(dt).getTime();
+    const now = Date.now();
+    const diff = d - now;
+    const abs = Math.abs(diff);
+    const rtf = new Intl.RelativeTimeFormat(undefined,{numeric:'auto'});
+    const units = [
+      ['day', 86400000],
+      ['hour', 3600000],
+      ['minute', 60000]
+    ];
+    for(const [unit, ms] of units){
+      if(abs >= ms || unit==='minute'){
+        return rtf.format(Math.round(diff/ms), unit);
+      }
+    }
+  }
+
+  // Live countdown update every 30s
+  setInterval(()=>{
+    document.querySelectorAll('#baraza-container .baraza-item').forEach(item=>{
+      const id = item.dataset.id;
+      const b = barazaList.find(x=>String(x.id)===String(id));
+      if(!b) return;
+      const line = item.querySelector('.baraza-datetime span');
+      if(line) line.textContent = formatRelative(b.datetime);
+      const meta = item.querySelector('.baraza-datetime');
+      if(meta){
+        const badges = getBadges(b.datetime);
+        meta.innerHTML = meta.innerHTML.replace(/<(span class=\"badge-(live|soon)\")[\s\S]*?span>/g,'');
+        meta.insertAdjacentHTML('beforeend', ' ' + badges);
+      }
+    });
+  }, 30000);
+
+  function getBadges(dt){
+    const start = new Date(dt).getTime();
+    const now = Date.now();
+    const diff = start - now;
+    if(diff <= 0 && diff > -2*3600*1000){
+      return '<span class="badge-live">LIVE</span>';
+    }
+    if(diff > 0 && diff < 30*60*1000){
+      return '<span class="badge-soon">Starting soon</span>';
+    }
+    return '';
   }
 
   function renderBarazas(list){
@@ -911,31 +1123,94 @@
     list.forEach(b => {
       const item = document.createElement('div');
       item.className = 'baraza-item card';
+      const when = new Date(b.datetime).toLocaleString();
+      const rel = formatRelative(b.datetime);
+      const badges = getBadges(b.datetime);
+      const tags = (b.tags||[]).map(t=>`<span class="chip">#${t}</span>`).join(' ');
+      const isPast = new Date(b.datetime).getTime() < Date.now();
+       const rec = '';
+      const upcomingCtas = `
+            <button class="small-btn primary" data-action="join" data-id="${b.id}">Join</button>
+            ${rec}
+            <button class="small-btn" data-action="rsvp" data-id="${b.id}">RSVP</button>
+            <button class="small-btn" data-action="calendar" data-id="${b.id}">Add to Calendar</button>
+            <button class="small-btn" data-action="remind" data-id="${b.id}">Remind Me</button>`;
+       const pastCtas = ``;
+      const highlights = isPast ? renderHighlights(b) : '';
       item.innerHTML = `
         <div class="baraza-meta">
           <div>
-            <div class="baraza-title">${b.title}</div>
-            <div class="baraza-datetime">${new Date(b.datetime).toLocaleString()} • ${b.county}</div>
+            <div class="baraza-title">${escapeHtml(b.title)}</div>
+            <div class="baraza-datetime">${when} • ${escapeHtml(b.county)} • <span>${rel}</span> ${badges}</div>
+            <div class="baraza-line2">
+               <span class="chip">Host: ${escapeHtml(b.host)}</span>
+               <span class="chip">👥 ${b.participants}</span>
+               <span class="chip">Location: ${escapeHtml(b.location||'Venue TBC')}</span>
+              ${tags}
           </div>
-          <div class="baraza-actions">
-            <button class="join-btn" onclick='openMeeting(${JSON.stringify(b)})'>Join</button>
-            ${b.recording_link ? `<a class="recording-link" href="${b.recording_link}" target="_blank">Recording</a>` : ''}
-            <button class="vote-btn" onclick="voteBaraza(${b.id},1,this)">▲</button>
-            <span>${b.upvotes}</span>
-            <button class="vote-btn" onclick="voteBaraza(${b.id},-1,this)">▼</button>
-            <span>${b.downvotes}</span>
+            ${highlights}
+          </div>
+          <div class="baraza-cta">
+            ${isPast ? pastCtas : upcomingCtas}
+            <button class="vote-btn" data-action="vote-up" data-id="${b.id}">▲</button>
+            <span data-role="up">${b.upvotes||0}</span>
+            <button class="vote-btn" data-action="vote-down" data-id="${b.id}">▼</button>
+            <span data-role="down">${b.downvotes||0}</span>
           </div>
         </div>`;
+      item.dataset.id = String(b.id);
       barazaContainer.appendChild(item);
     });
+    if(list.length===0){
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = '<div class="small-muted">No barazas match your filters.</div>';
+      barazaContainer.appendChild(card);
+    }
+  }
+
+  function renderHighlights(b){
+    const hls = Array.isArray(b.highlights) ? b.highlights : [];
+    if(hls.length===0) return '<div class="hl-wrap small-muted">No highlights added yet.</div>';
+    return `<div class="hl-wrap">${hls.map(h=>`
+      <div class="hl" data-hid="${h.id}">
+        <div class="hl-text">${escapeHtml(h.text)}</div>
+        <div class="hl-votes">
+          <button class="vote-btn" data-action="hl-up" data-id="${b.id}" data-hid="${h.id}">▲</button>
+          <span data-role="hl-up">${h.up||0}</span>
+          <button class="vote-btn" data-action="hl-down" data-id="${b.id}" data-hid="${h.id}">▼</button>
+          <span data-role="hl-down">${h.down||0}</span>
+        </div>
+      </div>`).join('')}</div>`;
   }
 
   function voteBaraza(id, value, el){
-    // For demo: update locally
-    const span = el.nextElementSibling;
-    span.textContent = Number(span.textContent) + 1;
+    const parent = el.closest('.baraza-cta');
+    if(!parent) return;
+    const up = parent.querySelector('span[data-role="up"]');
+    const down = parent.querySelector('span[data-role="down"]');
+    const item = barazaList.find(x=>String(x.id)===String(id));
+    if(!item) return;
+    if(value>0){ item.upvotes = (item.upvotes||0)+1; if(up) up.textContent = String(item.upvotes); }
+    else { item.downvotes = (item.downvotes||0)+1; if(down) down.textContent = String(item.downvotes); }
     // TODO: POST to backend when available
     // fetch(VOTE_ENDPOINT(id), { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({vote:value}) })
+  }
+
+  function voteHighlight(b, hid, value, el){
+    const list = Array.isArray(b.highlights) ? b.highlights : [];
+    const h = list.find(x=>String(x.id)===String(hid));
+    if(!h) return;
+    if(value>0){ h.up = (h.up||0)+1; }
+    else { h.down = (h.down||0)+1; }
+    const wrap = el.closest('.hl');
+    if(wrap){
+      const up = wrap.querySelector('span[data-role="hl-up"]');
+      const down = wrap.querySelector('span[data-role="hl-down"]');
+      if(up) up.textContent = String(h.up||0);
+      if(down) down.textContent = String(h.down||0);
+    }
+    // TODO: POST to backend
   }
 
   function openMeeting(baraza){
@@ -955,6 +1230,92 @@
   });
 
   document.addEventListener('DOMContentLoaded', loadBarazas);
+
+  // ===== Delegated events & filters =====
+  barazaContainer.addEventListener('click', (e)=>{
+    const target = e.target;
+    if(!(target instanceof Element)) return;
+    const action = target.getAttribute('data-action');
+    if(!action) return;
+    const id = target.getAttribute('data-id');
+    const baraza = barazaList.find(x=>String(x.id)===String(id));
+    if(!baraza) return;
+    if(action==='join'){
+      openMeeting(baraza);
+    } else if(action==='vote-up'){
+      voteBaraza(id, 1, target);
+    } else if(action==='vote-down'){
+      voteBaraza(id, -1, target);
+    } else if(action==='hl-up'){
+      voteHighlight(baraza, target.getAttribute('data-hid'), 1, target);
+    } else if(action==='hl-down'){
+      voteHighlight(baraza, target.getAttribute('data-hid'), -1, target);
+    } else if(action==='calendar'){
+      addToCalendar(baraza);
+    } else if(action==='rsvp'){
+      toggleRsvp(baraza, target);
+    } else if(action==='remind'){
+      scheduleReminder(baraza, target);
+    }
+  });
+
+  [bzSearch,bzCounty,bzFrom,bzTo,bzSort].forEach(el=>{
+    if(!el) return;
+    el.addEventListener('input', ()=> renderBarazas(applyBarazaFilters()));
+    el.addEventListener('change', ()=> renderBarazas(applyBarazaFilters()));
+  });
+
+  tabButtons.forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      tabButtons.forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      activeTab = btn.getAttribute('data-tab')||'upcoming';
+      renderBarazas(applyBarazaFilters());
+    });
+  });
+
+  // ===== RSVP / Calendar / Reminder =====
+  const rsvpSet = new Set(JSON.parse(localStorage.getItem('wazi-bz-rsvp')||'[]'));
+  function persistRsvp(){ localStorage.setItem('wazi-bz-rsvp', JSON.stringify(Array.from(rsvpSet))); }
+
+  function toggleRsvp(b, btn){
+    const key = String(b.id);
+    if(rsvpSet.has(key)) { rsvpSet.delete(key); btn.textContent='RSVP'; }
+    else { rsvpSet.add(key); btn.textContent='RSVP’d'; }
+    persistRsvp();
+  }
+
+   function addToCalendar(b){
+    const start = new Date(b.datetime);
+    const end = new Date(start.getTime()+60*60*1000);
+    const title = encodeURIComponent(b.title);
+    const details = encodeURIComponent(`Join: ${b.meeting_link}`);
+     const location = encodeURIComponent(b.location || b.county || 'Kenya');
+    const iso = (d)=> d.toISOString().replace(/[-:]|\.\d{3}/g,'');
+    const ics = `BEGIN:VCALENDAR\nVERSION:2.0\nBEGIN:VEVENT\nURL:${b.meeting_link}\nDTSTART:${iso(start)}\nDTEND:${iso(end)}\nSUMMARY:${title}\nDESCRIPTION:${details}\nLOCATION:${location}\nEND:VEVENT\nEND:VCALENDAR`;
+    const blob = new Blob([ics], {type:'text/calendar'});
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = `${title}.ics`;
+    document.body.appendChild(link); link.click(); link.remove();
+  }
+
+  async function scheduleReminder(b, btn){
+    try{
+      const perm = await Notification.requestPermission();
+      if(perm!=='granted') { alert('Enable notifications in your browser.'); return; }
+      const dt = new Date(b.datetime).getTime();
+      const due = Math.max(0, dt - Date.now() - 10*60*1000); // 10 min before
+      btn.textContent = 'Reminder set';
+      setTimeout(()=>{
+        new Notification('Baraza starting soon', { body: `${b.title} in 10 minutes` });
+      }, due);
+    }catch{}
+  }
+
+  function escapeHtml(str){
+    return String(str).replace(/[&<>"']/g, (c)=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
+  }
 
 </script>
 </body>
