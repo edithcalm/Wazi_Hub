@@ -608,11 +608,9 @@
         <div class="channel ussd">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M2 3h20v14H6l-4 4V3zm2 2v12.17L6.17 15H20V5H4zm10 2h2v6h-2V7zm-6 0h2v6H8V7z"/></svg>
           <div>
-            <div class="big" data-i18n="channels.ussdDial">Dial <span style="color:var(--kenya-green)">*</span><span>456</span><span>*11#</span></div>
             <div class="big" data-i18n="channels.ussdDial">Dial <span style="color:var(--kenya-green)">*</span><span>384</span><span>*43258#</span></div>
             <div class="mute" data-i18n="channels.ussdText">Check budgets, projects, and report issues from any phone.</div>
             <div style="margin-top:.5rem;">
-              <button class="btn" type="button" onclick="alert('This is a demo. On a real phone, you would dial *456*11#.');" data-i18n="channels.how">How it works</button>
               <button class="btn" type="button" onclick="alert('This is a demo. On a real phone, you would dial *384*43258#.');" data-i18n="channels.how">How it works</button>
             </div>
           </div>
@@ -687,7 +685,6 @@
       "contracts.title":"Open Contracting Portal","contracts.search":"Search","contracts.filter":"Filter","contracts.caption":"Browse, sort, and flag contracts. (Sample structure)","contracts.tender":"Tender ID","contracts.project":"Project","contracts.contractor":"Contractor","contracts.award":"Award Value (KSh)","contracts.date":"Award Date","contracts.status":"Status","contracts.flags":"Flags","contracts.report":"Report",
       "status.ongoing":"Ongoing","status.awarded":"Awarded",
       "projects.title":"Project Monitoring","projects.updates":"Updates",
-      "channels.title":"USSD & WhatsApp Chatbot","channels.ussdDial":"Dial *456*11#","channels.ussdText":"Check budgets, projects, and report issues from any phone.","channels.how":"How it works","channels.wa":"Chat on WhatsApp:","channels.openChat":"Open Chat","channels.waText":"Save +254 700 000 000 then say “Hello Wazi”.",
       "channels.title":"USSD & WhatsApp Chatbot","channels.ussdDial":"Dial *384*43258#","channels.ussdText":"Check budgets, projects, and report issues from any phone.","channels.how":"How it works","channels.wa":"Chat on WhatsApp:","channels.openChat":"Open Chat","channels.waText":"Save +254 700 000 000 then say “Hello Wazi”.",
       "barazas.title":"Virtual Barazas — Upcoming Townhalls","barazas.text":"Upcoming public barazas scheduled by community organizers. Click Join to open the live meeting, or watch the Recording if you missed it. Upvote or downvote to share feedback.",
       "report.title":"Report an Issue","report.help":"Report delays, ghost projects, or misuse of funds. A tracking ID will be generated.","report.project":"Project (link or name)","report.location":"Location","report.issueType":"Issue Type","report.details":"Details","report.photo":"Upload Photo (optional)","report.phone":"Phone (optional for follow-up)","report.consent":"I consent to share this information for accountability purposes.","report.submit":"Submit Report",
@@ -696,7 +693,6 @@
     },
     sw: { // Kiswahili
       "brand.name":"Wazi Hub","brand.tag":"Ona Zaidi • Fahamu Zaidi • Fanya Zaidi",
-      "nav.home":"Nyumbani","nav.budgets":"Bajeti","nav.contracts":"Mikataba","nav.projects":"Miradi","nav.channels":"USSD & WhatsApp","nav.report":"Ripoti","nav.about":"Kuhusu",
       "nav.home":"Nyumbani","nav.budgets":"Bajeti","nav.contracts":"Mikataba","nav.projects":"Miradi","nav.channels":"USSD & WhatsApp","nav.report":"Ripoti","nav.about":"Kuhusu","nav.barazas":"Baraza",
       "hero.title":"Ona Zaidi. Fahamu Zaidi. Fanya Zaidi.",
       "hero.text":"Fuatilia bajeti, fuatilia miradi, angalia mikataba, na wawajibishe viongozi — kwenye dashibodi rahisi kwa wote nchini Kenya.",
@@ -713,7 +709,6 @@
       "contracts.title":"Kituo cha Ununuzi Wazi","contracts.search":"Tafuta","contracts.filter":"Chuja","contracts.caption":"Vinjari, panga na weka alama mikataba. (Mfano)","contracts.tender":"Nambari ya Zabuni","contracts.project":"Mradi","contracts.contractor":"Mkandarasi","contracts.award":"Thamani ya Tuzo (KSh)","contracts.date":"Tarehe ya Tuzo","contracts.status":"Hali","contracts.flags":"Alama","contracts.report":"Ripoti",
       "status.ongoing":"Inaendelea","status.awarded":"Imetunukiwa",
       "projects.title":"Ufuatiliaji wa Miradi","projects.updates":"Taarifa",
-      "channels.title":"USSD & WhatsApp Chatbot","channels.ussdDial":"Piga *456*11#","channels.ussdText":"Angalia bajeti, miradi, na toa taarifa kwa simu yoyote.","channels.how":"Jinsi inavyofanya kazi","channels.wa":"Soga WhatsApp:","channels.openChat":"Fungua Mazungumzo","channels.waText":"Hifadhi +254 700 000 000 kisha sema “Hello Wazi”.",
       "channels.title":"USSD & WhatsApp Chatbot","channels.ussdDial":"Piga *384*43258#","channels.ussdText":"Angalia bajeti, miradi, na toa taarifa kwa simu yoyote.","channels.how":"Jinsi inavyofanya kazi","channels.wa":"Soga WhatsApp:","channels.openChat":"Fungua Mazungumzo","channels.waText":"Hifadhi +254 700 000 000 kisha sema “Hello Wazi”.",
       "barazas.title":"Baraza za Mitandaoni — Mikutano Ijayo","barazas.text":"Baraza za umma zijazo zimepangwa na waandaaji wa jamii. Bonyeza Jiunge kufungua kikao, au tazama Rekodi ikiwa ulilikosa. Piga kura juu au chini kutoa maoni.",
       "report.title":"Toa Taarifa","report.help":"Ripoti ucheleweshaji, miradi hewa au matumizi mabaya ya fedha. Utapata nambari ya ufuatiliaji.","report.project":"Mradi (kiungo au jina)","report.location":"Eneo","report.issueType":"Aina ya Tatizo","report.details":"Maelezo","report.photo":"Pakia Picha (hiari)","report.phone":"Simu (hiari kwa ufuatiliaji)","report.consent":"Ninakubali kushiriki taarifa hizi kwa uwajibikaji.","report.submit":"Wasilisha",
@@ -1153,8 +1148,6 @@
       item.innerHTML = `
         <div class="baraza-meta">
           <div>
-            <div class="baraza-title">${b.title}</div>
-            <div class="baraza-datetime">${new Date(b.datetime).toLocaleString()} • ${b.county}</div>
             <div class="baraza-title">${escapeHtml(b.title)}</div>
             <div class="baraza-datetime">${when} • ${escapeHtml(b.county)} • <span>${rel}</span> ${badges}</div>
             <div class="baraza-line2">
@@ -1163,15 +1156,6 @@
                <span class="chip">Location: ${escapeHtml(b.location||'Venue TBC')}</span>
               ${tags}
           </div>
-          <div class="baraza-actions">
-            <button class="join-btn" onclick='openMeeting(${JSON.stringify(b)})'>Join</button>
-            ${b.recording_link ? `<a class="recording-link" href="${b.recording_link}" target="_blank">Recording</a>` : ''}
-            <button class="vote-btn" onclick="voteBaraza(${b.id},1,this)">▲</button>
-            <span>${b.upvotes}</span>
-            <button class="vote-btn" onclick="voteBaraza(${b.id},-1,this)">▼</button>
-            <span>${b.downvotes}</span>
-            ${highlights}
-          </div>
           <div class="baraza-cta">
             ${isPast ? pastCtas : upcomingCtas}
             <button class="vote-btn" data-action="vote-up" data-id="${b.id}">▲</button>
@@ -1179,6 +1163,7 @@
             <button class="vote-btn" data-action="vote-down" data-id="${b.id}">▼</button>
             <span data-role="down">${b.downvotes||0}</span>
           </div>
+          <div class="baraza-highlights">${highlights}</div>
         </div>`;
       item.dataset.id = String(b.id);
       barazaContainer.appendChild(item);
