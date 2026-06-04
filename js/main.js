@@ -328,14 +328,15 @@
       const highlights = isPast ? renderHighlights(b) : '';
       item.innerHTML = `
         <div class="baraza-meta">
-          <div>
+          <div class="baraza-info">
             <div class="baraza-title">${WaziHub.escapeHtml(b.title)}</div>
             <div class="baraza-datetime">${when} • ${WaziHub.escapeHtml(b.county)} • <span>${rel}</span> ${badges}</div>
             <div class="baraza-line2">
-               <span class="chip">Host: ${WaziHub.escapeHtml(b.host)}</span>
-               <span class="chip">👥 ${b.participants}</span>
-               <span class="chip">Location: ${WaziHub.escapeHtml(b.location||'Venue TBC')}</span>
+              <span class="chip">Host: ${WaziHub.escapeHtml(b.host)}</span>
+              <span class="chip">👥 ${b.participants}</span>
+              <span class="chip">Location: ${WaziHub.escapeHtml(b.location||'Venue TBC')}</span>
               ${tags}
+            </div>
           </div>
           <div class="baraza-cta">
             ${isPast ? pastCtas : upcomingCtas}
@@ -344,8 +345,8 @@
             <button class="vote-btn" data-action="vote-down" data-id="${b.id}">▼</button>
             <span data-role="down">${b.downvotes||0}</span>
           </div>
-          <div class="baraza-highlights">${highlights}</div>
-        </div>`;
+        </div>
+        <div class="baraza-highlights">${highlights}</div>`;
       item.dataset.id = String(b.id);
       barazaContainer.appendChild(item);
     });

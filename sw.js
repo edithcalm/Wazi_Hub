@@ -1,5 +1,5 @@
 /* WaziHub service worker — offline shell */
-const CACHE_NAME = 'wazihub-v1';
+const CACHE_NAME = 'wazihub-v2';
 const ASSETS = [
   './',
   './index.html',

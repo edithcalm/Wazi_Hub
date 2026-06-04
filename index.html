@@ -39,7 +39,7 @@
 
 <!-- ===== HEADER ===== -->
 <header class="site-header" role="banner">
-  <div class="container" style="display:flex; justify-content:space-between; align-items:center; gap:.75rem; flex-wrap:wrap;">
+  <div class="container header-inner">
     <div class="brand" aria-label="Wazi Hub home">
       <!-- <div class="logo" aria-hidden="true"><span></span><span></span><span></span></div> -->
     <div>
@@ -52,7 +52,7 @@
         <small data-i18n="brand.tag">See More • Know More • Do More</small>
       </div>
     </div>
-    <nav aria-label="Primary">
+    <nav class="desktop-nav" aria-label="Primary">
       <ul>
         <li><a href="#home" data-i18n="nav.home">Home</a></li>
         <li><a href="#budget-tracker" data-i18n="nav.budgets">Budgets</a></li>
@@ -102,12 +102,12 @@
 
   <!-- ===== LANGUAGE SELECTOR (ABOVE BUDGET TRACKER) ===== -->
   <section id="language-bar" aria-label="Language switcher">
-    <div class="container card" style="display:flex; justify-content:space-between; align-items:center; gap:1rem; flex-wrap:wrap;">
-      <div class="flex" style="gap:.5rem;">
+    <div class="container card lang-bar">
+      <div class="lang-bar-label">
         <strong data-i18n="lang.label">Language / Lugha:</strong>
-        <span class="muted" data-i18n="lang.beta">Translation (Beta)</span>
+        <span class="text-muted" data-i18n="lang.beta">Translation (Beta)</span>
       </div>
-      <div class="flex" style="gap:.5rem;">
+      <div class="lang-bar-controls">
         <select id="language-select" aria-label="Choose language">
           <option value="en">English</option>
           <option value="sw">Kiswahili</option>
@@ -132,7 +132,7 @@
       <h3 id="budget-title" class="panel-title" style="font-size:1.6rem;" data-i18n="budget.title">Open Budget Tracker</h3>
 
       <!-- Filters -->
-      <form id="filters" class="grid" style="grid-template-columns: repeat(4, minmax(0, 1fr)); gap:.8rem; align-items:end;">
+      <form id="filters" class="grid filters-grid">
         <label><span data-i18n="filters.year">Year</span>
           <!-- <select id="copyright-year">
             <option value="2025/2026">2025/26</option>
@@ -223,22 +223,22 @@
         <div class="chart-wrap">
           <div class="panel-title" data-i18n="chart.barTitle">Planned vs Actual — Quarterly</div>
           <div class="chart-box"><canvas id="bars"></canvas></div>
-          <p class="muted" style="margin:.3rem 0 0;" data-i18n="chart.tip">Tip: Tap a legend item to hide/show a series.</p>
+          <p class="chart-tip" data-i18n="chart.tip">Tip: Tap a legend item to hide/show a series.</p>
         </div>
       </div>
 
       <!-- Summary Cards -->
       <div class="grid grid-3" style="margin-top:1rem;">
         <div class="card" style="text-align:center;">
-          <div id="total-budget" style="font-size:1.6rem; font-weight:900; color:var(--kenya-green)">KSh 3.32T</div>
+          <div id="total-budget" class="summary-value" style="font-size:1.6rem; font-weight:900; color:var(--kenya-green)">KSh 3.32T</div>
           <div class="mute" data-i18n="sum.totalBudget">Total Budget (selected)</div>
         </div>
         <div class="card" style="text-align:center;">
-          <div id="total-spent" style="font-size:1.6rem; font-weight:900; color:var(--kenya-red)">KSh 2.10T</div>
+          <div id="total-spent" class="summary-value" style="font-size:1.6rem; font-weight:900; color:var(--kenya-red)">KSh 2.10T</div>
           <div class="mute" data-i18n="sum.totalSpent">Total Spent (~63%)</div>
         </div>
         <div class="card" style="text-align:center;">
-          <div id="pending-budget" style="font-size:1.6rem; font-weight:900; color:var(--kenya-green)">KSh 1.22T</div>
+          <div id="pending-budget" class="summary-value" style="font-size:1.6rem; font-weight:900; color:var(--kenya-green)">KSh 1.22T</div>
           <div class="mute" data-i18n="sum.pending">Pending (~37%)</div>
         </div>
       </div>
@@ -251,14 +251,15 @@
   <section id="open-contracting" aria-labelledby="contracts-title" style="margin-top:.5rem;">
     <div class="container">
       <h3 id="contracts-title" class="panel-title" style="font-size:1.6rem;" data-i18n="contracts.title">Open Contracting Portal</h3>
-      <form role="search" class="grid" style="grid-template-columns: 1fr auto; gap:.6rem;">
+      <form role="search" class="grid search-row">
         <label><span data-i18n="contracts.search">Search</span>
           <input type="search" name="q" placeholder="Project, contractor, tender ID" aria-label="Search contracts" />
         </label>
         <button class="btn" type="button" data-i18n="contracts.filter">Filter</button>
       </form>
 
-      <div style="overflow:auto; margin-top:1rem;">
+      <p class="table-scroll-hint">Swipe left to see all columns →</p>
+      <div class="table-scroll" role="region" aria-label="Contracts table" tabindex="0">
         <table aria-describedby="contracts-help">
           <caption id="contracts-help" class="mute" data-i18n="contracts.caption">Browse, sort, and flag contracts. (Sample structure)</caption>
           <thead>
@@ -323,7 +324,7 @@
         <div class="card" aria-label="Interactive map">
           <div id="map" role="application" aria-label="Project locations map"></div>
         </div>
-        <div class="grid grid-2">
+        <div class="grid grid-2 project-cards">
           <article class="card">
             <h4 style="color:var(--kenya-red); margin:0 0 .25rem;">Nakuru Dispensary</h4>
             <p class="mute" style="margin:.2rem 0 .4rem;">Health • Nakuru Town East</p>
