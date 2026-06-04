@@ -1,0 +1,44 @@
+{
+  "name": "WaziHub — Civic Participation",
+  "short_name": "WaziHub",
+  "description": "Track budgets, monitor projects, follow contracts, and hold leaders accountable in Kenya.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f7f7f7",
+  "theme_color": "#00853F",
+  "lang": "en-KE",
+  "categories": ["government", "news", "social"],
+  "icons": [
+    {
+      "src": "icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Budgets",
+      "url": "./index.html#budget-tracker",
+      "description": "Explore county budgets"
+    },
+    {
+      "name": "Report Issue",
+      "url": "./index.html#report",
+      "description": "Report a community issue"
+    },
+    {
+      "name": "Barazas",
+      "url": "./index.html#barazas-section",
+      "description": "Virtual town halls"
+    }
+  ]
+}
