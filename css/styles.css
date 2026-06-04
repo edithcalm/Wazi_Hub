@@ -15,8 +15,8 @@ body {
 }
 img, svg, video, canvas { max-width: 100%; height: auto; }
 :root {
-  --kenya-black: #000000;
-  --kenya-red: #BB1919;
+  --kenya-black: #00853F;
+  --kenya-red: #00853F;
   --kenya-green: #00853F;
   --kenya-white: #FFFFFF;
   --ink: #101314;
@@ -39,7 +39,7 @@ img, svg, video, canvas { max-width: 100%; height: auto; }
   position: sticky;
   top: 0;
   z-index: 20;
-  background: linear-gradient(90deg, var(--kenya-black) 0 30%, var(--kenya-red) 30% 65%, var(--kenya-green) 65% 100%);
+  background: var(--kenya-green);
   box-shadow: 0 2px 10px rgba(0,0,0,.12);
 }
 .header-inner {
