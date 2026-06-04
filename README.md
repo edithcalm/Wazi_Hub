@@ -319,3 +319,7 @@ Wazi_Hub/
 - Works offline for the dashboard shell; live API data loads when online.
 
 Push to `main` to trigger the GitHub Actions Pages deploy workflow.
+
+### National budget (Program-Based Budget Book)
+
+Official Treasury data is **PDF-based** (no public API). See **[docs/BUDGET_DATA_INTEGRATION.md](docs/BUDGET_DATA_INTEGRATION.md)** for sources, schema, and how to load the Programme Based Budget into WaziHub. A starter sample lives in `data/pbb-fy2025-26-sample.json`.
