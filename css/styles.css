@@ -15,8 +15,8 @@ body {
 }
 img, svg, video, canvas { max-width: 100%; height: auto; }
 :root {
-  --kenya-black: #00853F;
-  --kenya-red: #00853F;
+  --kenya-green: #00853F;
+  --kenya-green: #00853F;
   --kenya-green: #00853F;
   --kenya-white: #FFFFFF;
   --ink: #101314;
