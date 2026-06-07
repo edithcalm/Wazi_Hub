@@ -137,39 +137,74 @@
   // Initial charts render
   drawAll();
 
-  // ===== MAP: DUMMY PROJECT PINS =====
-  // Map centered roughly on Kenya
+  // ===== MAP: INTERACTIVE PROJECT PINS =====
+  const sectorColors = {
+    'Health':            '#e53e3e',
+    'Transport':         '#3182ce',
+    'Roads':             '#2b6cb0',
+    'Water & Sanitation':'#0891b2',
+    'Energy':            '#d97706',
+    'Agriculture':       '#16a34a',
+    'Education':         '#7c3aed',
+    'Governance':        '#6b7280',
+    'default':           '#00853F'
+  };
+
+  function makeMarkerIcon(color) {
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="36" viewBox="0 0 28 36">
+      <path d="M14 0C6.27 0 0 6.27 0 14c0 9.33 14 22 14 22S28 23.33 28 14C28 6.27 21.73 0 14 0z" fill="${color}" stroke="#fff" stroke-width="2"/>
+      <circle cx="14" cy="14" r="5" fill="#fff"/>
+    </svg>`;
+    return L.divIcon({
+      html: svg,
+      className: '',
+      iconSize: [28, 36],
+      iconAnchor: [14, 36],
+      popupAnchor: [0, -36]
+    });
+  }
+
+  // Map centered on Kenya
   const map = L.map('map', {
     zoomControl: true,
-    scrollWheelZoom: false,
-    dragging: false,
-    keyboard: false,
-    tap: false
-  }).setView([0.3, 37.8], 6);
+    scrollWheelZoom: false
+  }).setView([0.5, 37.5], 6);
+
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 18, attribution: '&copy; OpenStreetMap'
+    maxZoom: 18,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
   }).addTo(map);
 
-  projects.forEach(p=>{
+  projects.forEach(p => {
+    const color = sectorColors[p.sector] || sectorColors.default;
+    const pct = p.progress;
+    const statusColor = p.status === 'Awarded' ? '#9c1c1c' : '#0c7a43';
     const popup = `
-      <strong>${p.name}</strong><br/>
-      <em>${p.sector} • ${p.county}</em><br/>
-      <div>Budget: <strong>${WaziHub.fmt(p.budget)}</strong> &nbsp; • &nbsp; Spent: <strong>${WaziHub.fmt(p.spent)}</strong></div>
-      <div>Status: <span class="badge" style="vertical-align:middle;">${p.status}</span></div>
-      <div style="margin-top:.3rem;">Progress:
-        <progress value="${p.progress}" max="100" style="width:100%">${p.progress}%</progress>
+      <div style="min-width:190px;font-family:system-ui,sans-serif;">
+        <div style="font-weight:800;font-size:1rem;margin-bottom:2px;">${p.name}</div>
+        <div style="color:#555;font-size:.85rem;margin-bottom:6px;">${p.sector} &bull; ${p.county}</div>
+        <div style="font-size:.85rem;margin-bottom:4px;">
+          <strong>Budget:</strong> ${WaziHub.fmt(p.budget)}<br/>
+          <strong>Spent:</strong> ${WaziHub.fmt(p.spent)}
+        </div>
+        <div style="margin-bottom:6px;">
+          <span style="display:inline-block;padding:2px 8px;border-radius:999px;font-size:.75rem;font-weight:700;background:${statusColor}1a;color:${statusColor};">${p.status}</span>
+        </div>
+        <div style="font-size:.82rem;margin-bottom:3px;"><strong>Completion: ${pct}%</strong></div>
+        <div style="background:#e5e7eb;border-radius:999px;height:8px;overflow:hidden;">
+          <div style="height:100%;width:${pct}%;background:${color};border-radius:999px;"></div>
+        </div>
       </div>
     `;
-    L.marker([p.lat,p.lng]).addTo(map).bindPopup(popup);
+    L.marker([p.lat, p.lng], { icon: makeMarkerIcon(color) })
+      .addTo(map)
+      .bindPopup(popup, { maxWidth: 240 });
   });
 
-  // Enable dragging only while pointer is over the map
+  // Scroll-wheel zoom only when focused on the map
   const mapEl = document.getElementById('map');
-  mapEl.addEventListener('mouseenter', ()=> map.dragging.enable());
-  mapEl.addEventListener('mouseleave', ()=> map.dragging.disable());
-  // On touch, enable dragging for the duration of the interaction only
-  mapEl.addEventListener('touchstart', ()=> map.dragging.enable(), {passive:true});
-  mapEl.addEventListener('touchend',   ()=> map.dragging.disable());
+  mapEl.addEventListener('mouseenter', () => map.scrollWheelZoom.enable());
+  mapEl.addEventListener('mouseleave', () => map.scrollWheelZoom.disable());
 
   // ===== BARAZA LIST & MODAL =====
   const API_BASE = '/api';

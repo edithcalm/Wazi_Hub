@@ -1,140 +1,152 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Wazi Hub — See More. Know More. Do More.</title>
-<meta name="description" content="Wazi Hub: Kenya Public Finance & Projects Dashboard — budget transparency, contracting openness, project tracking, and citizen feedback." />
-<meta name="author" content="Wazi Hub" />
-<meta name="theme-color" content="#00853F" />
-<meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-<meta name="apple-mobile-web-app-title" content="WaziHub" />
-<link rel="manifest" href="manifest.json" />
-<link rel="icon" href="icons/icon.svg" type="image/svg+xml" />
-<link rel="apple-touch-icon" href="icons/icon.svg" />
-<link rel="stylesheet" href="css/styles.css" />
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js" defer></script>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer crossorigin=""></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Wazi Hub — See More. Know More. Do More.</title>
+  <meta name="description"
+    content="Wazi Hub: Kenya Public Finance & Projects Dashboard — budget transparency, contracting openness, project tracking, and citizen feedback." />
+  <meta name="author" content="Wazi Hub" />
+  <meta name="theme-color" content="#00853F" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="WaziHub" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="icons/icon.svg" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js" defer></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer crossorigin=""></script>
 </head>
+
 <body>
 
-<div id="pwa-install" class="pwa-install" hidden role="region" aria-label="Install app">
-  <div class="pwa-install-inner">
-    <span class="pwa-install-text">Install WaziHub on your phone for quick access.</span>
-    <button type="button" class="btn pwa-install-btn" id="pwa-install-btn">Install</button>
-    <button type="button" class="pwa-dismiss" id="pwa-dismiss" aria-label="Dismiss">✕</button>
+  <div id="pwa-install" class="pwa-install" hidden role="region" aria-label="Install app">
+    <div class="pwa-install-inner">
+      <span class="pwa-install-text">Install WaziHub on your phone for quick access.</span>
+      <button type="button" class="btn pwa-install-btn" id="pwa-install-btn">Install</button>
+      <button type="button" class="pwa-dismiss" id="pwa-dismiss" aria-label="Dismiss">✕</button>
+    </div>
   </div>
-</div>
-<nav class="mobile-nav" aria-label="Mobile shortcuts">
-  <a href="#home"><span aria-hidden="true">🏠</span><small>Home</small></a>
-  <a href="#budget-tracker"><span aria-hidden="true">📊</span><small>Budgets</small></a>
-  <a href="#projects"><span aria-hidden="true">🏗</span><small>Projects</small></a>
-  <a href="#barazas-section"><span aria-hidden="true">🗣</span><small>Barazas</small></a>
-  <a href="#report"><span aria-hidden="true">🚨</span><small>Report</small></a>
-</nav>
+  <nav class="mobile-nav" aria-label="Mobile shortcuts">
+    <a href="#home"><span aria-hidden="true">🏠</span><small>Home</small></a>
+    <a href="#budget-tracker"><span aria-hidden="true">📊</span><small>Budgets</small></a>
+    <a href="#projects"><span aria-hidden="true">🏗</span><small>Projects</small></a>
+    <a href="#barazas-section"><span aria-hidden="true">🗣</span><small>Barazas</small></a>
+    <a href="#report"><span aria-hidden="true">🚨</span><small>Report</small></a>
+  </nav>
 
-<a href="#main" class="skip">Skip to content</a>
+  <a href="#main" class="skip">Skip to content</a>
 
-<!-- ===== HEADER ===== -->
-<header class="site-header" role="banner">
-  <div class="container header-inner">
-    <div class="brand" aria-label="Wazi Hub home">
-      <!-- <div class="logo" aria-hidden="true"><span></span><span></span><span></span></div> -->
-    <div>
-        <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Kenya.svg/1920px-Flag_of_Kenya.svg.png" alt="Kenya Flag"> -->
-        <!-- <h1 data-i18n="brand.name">WaziHub</h1> -->
-        <h1>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Kenya.svg/1920px-Flag_of_Kenya.svg.png" alt="Kenya Flag">
-        WaziHub
-        </h1>
-        <small data-i18n="brand.tag">See More • Know More • Do More</small>
+  <!-- ===== HEADER ===== -->
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <div class="brand" aria-label="Wazi Hub home">
+        <!-- <div class="logo" aria-hidden="true"><span></span><span></span><span></span></div> -->
+        <div>
+          <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Kenya.svg/1920px-Flag_of_Kenya.svg.png" alt="Kenya Flag"> -->
+          <!-- <h1 data-i18n="brand.name">WaziHub</h1> -->
+          <h1>
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Kenya.svg/1920px-Flag_of_Kenya.svg.png"
+              alt="Kenya Flag">
+            WaziHub
+          </h1>
+          <small data-i18n="brand.tag">See More • Know More • Do More</small>
+        </div>
       </div>
+      <nav class="desktop-nav" aria-label="Primary">
+        <ul>
+          <li><a href="#home" data-i18n="nav.home">Home</a></li>
+          <li><a href="#budget-tracker" data-i18n="nav.budgets">Budgets</a></li>
+          <li><a href="#open-contracting" data-i18n="nav.contracts">Contracts</a></li>
+          <li><a href="#projects" data-i18n="nav.projects">Projects</a></li>
+          <li><a href="#barazas-section" data-i18n="nav.barazas">Barazas</a></li>
+          <li><a href="#report" data-i18n="nav.report">Report</a></li>
+        </ul>
+      </nav>
     </div>
-    <nav class="desktop-nav" aria-label="Primary">
-      <ul>
-        <li><a href="#home" data-i18n="nav.home">Home</a></li>
-        <li><a href="#budget-tracker" data-i18n="nav.budgets">Budgets</a></li>
-        <li><a href="#open-contracting" data-i18n="nav.contracts">Contracts</a></li>
-        <li><a href="#projects" data-i18n="nav.projects">Projects</a></li>
-        <li><a href="#barazas-section" data-i18n="nav.barazas">Barazas</a></li>
-        <li><a href="#report" data-i18n="nav.report">Report</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
+  </header>
 
-<main id="main" tabindex="-1">
-  <!-- ===== HERO ===== -->
-  <section id="home">
-    <div class="container">
-      <h2 aria-live="polite" data-i18n="hero.title">See More. Know More. Do More.</h2>
-      <p class="muted" style="font-size:1.1rem; max-width:65ch;" data-i18n="hero.text">
-        Track budgets, monitor projects, follow contracts, and hold leaders accountable — all in one easy dashboard built for everyone in Kenya.
-      </p>
-      <div class="cta-row">
-        <a class="btn" href="#budget-tracker" style="--bg:var(--kenya-green)" data-i18n="cta.budgets">Explore Budgets</a>
-        <a class="btn secondary" href="#open-contracting" data-i18n="cta.contracts">Open Contracting</a>
-        <a class="btn" href="#report" style="--bg:var(--kenya-green)" data-i18n="cta.report">Report an Issue</a>
+  <main id="main" tabindex="-1">
+    <!-- ===== HERO ===== -->
+    <section id="home">
+      <div class="container">
+        <h2 aria-live="polite" data-i18n="hero.title">See More. Know More. Do More.</h2>
+        <p class="muted" style="font-size:1.1rem; max-width:65ch;" data-i18n="hero.text">
+          Track budgets, monitor projects, follow contracts, and hold leaders accountable — all in one easy dashboard
+          built for everyone in Kenya.
+        </p>
+        <div class="cta-row">
+          <a class="btn" href="#budget-tracker" style="--bg:var(--kenya-green)" data-i18n="cta.budgets">Explore
+            Budgets</a>
+          <a class="btn" href="#open-contracting" style="--bg:#ffffff; --fg:#0d0f10; border:2px solid #0d0f10;"
+            data-i18n="cta.contracts">Open Contracting</a>
+          <a class="btn" href="#report" style="--bg:var(--kenya-green)" data-i18n="cta.report">Report an Issue</a>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ===== HIGHLIGHTS ===== -->
-  <section id="highlights" class="container" aria-labelledby="highlights-title" style="margin-top:1rem;">
-    <h3 id="highlights-title" class="panel-title" data-i18n="hl.title">Highlights</h3>
-    <div class="grid grid-3">
-      <article class="card">
-        <h4 class="panel-title" style="color:var(--kenya-red)" data-i18n="hl.a.title">Where is your county’s money going?</h4>
-        <p class="mute" data-i18n="hl.a.text">Quick view of allocations by sector for your county.</p>
-      </article>
-      <article class="card">
-        <h4 class="panel-title" style="color:var(--kenya-red)" data-i18n="hl.b.title">Who won the latest tenders?</h4>
-        <p class="mute" data-i18n="hl.b.text">Search contractors, awards, and red flags.</p>
-      </article>
-      <article class="card">
-        <h4 class="panel-title" style="color:var(--kenya-red)" data-i18n="hl.c.title">Is that road really 80% complete?</h4>
-        <p class="mute" data-i18n="hl.c.text">Project statuses, photos, and community updates.</p>
-      </article>
-    </div>
-  </section>
-
-  <!-- ===== LANGUAGE SELECTOR (ABOVE BUDGET TRACKER) ===== -->
-  <section id="language-bar" aria-label="Language switcher">
-    <div class="container card lang-bar">
-      <div class="lang-bar-label">
-        <strong data-i18n="lang.label">Language / Lugha:</strong>
-        <span class="text-muted" data-i18n="lang.beta">Translation (Beta)</span>
+    <!-- ===== HIGHLIGHTS ===== -->
+    <section id="highlights" class="container" aria-labelledby="highlights-title" style="margin-top:1rem;">
+      <h3 id="highlights-title" class="panel-title" data-i18n="hl.title">Highlights</h3>
+      <div class="grid grid-3">
+        <article class="card">
+          <h4 class="panel-title" style="color:var(--kenya-red)" data-i18n="hl.a.title">Where is your county’s money
+            going?</h4>
+          <p class="mute" data-i18n="hl.a.text">Quick view of allocations by sector for your county.</p>
+        </article>
+        <article class="card">
+          <h4 class="panel-title" style="color:var(--kenya-red)" data-i18n="hl.b.title">Who won the latest tenders?</h4>
+          <p class="mute" data-i18n="hl.b.text">Search contractors, awards, and red flags.</p>
+        </article>
+        <article class="card">
+          <h4 class="panel-title" style="color:var(--kenya-red)" data-i18n="hl.c.title">Is that road really 80%
+            complete?</h4>
+          <p class="mute" data-i18n="hl.c.text">Project statuses, photos, and community updates.</p>
+        </article>
       </div>
-      <div class="lang-bar-controls">
-        <select id="language-select" aria-label="Choose language">
-          <option value="en">English</option>
-          <option value="sw">Kiswahili</option>
-          <option value="ki">Gikuyu</option>
-          <option value="luo">Dholuo</option>
-          <option value="kamba">Kikamba</option>
-          <option value="luy">Luhya</option>
-          <option value="kal">Kalenjin</option>
-          <option value="som">Somali</option>
-          <option value="tuk">Turkana</option>
-          <option value="meru">Kĩmerũ</option>
+    </section>
 
-        </select>
-        <button class="btn" id="apply-lang" type="button" style="--bg:var(--kenya-green)" data-i18n="lang.apply">Apply</button>
+    <!-- ===== LANGUAGE SELECTOR (ABOVE BUDGET TRACKER) ===== -->
+    <section id="language-bar" aria-label="Language switcher">
+      <div class="container card lang-bar">
+        <div class="lang-bar-label">
+          <strong data-i18n="lang.label">Language / Lugha:</strong>
+          <span class="text-muted" data-i18n="lang.beta">Translation (Beta)</span>
+        </div>
+        <div class="lang-bar-controls">
+          <select id="language-select" aria-label="Choose language">
+            <option value="en">English</option>
+            <option value="sw">Kiswahili</option>
+            <option value="ki">Gikuyu</option>
+            <option value="luo">Dholuo</option>
+            <option value="kamba">Kikamba</option>
+            <option value="luy">Luhya</option>
+            <option value="kal">Kalenjin</option>
+            <option value="som">Somali</option>
+            <option value="tuk">Turkana</option>
+            <option value="meru">Kĩmerũ</option>
+
+          </select>
+          <button class="btn" id="apply-lang" type="button" style="--bg:var(--kenya-green)"
+            data-i18n="lang.apply">Apply</button>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ===== BUDGET TRACKER ===== -->
-  <section id="budget-tracker" aria-labelledby="budget-title" style="margin-top:.5rem;">
-    <div class="container">
-      <h3 id="budget-title" class="panel-title" style="font-size:1.6rem;" data-i18n="budget.title">Open Budget Tracker</h3>
+    <!-- ===== BUDGET TRACKER ===== -->
+    <section id="budget-tracker" aria-labelledby="budget-title" style="margin-top:.5rem;">
+      <div class="container">
+        <h3 id="budget-title" class="panel-title" style="font-size:1.6rem;" data-i18n="budget.title">Open Budget Tracker
+        </h3>
 
-      <!-- Filters -->
-      <form id="filters" class="grid filters-grid">
-        <label><span data-i18n="filters.year">Year</span>
-          <!-- <select id="copyright-year">
+        <!-- Filters -->
+        <form id="filters" class="grid filters-grid">
+          <label><span data-i18n="filters.year">Year</span>
+            <!-- <select id="copyright-year">
             <option value="2025/2026">2025/26</option>
             <option value="2024/25">2024/25</option>
             <option value="2023/24">2023/24</option>
@@ -144,246 +156,274 @@
             <option value="2019/20">2019/20</option>
             <option value="2018/19">2018/19</option> -->
             <select id="budget-year" class="border rounded px-2 py-1">
-        <option>2025/26</option><option>2024/25</option><option>2023/24</option>
-        <option>2022/23</option><option>2021/22</option><option>2020/21</option>
-        <option>2019/20</option><option>2018/19</option><option> 2017/18</option>
-          </select>
-        </label>
-        <label><span data-i18n="filters.sector">Sector</span>
-          <select id="sector">
-            <option data-i18n="filters.allSectors">All sectors</option>
-            <option>Health</option><option>Education</option><option>Infrastructure</option><option>Agriculture</option>
-            <option>Water & Sanitation</option><option>Transport</option><option>Energy</option>
-            <option>Security</option><option>Governance</option><option>Environment</option>
-            <option>Trade & Industry</option><option>Tourism</option><option>Youth Affairs</option><option>Gender & Social Services</option>
-          </select>
-        </label>
-        <label><span data-i18n="filters.county">County</span>
-          <select id="county">
-            <option data-i18n="filters.allCounties">All counties</option>
-            <option value="baringo">Baringo</option>
-            <option value="bomet">Bomet</option>
-            <option value="bungoma">Bungoma</option>
-            <option value="busia">Busia</option>
-            <option value="elgeyo-marakwet">Elgeyo-Marakwet</option>
-            <option value="embu">Embu</option>
-            <option value="garissa">Garissa</option>
-            <option value="homa-bay">Homa Bay</option>
-            <option value="isiolo">Isiolo</option>
-            <option value="kajiado">Kajiado</option>
-            <option value="kakamega">Kakamega</option>
-            <option value="kericho">Kericho</option>
-            <option value="kiambu">Kiambu</option>
-            <option value="kilifi">Kilifi</option>
-            <option value="kirinyaga">Kirinyaga</option>
-            <option value="kisii">Kisii</option>
-            <option value="kisumu">Kisumu</option>
-            <option value="kitui">Kitui</option>
-            <option value="kwale">Kwale</option>
-            <option value="laikipia">Laikipia</option>
-            <option value="lamu">Lamu</option>
-            <option value="machakos">Machakos</option>
-            <option value="makueni">Makueni</option>
-            <option value="mandera">Mandera</option>
-            <option value="marsabit">Marsabit</option>
-            <option value="meru">Meru</option>
-            <option value="migori">Migori</option>
-            <option value="mombasa">Mombasa</option>
-            <option value="muranga">Murang'a</option>
-            <option value="nairobi">Nairobi</option>
-            <option value="nakuru">Nakuru</option>
-            <option value="nandi">Nandi</option>
-            <option value="narok">Narok</option>
-            <option value="nyamira">Nyamira</option>
-            <option value="nyandarua">Nyandarua</option>
-            <option value="nyeri">Nyeri</option>
-            <option value="samburu">Samburu</option>
-            <option value="siaya">Siaya</option>
-            <option value="taita-taveta">Taita-Taveta</option>
-            <option value="tana-river">Tana River</option>
-            <option value="tharaka-nithi">Tharaka-Nithi</option>
-            <option value="trans-nzoia">Trans Nzoia</option>
-            <option value="turkana">Turkana</option>
-            <option value="uasin-gishu">Uasin Gishu</option>
-            <option value="vihiga">Vihiga</option>
-            <option value="wajir">Wajir</option>
-            <option value="west-pokot">West Pokot</option>
-          </select>
-        </label>
-        <button type="button" id="update" class="btn" data-i18n="filters.update">Update Data</button>
-      </form>
-
-      <!-- Charts -->
-      <div class="grid grid-2" style="margin-top:1rem;">
-        <div class="chart-wrap">
-          <div class="panel-title" data-i18n="chart.pieTitle">Budget Allocation by Sector</div>
-          <div class="chart-box"><canvas id="pie"></canvas></div>
-          <div id="pie-legend" class="legend" aria-live="polite"></div>
-        </div>
-        <div class="chart-wrap">
-          <div class="panel-title" data-i18n="chart.barTitle">Planned vs Actual — Quarterly</div>
-          <div class="chart-box"><canvas id="bars"></canvas></div>
-          <p class="chart-tip" data-i18n="chart.tip">Tip: Tap a legend item to hide/show a series.</p>
-        </div>
-      </div>
-
-      <!-- Summary Cards -->
-      <div class="grid grid-3" style="margin-top:1rem;">
-        <div class="card" style="text-align:center;">
-          <div id="total-budget" class="summary-value" style="font-size:1.6rem; font-weight:900; color:var(--kenya-green)">KSh 3.32T</div>
-          <div class="mute" data-i18n="sum.totalBudget">Total Budget (selected)</div>
-        </div>
-        <div class="card" style="text-align:center;">
-          <div id="total-spent" class="summary-value" style="font-size:1.6rem; font-weight:900; color:var(--kenya-red)">KSh 2.10T</div>
-          <div class="mute" data-i18n="sum.totalSpent">Total Spent (~63%)</div>
-        </div>
-        <div class="card" style="text-align:center;">
-          <div id="pending-budget" class="summary-value" style="font-size:1.6rem; font-weight:900; color:var(--kenya-green)">KSh 1.22T</div>
-          <div class="mute" data-i18n="sum.pending">Pending (~37%)</div>
-        </div>
-      </div>
-
-      <p class="mute" style="margin-top:.5rem;" data-i18n="sources.note">Data sources: National Treasury, Controller of Budget, County Budgets (demo data shown).</p>
-    </div>
-  </section>
-
-  <!-- ===== OPEN CONTRACTING PORTAL ===== -->
-  <section id="open-contracting" aria-labelledby="contracts-title" style="margin-top:.5rem;">
-    <div class="container">
-      <h3 id="contracts-title" class="panel-title" style="font-size:1.6rem;" data-i18n="contracts.title">Open Contracting Portal</h3>
-      <form role="search" class="grid search-row">
-        <label><span data-i18n="contracts.search">Search</span>
-          <input type="search" name="q" placeholder="Project, contractor, tender ID" aria-label="Search contracts" />
-        </label>
-        <button class="btn" type="button" data-i18n="contracts.filter">Filter</button>
-      </form>
-
-      <p class="table-scroll-hint">Swipe left to see all columns →</p>
-      <div class="table-scroll" role="region" aria-label="Contracts table" tabindex="0">
-        <table aria-describedby="contracts-help">
-          <caption id="contracts-help" class="mute" data-i18n="contracts.caption">Browse, sort, and flag contracts. (Sample structure)</caption>
-          <thead>
-            <tr>
-              <th scope="col" data-i18n="contracts.tender">Tender ID</th>
-              <th scope="col" data-i18n="contracts.project">Project</th>
-              <th scope="col" data-i18n="contracts.contractor">Contractor</th>
-              <th scope="col" data-i18n="contracts.award">Award Value (KSh)</th>
-              <th scope="col" data-i18n="contracts.date">Award Date</th>
-              <th scope="col" data-i18n="contracts.status">Status</th>
-              <th scope="col" data-i18n="contracts.flags">Flags</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>PPIP-001</td>
-              <td>Nairobi Ward Road Upgrade</td>
-              <td>ABC Builders Ltd</td>
-              <td>120,000,000</td>
-              <td>2025-07-10</td>
-              <td><span class="badge" data-status="ongoing" data-i18n="status.ongoing">Ongoing</span></td>
-              <td><a href="#" style="color:var(--kenya-red); font-weight:700;" data-i18n="contracts.report">Report</a></td>
-            </tr>
-            <tr>
-              <td>PPIP-002</td>
-              <td>County Hospital Wing</td>
-              <td>HealthWorks KE</td>
-              <td>340,000,000</td>
-              <td>2025-06-02</td>
-              <td><span class="badge" data-status="awarded" data-i18n="status.awarded">Awarded</span></td>
-              <td><a href="#" style="color:var(--kenya-red); font-weight:700;" data-i18n="contracts.report">Report</a></td>
-            </tr>
-            <tr>
-              <td>PPIP-003</td>
-              <td>Garissa Solar Mini-Grid Phase 1</td>
-              <td>SunGrid Africa</td>
-              <td>210,000,000</td>
-              <td>2025-05-18</td>
-              <td><span class="badge" data-status="ongoing" data-i18n="status.ongoing">Ongoing</span></td>
-              <td><a href="#" style="color:var(--kenya-red); font-weight:700;" data-i18n="contracts.report">Report</a></td>
-            </tr>
-            <tr>
-              <td>PPIP-004</td>
-              <td>Kiambu Community Water Project</td>
-              <td>AquaWorks Consortium</td>
-              <td>85,000,000</td>
-              <td>2025-04-11</td>
-              <td><span class="badge" data-status="awarded" data-i18n="status.awarded">Awarded</span></td>
-              <td><a href="#" style="color:var(--kenya-red); font-weight:700;" data-i18n="contracts.report">Report</a></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== PROJECT MONITORING ===== -->
-  <section id="projects" aria-labelledby="projects-title">
-    <div class="container">
-      <h3 id="projects-title" class="panel-title" style="font-size:1.6rem;" data-i18n="projects.title">Project Monitoring</h3>
-      <div class="grid grid-2">
-        <div class="card" aria-label="Interactive map">
-          <div id="map" role="application" aria-label="Project locations map"></div>
-        </div>
-        <div class="grid grid-2 project-cards">
-          <article class="card">
-            <h4 style="color:var(--kenya-red); margin:0 0 .25rem;">Nakuru Dispensary</h4>
-            <p class="mute" style="margin:.2rem 0 .4rem;">Health • Nakuru Town East</p>
-            <p><strong>Budget:</strong> KSh 45M • <strong>Spent:</strong> KSh 20M</p>
-            <label>Completion: <progress value="45" max="100">45%</progress></label>
-            <details style="margin-top:.5rem;">
-              <summary data-i18n="projects.updates">Updates</summary>
-              <ul>
-                <li>2025-08-01: Foundation complete (photo pending)</li>
-                <li>2025-07-15: Contractor mobilized</li>
-              </ul>
-            </details>
-          </article>
-          <article class="card">
-            <h4 style="color:var(--kenya-red); margin:0 0 .25rem;">Kisumu Road Upgrade</h4>
-            <p class="mute" style="margin:.2rem 0 .4rem;">Roads • Kisumu Central</p>
-            <p><strong>Budget:</strong> KSh 120M • <strong>Spent:</strong> KSh 90M</p>
-            <label>Completion: <progress value="70" max="100">70%</progress></label>
-            <details style="margin-top:.5rem;">
-              <summary data-i18n="projects.updates">Updates</summary>
-              <ul>
-                <li>2025-08-10: Works slowed — awaiting materials</li>
-                <li>2025-07-20: Drainage installed</li>
-              </ul>
-            </details>
-          </article>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== VIRTUAL BARAZAS: VIEW-ONLY ===== -->
-  <section id="barazas-section" aria-labelledby="barazas-title">
-    <div class="container">
-      <h3 id="barazas-title" class="panel-title" data-i18n="barazas.title">Virtual Barazas — Upcoming Townhalls</h3>
-      <p class="small-muted" data-i18n="barazas.text">
-        Upcoming public barazas scheduled by community organizers. 
-        Click <strong>Join</strong> to open the live meeting, or watch the <strong>Recording</strong> if you missed it. 
-        Upvote or downvote to share feedback.
-      </p>
-
-      <div class="card" style="margin-top:.5rem;">
-        <div class="baraza-controls">
-          <label style="flex:2 1 240px; display:flex; flex-direction:column; gap:.3rem;">
-            <span>Search</span>
-            <input type="search" id="bz-search" placeholder="Search title, host, county, tags" />
-          </label>
-          <label style="flex:1 1 160px; display:flex; flex-direction:column; gap:.3rem;">
-            <span>County</span>
-            <select id="bz-county">
-              <option value="">All</option>
-              <option value="Nairobi">Nairobi</option>
-              <option value="Kiambu">Kiambu</option>
-              <option value="Nakuru">Nakuru</option>
-              <option value="Kisumu">Kisumu</option>
-              <option value="Mombasa">Mombasa</option>
+              <option>2025/26</option>
+              <option>2024/25</option>
+              <option>2023/24</option>
+              <option>2022/23</option>
+              <option>2021/22</option>
+              <option>2020/21</option>
+              <option>2019/20</option>
+              <option>2018/19</option>
+              <option> 2017/18</option>
             </select>
           </label>
-          <!-- <label style="flex:1 1 160px; display:flex; flex-direction:column; gap:.3rem;">
+          <label><span data-i18n="filters.sector">Sector</span>
+            <select id="sector">
+              <option data-i18n="filters.allSectors">All sectors</option>
+              <option>Health</option>
+              <option>Education</option>
+              <option>Infrastructure</option>
+              <option>Agriculture</option>
+              <option>Water & Sanitation</option>
+              <option>Transport</option>
+              <option>Energy</option>
+              <option>Security</option>
+              <option>Governance</option>
+              <option>Environment</option>
+              <option>Trade & Industry</option>
+              <option>Tourism</option>
+              <option>Youth Affairs</option>
+              <option>Gender & Social Services</option>
+            </select>
+          </label>
+          <label><span data-i18n="filters.county">County</span>
+            <select id="county">
+              <option data-i18n="filters.allCounties">All counties</option>
+              <option value="baringo">Baringo</option>
+              <option value="bomet">Bomet</option>
+              <option value="bungoma">Bungoma</option>
+              <option value="busia">Busia</option>
+              <option value="elgeyo-marakwet">Elgeyo-Marakwet</option>
+              <option value="embu">Embu</option>
+              <option value="garissa">Garissa</option>
+              <option value="homa-bay">Homa Bay</option>
+              <option value="isiolo">Isiolo</option>
+              <option value="kajiado">Kajiado</option>
+              <option value="kakamega">Kakamega</option>
+              <option value="kericho">Kericho</option>
+              <option value="kiambu">Kiambu</option>
+              <option value="kilifi">Kilifi</option>
+              <option value="kirinyaga">Kirinyaga</option>
+              <option value="kisii">Kisii</option>
+              <option value="kisumu">Kisumu</option>
+              <option value="kitui">Kitui</option>
+              <option value="kwale">Kwale</option>
+              <option value="laikipia">Laikipia</option>
+              <option value="lamu">Lamu</option>
+              <option value="machakos">Machakos</option>
+              <option value="makueni">Makueni</option>
+              <option value="mandera">Mandera</option>
+              <option value="marsabit">Marsabit</option>
+              <option value="meru">Meru</option>
+              <option value="migori">Migori</option>
+              <option value="mombasa">Mombasa</option>
+              <option value="muranga">Murang'a</option>
+              <option value="nairobi">Nairobi</option>
+              <option value="nakuru">Nakuru</option>
+              <option value="nandi">Nandi</option>
+              <option value="narok">Narok</option>
+              <option value="nyamira">Nyamira</option>
+              <option value="nyandarua">Nyandarua</option>
+              <option value="nyeri">Nyeri</option>
+              <option value="samburu">Samburu</option>
+              <option value="siaya">Siaya</option>
+              <option value="taita-taveta">Taita-Taveta</option>
+              <option value="tana-river">Tana River</option>
+              <option value="tharaka-nithi">Tharaka-Nithi</option>
+              <option value="trans-nzoia">Trans Nzoia</option>
+              <option value="turkana">Turkana</option>
+              <option value="uasin-gishu">Uasin Gishu</option>
+              <option value="vihiga">Vihiga</option>
+              <option value="wajir">Wajir</option>
+              <option value="west-pokot">West Pokot</option>
+            </select>
+          </label>
+          <button type="button" id="update" class="btn" data-i18n="filters.update">Update Data</button>
+        </form>
+
+        <!-- Charts -->
+        <div class="grid grid-2" style="margin-top:1rem;">
+          <div class="chart-wrap">
+            <div class="panel-title" data-i18n="chart.pieTitle">Budget Allocation by Sector</div>
+            <div class="chart-box"><canvas id="pie"></canvas></div>
+            <div id="pie-legend" class="legend" aria-live="polite"></div>
+          </div>
+          <div class="chart-wrap">
+            <div class="panel-title" data-i18n="chart.barTitle">Planned vs Actual — Quarterly</div>
+            <div class="chart-box"><canvas id="bars"></canvas></div>
+            <p class="chart-tip" data-i18n="chart.tip">Tip: Tap a legend item to hide/show a series.</p>
+          </div>
+        </div>
+
+        <!-- Summary Cards -->
+        <div class="grid grid-3" style="margin-top:1rem;">
+          <div class="card" style="text-align:center;">
+            <div id="total-budget" class="summary-value"
+              style="font-size:1.6rem; font-weight:900; color:var(--kenya-green)">KSh 3.32T</div>
+            <div class="mute" data-i18n="sum.totalBudget">Total Budget (selected)</div>
+          </div>
+          <div class="card" style="text-align:center;">
+            <div id="total-spent" class="summary-value"
+              style="font-size:1.6rem; font-weight:900; color:var(--kenya-red)">KSh 2.10T</div>
+            <div class="mute" data-i18n="sum.totalSpent">Total Spent (~63%)</div>
+          </div>
+          <div class="card" style="text-align:center;">
+            <div id="pending-budget" class="summary-value"
+              style="font-size:1.6rem; font-weight:900; color:var(--kenya-green)">KSh 1.22T</div>
+            <div class="mute" data-i18n="sum.pending">Pending (~37%)</div>
+          </div>
+        </div>
+
+        <p class="mute" style="margin-top:.5rem;" data-i18n="sources.note">Data sources: National Treasury, Controller
+          of Budget, County Budgets (demo data shown).</p>
+      </div>
+    </section>
+
+    <!-- ===== OPEN CONTRACTING PORTAL ===== -->
+    <section id="open-contracting" aria-labelledby="contracts-title" style="margin-top:.5rem;">
+      <div class="container">
+        <h3 id="contracts-title" class="panel-title" style="font-size:1.6rem;" data-i18n="contracts.title">Open
+          Contracting Portal</h3>
+        <form role="search" class="grid search-row">
+          <label><span data-i18n="contracts.search">Search</span>
+            <input type="search" name="q" placeholder="Project, contractor, tender ID" aria-label="Search contracts" />
+          </label>
+          <button class="btn" type="button" data-i18n="contracts.filter">Filter</button>
+        </form>
+
+        <p class="table-scroll-hint">Swipe left to see all columns →</p>
+        <div class="table-scroll" role="region" aria-label="Contracts table" tabindex="0">
+          <table aria-describedby="contracts-help">
+            <caption id="contracts-help" class="mute" data-i18n="contracts.caption">Browse, sort, and flag contracts.
+              (Sample structure)</caption>
+            <thead>
+              <tr>
+                <th scope="col" data-i18n="contracts.tender">Tender ID</th>
+                <th scope="col" data-i18n="contracts.project">Project</th>
+                <th scope="col" data-i18n="contracts.contractor">Contractor</th>
+                <th scope="col" data-i18n="contracts.award">Award Value (KSh)</th>
+                <th scope="col" data-i18n="contracts.date">Award Date</th>
+                <th scope="col" data-i18n="contracts.status">Status</th>
+                <th scope="col" data-i18n="contracts.flags">Flags</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>PPIP-001</td>
+                <td>Nairobi Ward Road Upgrade</td>
+                <td>ABC Builders Ltd</td>
+                <td>120,000,000</td>
+                <td>2025-07-10</td>
+                <td><span class="badge" data-status="ongoing" data-i18n="status.ongoing">Ongoing</span></td>
+                <td><a href="#" style="color:var(--kenya-red); font-weight:700;" data-i18n="contracts.report">Report</a>
+                </td>
+              </tr>
+              <tr>
+                <td>PPIP-002</td>
+                <td>County Hospital Wing</td>
+                <td>HealthWorks KE</td>
+                <td>340,000,000</td>
+                <td>2025-06-02</td>
+                <td><span class="badge" data-status="awarded" data-i18n="status.awarded">Awarded</span></td>
+                <td><a href="#" style="color:var(--kenya-red); font-weight:700;" data-i18n="contracts.report">Report</a>
+                </td>
+              </tr>
+              <tr>
+                <td>PPIP-003</td>
+                <td>Garissa Solar Mini-Grid Phase 1</td>
+                <td>SunGrid Africa</td>
+                <td>210,000,000</td>
+                <td>2025-05-18</td>
+                <td><span class="badge" data-status="ongoing" data-i18n="status.ongoing">Ongoing</span></td>
+                <td><a href="#" style="color:var(--kenya-red); font-weight:700;" data-i18n="contracts.report">Report</a>
+                </td>
+              </tr>
+              <tr>
+                <td>PPIP-004</td>
+                <td>Kiambu Community Water Project</td>
+                <td>AquaWorks Consortium</td>
+                <td>85,000,000</td>
+                <td>2025-04-11</td>
+                <td><span class="badge" data-status="awarded" data-i18n="status.awarded">Awarded</span></td>
+                <td><a href="#" style="color:var(--kenya-red); font-weight:700;" data-i18n="contracts.report">Report</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PROJECT MONITORING ===== -->
+    <section id="projects" aria-labelledby="projects-title">
+      <div class="container">
+        <h3 id="projects-title" class="panel-title" style="font-size:1.6rem;" data-i18n="projects.title">Project
+          Monitoring</h3>
+        <div class="grid grid-2">
+          <div class="card" aria-label="Interactive map">
+            <div id="map" role="application" aria-label="Project locations map"></div>
+          </div>
+          <div class="grid grid-2 project-cards">
+            <article class="card">
+              <h4 style="color:var(--kenya-red); margin:0 0 .25rem;">Nakuru Dispensary</h4>
+              <p class="mute" style="margin:.2rem 0 .4rem;">Health • Nakuru Town East</p>
+              <p><strong>Budget:</strong> KSh 45M • <strong>Spent:</strong> KSh 20M</p>
+              <label>Completion: <progress value="45" max="100">45%</progress></label>
+              <details style="margin-top:.5rem;">
+                <summary data-i18n="projects.updates">Updates</summary>
+                <ul>
+                  <li>2025-08-01: Foundation complete (photo pending)</li>
+                  <li>2025-07-15: Contractor mobilized</li>
+                </ul>
+              </details>
+            </article>
+            <article class="card">
+              <h4 style="color:var(--kenya-red); margin:0 0 .25rem;">Kisumu Road Upgrade</h4>
+              <p class="mute" style="margin:.2rem 0 .4rem;">Roads • Kisumu Central</p>
+              <p><strong>Budget:</strong> KSh 120M • <strong>Spent:</strong> KSh 90M</p>
+              <label>Completion: <progress value="70" max="100">70%</progress></label>
+              <details style="margin-top:.5rem;">
+                <summary data-i18n="projects.updates">Updates</summary>
+                <ul>
+                  <li>2025-08-10: Works slowed — awaiting materials</li>
+                  <li>2025-07-20: Drainage installed</li>
+                </ul>
+              </details>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== VIRTUAL BARAZAS: VIEW-ONLY ===== -->
+    <section id="barazas-section" aria-labelledby="barazas-title">
+      <div class="container">
+        <h3 id="barazas-title" class="panel-title" data-i18n="barazas.title">Virtual Barazas — Upcoming Townhalls</h3>
+        <p class="small-muted" data-i18n="barazas.text">
+          Upcoming public barazas scheduled by community organizers.
+          Click <strong>Join</strong> to open the live meeting, or watch the <strong>Recording</strong> if you missed
+          it.
+          Upvote or downvote to share feedback.
+        </p>
+
+        <div class="card" style="margin-top:.5rem;">
+          <div class="baraza-controls">
+            <label style="flex:2 1 240px; display:flex; flex-direction:column; gap:.3rem;">
+              <span>Search</span>
+              <input type="search" id="bz-search" placeholder="Search title, host, county, tags" />
+            </label>
+            <label style="flex:1 1 160px; display:flex; flex-direction:column; gap:.3rem;">
+              <span>County</span>
+              <select id="bz-county">
+                <option value="">All</option>
+                <option value="Nairobi">Nairobi</option>
+                <option value="Kiambu">Kiambu</option>
+                <option value="Nakuru">Nakuru</option>
+                <option value="Kisumu">Kisumu</option>
+                <option value="Mombasa">Mombasa</option>
+              </select>
+            </label>
+            <!-- <label style="flex:1 1 160px; display:flex; flex-direction:column; gap:.3rem;">
             <span>From</span>
             <input type="date" id="bz-from" />
           </label>
@@ -394,147 +434,168 @@
           <label style="flex:1 1 160px; display:flex; flex-direction:column; gap:.3rem;">
             <span>Sort</span> -->
             <!-- <select id="bz-sort"> -->
-              <!-- <option value="time">Start time</option> -->
-              <!-- <option value="popularity">Popularity</option> -->
+            <!-- <option value="time">Start time</option> -->
+            <!-- <option value="popularity">Popularity</option> -->
             <!-- </select> -->
-          </label>
+            </label>
+          </div>
+          <div class="tabs" style="margin-top:.5rem;">
+            <button class="tab-btn active" data-tab="upcoming">Upcoming</button>
+            <button class="tab-btn" data-tab="past">Past</button>
+          </div>
         </div>
-        <div class="tabs" style="margin-top:.5rem;">
-          <button class="tab-btn active" data-tab="upcoming">Upcoming</button>
-          <button class="tab-btn" data-tab="past">Past</button>
-        </div>
-      </div>
 
-      <div id="baraza-container" style="margin-top:12px">
-        <div class="card">
-          <div class="small-muted">Loading upcoming barazas…</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Modal for embedded meeting -->
-  <div id="baraza-overlay" class="overlay" aria-hidden="true" role="dialog" aria-modal="true">
-    <div class="modal">
-      <div class="toolbar">
-        <div>
-          <strong id="modal-title" style="color:#fff">Meeting</strong>
-          <div id="modal-meta" style="color:#fff;font-size:0.95rem"></div>
-        </div>
-        <div style="display:flex;gap:8px;align-items:center">
-          <button id="copy-link" class="copy-btn">Copy Link</button>
-          <button id="modal-close" class="close-x" aria-label="Close">✕</button>
+        <div id="baraza-container" style="margin-top:12px">
+          <div class="card">
+            <div class="small-muted">Loading upcoming barazas…</div>
+          </div>
         </div>
       </div>
-      <div class="iframe-wrap" id="modal-iframe"></div>
-    </div>
-  </div>
+    </section>
 
-
-  <!-- ===== REPORT ===== -->
-  <section id="report" aria-labelledby="report-title">
-    <div class="container">
-      <h3 id="report-title" class="panel-title" style="font-size:1.6rem;" data-i18n="report.title">Report an Issue</h3>
-      <p class="mute" data-i18n="report.help">Report delays, ghost projects, or misuse of funds. A tracking ID will be generated.</p>
-      <form class="grid grid-2">
-        <label><span data-i18n="report.project">Project (link or name)</span>
-          <input type="text" name="project" placeholder="e.g., Nakuru Dispensary" />
-        </label>
-        <label><span data-i18n="report.location">Location</span>
-          <input type="text" name="location" placeholder="County / Ward" />
-        </label>
-        <label><span data-i18n="report.issueType">Issue Type</span>
-          <select name="issue">
-            <option data-i18n="issue.delay">Delay</option>
-            <option data-i18n="issue.abandoned">Abandoned site</option>
-            <option data-i18n="issue.quality">Quality concern</option>
-            <option data-i18n="issue.corruption">Corruption / Irregularity</option>
-          </select>
-        </label>
-        <label><span data-i18n="report.details">Details</span>
-          <textarea name="details" rows="5" placeholder="Describe the issue…"></textarea>
-        </label>
-        <label><span data-i18n="report.photo">Upload Photo (optional)</span>
-          <input type="file" name="photo" accept="image/*" />
-        </label>
-        <label><span data-i18n="report.phone">Phone (optional for follow-up)</span>
-          <input type="tel" name="phone" placeholder="07xx xxx xxx" />
-        </label>
-        <label style="flex-direction:row; align-items:center; gap:.5rem;">
-          <input type="checkbox" name="consent" /> <span data-i18n="report.consent">I consent to share this information for accountability purposes.</span>
-        </label>
-        <div><button type="submit" class="btn" data-i18n="report.submit">Submit Report</button></div>
-      </form>
-    </div>
-  </section>
-
-<!-- ===== USSD & WHATSAPP ===== -->
-  <section id="channels" aria-labelledby="channels-title" style="margin-top:.5rem;">
-    <div class="container">
-      <h3 id="channels-title" class="panel-title" style="font-size:1.6rem;" data-i18n="channels.title">USSD & WhatsApp Chatbot</h3>
-      <div class="channels">
-        <!-- USSD -->
-        <div class="channel ussd">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M2 3h20v14H6l-4 4V3zm2 2v12.17L6.17 15H20V5H4zm10 2h2v6h-2V7zm-6 0h2v6H8V7z"/></svg>
+    <!-- Modal for embedded meeting -->
+    <div id="baraza-overlay" class="overlay" aria-hidden="true" role="dialog" aria-modal="true">
+      <div class="modal">
+        <div class="toolbar">
           <div>
-            <div class="big" data-i18n="channels.ussdDial">Dial <span style="color:var(--kenya-green)">*</span><span>384</span><span>*43258#</span></div>
-            <div class="mute" data-i18n="channels.ussdText">Check budgets, projects, and report issues from any phone.</div>
-            <div style="margin-top:.5rem;">
-              <button class="btn" type="button" onclick="alert('This is a demo. On a real phone, you would dial *384*43258#.');" data-i18n="channels.how">How it works</button>
+            <strong id="modal-title" style="color:#fff">Meeting</strong>
+            <div id="modal-meta" style="color:#fff;font-size:0.95rem"></div>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center">
+            <button id="copy-link" class="copy-btn">Copy Link</button>
+            <button id="modal-close" class="close-x" aria-label="Close">✕</button>
+          </div>
+        </div>
+        <div class="iframe-wrap" id="modal-iframe"></div>
+      </div>
+    </div>
+
+
+    <!-- ===== REPORT ===== -->
+    <section id="report" aria-labelledby="report-title">
+      <div class="container">
+        <h3 id="report-title" class="panel-title" style="font-size:1.6rem;" data-i18n="report.title">Report an Issue
+        </h3>
+        <p class="mute" data-i18n="report.help">Report delays, ghost projects, or misuse of funds. A tracking ID will be
+          generated.</p>
+        <form class="grid grid-2">
+          <label><span data-i18n="report.project">Project (link or name)</span>
+            <input type="text" name="project" placeholder="e.g., Nakuru Dispensary" />
+          </label>
+          <label><span data-i18n="report.location">Location</span>
+            <input type="text" name="location" placeholder="County / Ward" />
+          </label>
+          <label><span data-i18n="report.issueType">Issue Type</span>
+            <select name="issue">
+              <option data-i18n="issue.delay">Delay</option>
+              <option data-i18n="issue.abandoned">Abandoned site</option>
+              <option data-i18n="issue.quality">Quality concern</option>
+              <option data-i18n="issue.corruption">Corruption / Irregularity</option>
+            </select>
+          </label>
+          <label><span data-i18n="report.details">Details</span>
+            <textarea name="details" rows="5" placeholder="Describe the issue…"></textarea>
+          </label>
+          <label><span data-i18n="report.photo">Upload Photo (optional)</span>
+            <input type="file" name="photo" accept="image/*" />
+          </label>
+          <label><span data-i18n="report.phone">Phone (optional for follow-up)</span>
+            <input type="tel" name="phone" placeholder="07xx xxx xxx" />
+          </label>
+          <label style="flex-direction:row; align-items:center; gap:.5rem;">
+            <input type="checkbox" name="consent" /> <span data-i18n="report.consent">I consent to share this
+              information for accountability purposes.</span>
+          </label>
+          <div><button type="submit" class="btn" data-i18n="report.submit">Submit Report</button></div>
+        </form>
+      </div>
+    </section>
+
+    <!-- ===== USSD & WHATSAPP ===== -->
+    <section id="channels" aria-labelledby="channels-title" style="margin-top:.5rem;">
+      <div class="container">
+        <h3 id="channels-title" class="panel-title" style="font-size:1.6rem;" data-i18n="channels.title">USSD & WhatsApp
+          Chatbot</h3>
+        <div class="channels">
+          <!-- USSD -->
+          <div class="channel ussd">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="currentColor"
+                d="M2 3h20v14H6l-4 4V3zm2 2v12.17L6.17 15H20V5H4zm10 2h2v6h-2V7zm-6 0h2v6H8V7z" />
+            </svg>
+            <div>
+              <div class="big" data-i18n="channels.ussdDial">Dial <span
+                  style="color:var(--kenya-green)">*</span><span>384</span><span>*43258#</span></div>
+              <div class="mute" data-i18n="channels.ussdText">Check budgets, projects, and report issues from any phone.
+              </div>
+              <div style="margin-top:.5rem;">
+                <button class="btn" type="button"
+                  onclick="alert('This is a demo. On a real phone, you would dial *384*43258#.');"
+                  data-i18n="channels.how">How it works</button>
+              </div>
+            </div>
+          </div>
+          <!-- WhatsApp -->
+          <div class="channel whatsapp">
+            <svg viewBox="0 0 32 32" aria-hidden="true">
+              <path fill="#25D366"
+                d="M16 .6C7.6.6.8 7.4.8 15.8c0 2.7.7 5.2 2.1 7.4L.6 31.4l8.4-2.2c2.1 1.1 4.5 1.7 7 1.7 8.4 0 15.2-6.8 15.2-15.2S24.4.6 16 .6z" />
+              <path fill="#fff"
+                d="M24 19.6c-.4 1.1-2.1 2-2.9 2.1-.8.1-1.7.2-2.8-.2-3.1-1-5-3.5-5.1-3.7-.1-.1-1.2-1.6-1.2-3.1s.7-2.2 1-2.5c.4-.5.9-.6 1.2-.6h.9c.3 0 .7 0 1 .8.4.9 1.3 3.2 1.4 3.4.1.2.1.4 0 .6-.2.5-.5.9-.9 1.4-.2.2-.4.4-.2.8.2.4 1 1.6 2.2 2.6 1.5 1.3 2.8 1.7 3.3 1.9.4.2.7.2 1-.1.3-.3 1.2-1.4 1.5-1.8.3-.4.6-.4 1-.2l2.3 1.1c.5.2.8.4.9.6.1.2.1 1.3-.3 2.3z" />
+            </svg>
+            <div>
+              <div class="big" data-i18n="channels.wa">Open Chat: <a
+                  href="https://wa.me/254721606409?text=Hello%20WaziHub" target="" rel="noopener" class="btn"
+                  style="--bg:#25D366;" data-i18n="channels.openChat">Open Chat</a></div>
+              <div class="mute" data-i18n="channels.waText">Save <strong>+254 721606409</strong> then say “Hello
+                WaziHub”.</div>
+              <a href="https://wa.me/254721606409?text=Hello%20WaziHub" class="btn">Chat on WhatsApp</a>
             </div>
           </div>
         </div>
-        <!-- WhatsApp -->
-        <div class="channel whatsapp">
-          <svg viewBox="0 0 32 32" aria-hidden="true"><path fill="#25D366" d="M16 .6C7.6.6.8 7.4.8 15.8c0 2.7.7 5.2 2.1 7.4L.6 31.4l8.4-2.2c2.1 1.1 4.5 1.7 7 1.7 8.4 0 15.2-6.8 15.2-15.2S24.4.6 16 .6z"/><path fill="#fff" d="M24 19.6c-.4 1.1-2.1 2-2.9 2.1-.8.1-1.7.2-2.8-.2-3.1-1-5-3.5-5.1-3.7-.1-.1-1.2-1.6-1.2-3.1s.7-2.2 1-2.5c.4-.5.9-.6 1.2-.6h.9c.3 0 .7 0 1 .8.4.9 1.3 3.2 1.4 3.4.1.2.1.4 0 .6-.2.5-.5.9-.9 1.4-.2.2-.4.4-.2.8.2.4 1 1.6 2.2 2.6 1.5 1.3 2.8 1.7 3.3 1.9.4.2.7.2 1-.1.3-.3 1.2-1.4 1.5-1.8.3-.4.6-.4 1-.2l2.3 1.1c.5.2.8.4.9.6.1.2.1 1.3-.3 2.3z"/></svg>
-          <div>
-            <div class="big" data-i18n="channels.wa">Open Chat: <a href="https://wa.me/254721606409?text=Hello%20WaziHub" target="" rel="noopener" class="btn" style="--bg:#25D366;" data-i18n="channels.openChat">Open Chat</a></div>
-            <div class="mute" data-i18n="channels.waText">Save <strong>+254 721606409</strong> then say “Hello WaziHub”.</div>
-            <a href="https://wa.me/254721606409?text=Hello%20WaziHub" class="btn">Chat on WhatsApp</a> 
-          </div>
-        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ===== ABOUT / FOOTER ===== -->
-  <section id="about" aria-labelledby="about-title">
-    <div class="container">
-      <h3 id="about-title" class="panel-title" style="font-size:1.6rem;" data-i18n="about.title">About WaziHub</h3>
-      <p data-i18n="about.text">WaziHub is a Kenyan civic tech platform for budget transparency, open contracting, project monitoring, and citizen feedback. Built with the community, for the community.</p>
-    </div>
-  </section>
+    <!-- ===== ABOUT / FOOTER ===== -->
+    <section id="about" aria-labelledby="about-title">
+      <div class="container">
+        <h3 id="about-title" class="panel-title" style="font-size:1.6rem;" data-i18n="about.title">About WaziHub</h3>
+        <p data-i18n="about.text">WaziHub is a Kenyan civic tech platform for budget transparency, open contracting,
+          project monitoring, and citizen feedback. Built with the community, for the community.</p>
+      </div>
+    </section>
 
-  <footer role="contentinfo">
-    <div class="container">
-      <p><strong>WaziHub</strong> — <span data-i18n="brand.tag">See More • Know More • Do More</span>.</p>
-      <nav aria-label="Footer">
-        <ul class="flex" style="flex-wrap:wrap;">
-          <li><a href="#channels" data-i18n="nav.channels">USSD & WhatsApp</a></li>
-          <li><a href="#sources" data-i18n="footer.sources">Data Sources</a></li>
-          <li><a href="#privacy" data-i18n="footer.privacy">Privacy</a></li>
-          <li><a href="#faq" data-i18n="footer.faq">FAQs</a></li>
-        </ul>
-      </nav>
-      <p class="muted">© <span id="copyright-year">2025</span> WaziHub. All rights reserved.</p>
-    </div>
-  </footer>
-</main>
-<script src="data/i18n.js"></script>
-<script src="data/budget.js"></script>
-<script src="data/projects.js"></script>
-<script src="data/barazas-demo.js"></script>
-<script src="js/utils.js"></script>
-<script src="js/i18n.js"></script>
-<script src="js/report.js"></script>
-<script src="js/main.js" defer></script>
-<script src="js/pwa.js" defer></script>
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  var y = document.getElementById('copyright-year');
-  if (y) y.textContent = new Date().getFullYear();
-  if (window.WaziHub && WaziHub.initI18n) WaziHub.initI18n();
-});
-</script>
+    <footer role="contentinfo">
+      <div class="container">
+        <p><strong>WaziHub</strong> — <span data-i18n="brand.tag">See More • Know More • Do More</span>.</p>
+        <nav aria-label="Footer">
+          <ul class="flex" style="flex-wrap:wrap;">
+            <li><a href="#channels" data-i18n="nav.channels">USSD & WhatsApp</a></li>
+            <li><a href="#sources" data-i18n="footer.sources">Data Sources</a></li>
+            <li><a href="#privacy" data-i18n="footer.privacy">Privacy</a></li>
+            <li><a href="#faq" data-i18n="footer.faq">FAQs</a></li>
+          </ul>
+        </nav>
+        <p class="muted">© <span id="copyright-year">2025</span> WaziHub. All rights reserved.</p>
+      </div>
+    </footer>
+  </main>
+  <script src="data/i18n.js"></script>
+  <script src="data/budget.js"></script>
+  <script src="data/projects.js"></script>
+  <script src="data/barazas-demo.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/report.js"></script>
+  <script src="js/main.js" defer></script>
+  <script src="js/pwa.js" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var y = document.getElementById('copyright-year');
+      if (y) y.textContent = new Date().getFullYear();
+      if (window.WaziHub && WaziHub.initI18n) WaziHub.initI18n();
+    });
+  </script>
 </body>
+
 </html>
