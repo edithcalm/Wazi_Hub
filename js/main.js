@@ -3,141 +3,14 @@
   'use strict';
   const WaziData = window.WaziData;
   const WaziHub = window.WaziHub;
-  const sectorPalette = WaziData.sectorPalette;
-  const baseData = WaziData.baseData;
-  const yearMul = WaziData.yearMul;
-  const countyScale = WaziData.countyScale;
   const projects = WaziData.projects;
 
-  // ===== CHARTS =====
-  const pieCtx = document.getElementById('pie').getContext('2d');
-  const barCtx = document.getElementById('bars').getContext('2d');
-  let pieChart, barChart;
-
-  function makePie(data){
-    const labels = Object.keys(data);
-    const values = labels.map(k => data[k].planned);
-    const colors = labels.map(l => sectorPalette[l] || '#ccc');
-    return new Chart(pieCtx, {
-      type: 'pie',
-      data: { labels, datasets: [{ data: values, backgroundColor: colors, borderColor: '#ffffff', borderWidth: 2 }]},
-      options: {
-        plugins:{
-          legend:{ display:false },
-          tooltip:{ callbacks:{ label:(ctx)=> `${ctx.label}: ${WaziHub.fmt(ctx.parsed)}` } }
-        }
-      }
-    });
-  }
-
-  function makeBars(data){
-    const labels = ["Q1","Q2","Q3","Q4"];
-    const plannedTotal = Object.values(data).reduce((s,v)=>s+v.planned,0);
-    const actualTotal  = Object.values(data).reduce((s,v)=>s+v.actual,0);
-    // Simple quarterly splits (dummy)
-    const p = [0.24,0.26,0.26,0.24].map(r=> Math.round(plannedTotal*r));
-    const a = [0.20,0.23,0.25,0.22].map((r,i)=> Math.min(Math.round(actualTotal*r), p[i])); // cap actual <= planned per quarter
-    return new Chart(barCtx, {
-      type:'bar',
-      data:{
-        labels,
-        datasets:[
-          { label:'Planned', data:p, backgroundColor:'rgba(0,133,63,0.85)' },
-          { label:'Actual',  data:a, backgroundColor:'rgba(187,25,25,0.9)' }
-        ]
-      },
-      options:{
-        responsive:true,
-        maintainAspectRatio:false,
-        layout:{ padding:{ top: 8, right: 8, bottom: 0, left: 8 } },
-        plugins:{
-          legend:{ position:'top', labels:{ boxWidth: 12, boxHeight:12, padding:10 } },
-          tooltip:{ padding:8 }
-        },
-        interaction:{ mode:'index', intersect:false },
-        scales:{
-          y:{ beginAtZero:true, grace:'1%', ticks:{ callback:(v)=> (v/1e9)+'B' } },
-          x:{ grid:{ display:false } }
-        }
-      }
-    });
-  }
-
-  function buildLegend(data){
-    const el = document.getElementById('pie-legend');
-    el.innerHTML = '';
-    for(const [label,vals] of Object.entries(data)){
-      const color = sectorPalette[label] || '#ccc';
-      const item = document.createElement('div');
-      item.innerHTML = `<span style="display:inline-block;width:14px;height:14px;border-radius:3px;background:${color};margin-right:8px;vertical-align:middle;"></span>${label} — <strong>${WaziHub.fmt(vals.planned)}</strong>`;
-      el.appendChild(item);
-    }
-  }
-
-  function updateCards(data){
-    const planned = Object.values(data).reduce((s,v)=>s+v.planned,0);
-    const actual  = Object.values(data).reduce((s,v)=>s+v.actual,0);
-    const pending = Math.max(planned-actual, 0);
-    document.getElementById('total-budget').textContent = WaziHub.fmt(planned);
-    document.getElementById('total-spent').textContent  = WaziHub.fmt(actual);
-    document.getElementById('pending-budget').textContent = WaziHub.fmt(pending);
-  }
-
-  function filterBySector(data, sector){
-    if(!sector || sector==="All sectors" || sector==="Sekta zote" || sector==="Sekta zote") return data;
-    const filtered = {};
-    if(data[sector]) filtered[sector] = data[sector];
-    return filtered;
-  }
-
-  function scaleForCounty(data, countyVal){
-    const key = (countyVal||'').toLowerCase();
-    const scale = countyScale[key] || countyScale.default;
-    const scaled = {};
-    for(const k in data){
-      scaled[k] = {
-        planned: Math.round(data[k].planned*scale),
-        actual : Math.round(data[k].actual *Math.min(scale, 1.15))
-      };
-    }
-    return scaled;
-  }
-
-  function scaleForYear(data, year){
-    const mul = yearMul[year] || 1;
-    const scaled = {};
-    for(const k in data){
-      scaled[k] = {
-        planned: Math.round(data[k].planned*mul),
-        actual : Math.round(data[k].actual *mul*0.97) // slight execution gap
-      };
-    }
-    return scaled;
-  }
-
-  function drawAll(){
-    const sectorSel = document.getElementById('sector').value;
-    const countySel = document.getElementById('county').value;
-    const yearSel   = document.getElementById('budget-year').value;
-    let data = scaleForYear(baseData, yearSel);
-    data = scaleForCounty(data, countySel);
-    data = filterBySector(data, sectorSel);
-
-    if(pieChart) pieChart.destroy();
-    if(barChart) barChart.destroy();
-
-    pieChart = makePie(data);
-    barChart = makeBars(data);
-    buildLegend(data);
-    updateCards(data);
-  }
-
-  document.getElementById('update').addEventListener('click', drawAll);
-
-  // Initial charts render
-  drawAll();
+  // Budget charts: see js/budget-intelligence.js
 
   // ===== MAP: INTERACTIVE PROJECT PINS =====
+  const mapEl = document.getElementById('map');
+  if (mapEl && typeof L !== 'undefined') {
+
   const sectorColors = {
     'Health':            '#e53e3e',
     'Transport':         '#3182ce',
@@ -202,9 +75,10 @@
   });
 
   // Scroll-wheel zoom only when focused on the map
-  const mapEl = document.getElementById('map');
   mapEl.addEventListener('mouseenter', () => map.scrollWheelZoom.enable());
   mapEl.addEventListener('mouseleave', () => map.scrollWheelZoom.disable());
+
+  } // end map block
 
   // ===== BARAZA LIST & MODAL =====
   const API_BASE = '/api';

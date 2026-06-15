@@ -15,9 +15,17 @@
   <link rel="manifest" href="manifest.json" />
   <link rel="icon" href="icons/icon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="icons/icon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/budget-intelligence.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-treemap@2.3.0/dist/chartjs-chart-treemap.min.js"
+    defer></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer crossorigin=""></script>
 </head>
 
@@ -34,7 +42,6 @@
     <a href="#home"><span aria-hidden="true">🏠</span><small>Home</small></a>
     <a href="#budget-tracker"><span aria-hidden="true">📊</span><small>Budgets</small></a>
     <a href="#projects"><span aria-hidden="true">🏗</span><small>Projects</small></a>
-    <a href="#barazas-section"><span aria-hidden="true">🗣</span><small>Barazas</small></a>
     <a href="#report"><span aria-hidden="true">🚨</span><small>Report</small></a>
   </nav>
 
@@ -63,7 +70,6 @@
           <li><a href="#budget-tracker" data-i18n="nav.budgets">Budgets</a></li>
           <li><a href="#open-contracting" data-i18n="nav.contracts">Contracts</a></li>
           <li><a href="#projects" data-i18n="nav.projects">Projects</a></li>
-          <li><a href="#barazas-section" data-i18n="nav.barazas">Barazas</a></li>
           <li><a href="#report" data-i18n="nav.report">Report</a></li>
         </ul>
       </nav>
@@ -137,146 +143,214 @@
       </div>
     </section>
 
-    <!-- ===== BUDGET TRACKER ===== -->
+    <!-- ===== BUDGET INTELLIGENCE ===== -->
     <section id="budget-tracker" aria-labelledby="budget-title" style="margin-top:.5rem;">
       <div class="container">
-        <h3 id="budget-title" class="panel-title" style="font-size:1.6rem;" data-i18n="budget.title">Open Budget Tracker
-        </h3>
+        <div class="bi-header">
+          <div>
+            <h3 id="budget-title" class="panel-title" style="font-size:1.8rem;">WaziHub Public Finance Intelligence</h3>
+            <p class="bi-subtitle">Official county budget analytics, programme-based allocations, vulnerable group
+              equity index, project monitoring, and citizen participation metrics.</p>
+          </div>
+        </div>
 
-        <!-- Filters -->
-        <form id="filters" class="grid filters-grid">
-          <label><span data-i18n="filters.year">Year</span>
-            <!-- <select id="copyright-year">
-            <option value="2025/2026">2025/26</option>
-            <option value="2024/25">2024/25</option>
-            <option value="2023/24">2023/24</option>
-            <option value="2022/23">2022/23</option>
-            <option value="2021/22">2021/22</option>
-            <option value="2020/21">2020/21</option>
-            <option value="2019/20">2019/20</option>
-            <option value="2018/19">2018/19</option> -->
-            <select id="budget-year" class="border rounded px-2 py-1">
-              <option>2025/26</option>
-              <option>2024/25</option>
-              <option>2023/24</option>
-              <option>2022/23</option>
-              <option>2021/22</option>
-              <option>2020/21</option>
-              <option>2019/20</option>
-              <option>2018/19</option>
-              <option> 2017/18</option>
-            </select>
-          </label>
-          <label><span data-i18n="filters.sector">Sector</span>
-            <select id="sector">
-              <option data-i18n="filters.allSectors">All sectors</option>
-              <option>Health</option>
-              <option>Education</option>
-              <option>Infrastructure</option>
-              <option>Agriculture</option>
-              <option>Water & Sanitation</option>
-              <option>Transport</option>
-              <option>Energy</option>
-              <option>Security</option>
-              <option>Governance</option>
-              <option>Environment</option>
-              <option>Trade & Industry</option>
-              <option>Tourism</option>
-              <option>Youth Affairs</option>
-              <option>Gender & Social Services</option>
-            </select>
-          </label>
-          <label><span data-i18n="filters.county">County</span>
-            <select id="county">
-              <option data-i18n="filters.allCounties">All counties</option>
-              <option value="baringo">Baringo</option>
-              <option value="bomet">Bomet</option>
-              <option value="bungoma">Bungoma</option>
-              <option value="busia">Busia</option>
-              <option value="elgeyo-marakwet">Elgeyo-Marakwet</option>
-              <option value="embu">Embu</option>
-              <option value="garissa">Garissa</option>
-              <option value="homa-bay">Homa Bay</option>
-              <option value="isiolo">Isiolo</option>
-              <option value="kajiado">Kajiado</option>
-              <option value="kakamega">Kakamega</option>
-              <option value="kericho">Kericho</option>
-              <option value="kiambu">Kiambu</option>
-              <option value="kilifi">Kilifi</option>
-              <option value="kirinyaga">Kirinyaga</option>
-              <option value="kisii">Kisii</option>
-              <option value="kisumu">Kisumu</option>
-              <option value="kitui">Kitui</option>
-              <option value="kwale">Kwale</option>
-              <option value="laikipia">Laikipia</option>
-              <option value="lamu">Lamu</option>
-              <option value="machakos">Machakos</option>
-              <option value="makueni">Makueni</option>
-              <option value="mandera">Mandera</option>
-              <option value="marsabit">Marsabit</option>
-              <option value="meru">Meru</option>
-              <option value="migori">Migori</option>
-              <option value="mombasa">Mombasa</option>
-              <option value="muranga">Murang'a</option>
-              <option value="nairobi">Nairobi</option>
-              <option value="nakuru">Nakuru</option>
-              <option value="nandi">Nandi</option>
-              <option value="narok">Narok</option>
-              <option value="nyamira">Nyamira</option>
-              <option value="nyandarua">Nyandarua</option>
-              <option value="nyeri">Nyeri</option>
-              <option value="samburu">Samburu</option>
-              <option value="siaya">Siaya</option>
-              <option value="taita-taveta">Taita-Taveta</option>
-              <option value="tana-river">Tana River</option>
-              <option value="tharaka-nithi">Tharaka-Nithi</option>
-              <option value="trans-nzoia">Trans Nzoia</option>
-              <option value="turkana">Turkana</option>
-              <option value="uasin-gishu">Uasin Gishu</option>
-              <option value="vihiga">Vihiga</option>
-              <option value="wajir">Wajir</option>
-              <option value="west-pokot">West Pokot</option>
-            </select>
-          </label>
-          <button type="button" id="update" class="btn" data-i18n="filters.update">Update Data</button>
+        <!-- Dashboard Selection Tabs -->
+        <div class="bi-tabs" role="tablist" aria-label="Budget views">
+          <button type="button" class="bi-tab active" role="tab" data-view="sector"
+            aria-selected="true">Sectors</button>
+          <button type="button" class="bi-tab" role="tab" data-view="theme" aria-selected="false">Thematic
+            Focus</button>
+          <button type="button" class="bi-tab" role="tab" data-view="compare" aria-selected="false">County
+            Comparison</button>
+        </div>
+
+        <!-- Global Filters Form -->
+        <form id="bi-filters" class="bi-filters-card">
+          <div class="bi-filters-grid">
+            <label>
+              <span>Financial Year</span>
+              <select id="bi-year">
+                <option value="2025/26">FY 2025/26</option>
+                <option value="2024/25">FY 2024/25</option>
+                <option value="2023/24">FY 2023/24</option>
+              </select>
+            </label>
+            <label>
+              <span>County (All 47)</span>
+              <select id="bi-county">
+                <!-- Will be dynamically populated with 47 counties via JS -->
+              </select>
+            </label>
+            <label>
+              <span>Sector (CoG aligned)</span>
+              <select id="bi-sector">
+                <option value="all">All Sectors</option>
+              </select>
+            </label>
+            <label>
+              <span>Programme</span>
+              <select id="bi-programme">
+                <option value="all">All Programmes</option>
+              </select>
+            </label>
+            <label>
+              <span>Sub-Programme</span>
+              <select id="bi-subprogramme">
+                <option value="all">All Sub-Programmes</option>
+              </select>
+            </label>
+            <label>
+              <span>Thematic Focus</span>
+              <select id="bi-theme">
+                <option value="all">All Citizen Themes</option>
+              </select>
+            </label>
+          </div>
+          <div class="bi-filters-actions">
+            <button type="button" id="bi-update" class="btn">Apply Filters</button>
+            <button type="button" id="bi-reset" class="btn secondary">Reset Filters</button>
+          </div>
         </form>
 
-        <!-- Charts -->
-        <div class="grid grid-2" style="margin-top:1rem;">
-          <div class="chart-wrap">
-            <div class="panel-title" data-i18n="chart.pieTitle">Budget Allocation by Sector</div>
-            <div class="chart-box"><canvas id="pie"></canvas></div>
-            <div id="pie-legend" class="legend" aria-live="polite"></div>
+        <nav id="bi-breadcrumb" class="bi-breadcrumb" aria-label="Budget drill-down path"></nav>
+
+        <!-- Summary KPIs Row -->
+        <div class="grid bi-summary">
+          <div class="card bi-summary-card">
+            <span class="bi-sum-icon">💰</span>
+            <div>
+              <div id="bi-total-budget" class="summary-value">—</div>
+              <div class="mute">Total Budget</div>
+            </div>
           </div>
-          <div class="chart-wrap">
-            <div class="panel-title" data-i18n="chart.barTitle">Planned vs Actual — Quarterly</div>
-            <div class="chart-box"><canvas id="bars"></canvas></div>
-            <p class="chart-tip" data-i18n="chart.tip">Tip: Tap a legend item to hide/show a series.</p>
+          <div class="card bi-summary-card">
+            <span class="bi-sum-icon">💸</span>
+            <div>
+              <div id="bi-total-spent" class="summary-value">—</div>
+              <div class="mute">Total Spent</div>
+            </div>
           </div>
+          <div class="card bi-summary-card">
+            <span class="bi-sum-icon">⏳</span>
+            <div>
+              <div id="bi-pending-budget" class="summary-value">—</div>
+              <div class="mute">Unspent / Pending</div>
+            </div>
+          </div>
+
+
         </div>
 
-        <!-- Summary Cards -->
-        <div class="grid grid-3" style="margin-top:1rem;">
-          <div class="card" style="text-align:center;">
-            <div id="total-budget" class="summary-value"
-              style="font-size:1.6rem; font-weight:900; color:var(--kenya-green)">KSh 3.32T</div>
-            <div class="mute" data-i18n="sum.totalBudget">Total Budget (selected)</div>
-          </div>
-          <div class="card" style="text-align:center;">
-            <div id="total-spent" class="summary-value"
-              style="font-size:1.6rem; font-weight:900; color:var(--kenya-green)">KSh 2.10T</div>
-            <div class="mute" data-i18n="sum.totalSpent">Total Spent (~63%)</div>
-          </div>
-          <div class="card" style="text-align:center;">
-            <div id="pending-budget" class="summary-value"
-              style="font-size:1.6rem; font-weight:900; color:var(--kenya-green)">KSh 1.22T</div>
-            <div class="mute" data-i18n="sum.pending">Pending (~37%)</div>
-          </div>
-        </div>
+        <!-- 1. Sector Dashboard View -->
+        <div class="bi-view" data-view="sector">
+          <div class="bi-chart-row">
+            <div class="chart-wrap">
+              <div class="panel-title">Sector Allocations (KES)</div>
+              <div class="chart-box"><canvas id="bi-chart-sector-pie"></canvas></div>
+              <div id="bi-sector-legend" class="bi-legend"></div>
+              <p class="chart-tip">Click a sector or legend to drill down to programme levels.</p>
+            </div>
 
-        <p class="mute" style="margin-top:.5rem;" data-i18n="sources.note">Data sources: National Treasury, Controller
-          of Budget, County Budgets (demo data shown).</p>
-      </div>
+
+            <div class="bi-chart-row">
+              <div class="chart-wrap">
+                <div class="panel-title">Planned vs Actual — Quarterly Execution</div>
+                <div class="chart-box"><canvas id="bi-chart-quarterly"></canvas></div>
+              </div>
+            </div>
+
+            <div id="bi-drill-panel" hidden>
+              <div class="chart-wrap" style="margin-top: 1rem;">
+                <div id="bi-drill-title" class="panel-title">Programme drill-down</div>
+                <div class="chart-box"><canvas id="bi-chart-programme-stack"></canvas></div>
+                <div class="panel-title" style="margin-top: 1.5rem;">Associated Project Hierarchy</div>
+                <div class="bi-drill-table-wrap table-scroll" tabindex="0">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th scope="col">Code</th>
+                        <th scope="col">Sub-Programme</th>
+                        <th scope="col">Project</th>
+                        <th scope="col">Ward</th>
+                        <th scope="col">Planned</th>
+                        <th scope="col">Actual</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Progress</th>
+                      </tr>
+                    </thead>
+                    <tbody id="bi-drill-tbody"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. Thematic Dashboard View -->
+          <div class="bi-view" data-view="theme" hidden>
+            <div class="bi-chart-row">
+              <div class="chart-wrap">
+                <div class="panel-title">Thematic Budget Tree Analysis</div>
+                <div class="chart-box tall"><canvas id="bi-chart-theme-treemap"></canvas></div>
+                <p class="chart-tip">Citizen themes filter allocations matching marginalized groups, food, climate, and
+                  more.</p>
+              </div>
+              <div class="chart-wrap">
+                <div class="panel-title">Theme Beneficiary Analysis (Persons Benefit)</div>
+                <div class="chart-box tall"><canvas id="bi-chart-theme-beneficiaries"></canvas></div>
+              </div>
+            </div>
+
+            <div class="panel-title" style="margin-top: 1.5rem;">Thematic Allocations Overview</div>
+            <div id="bi-theme-cards" class="bi-theme-grid"></div>
+
+            <div class="chart-wrap" style="margin-top: 1.5rem;">
+              <div class="panel-title">Theme Budgets County Comparison (FY 2025/26)</div>
+              <div class="chart-box"><canvas id="bi-chart-theme-county-compare"></canvas></div>
+            </div>
+          </div>
+
+          <!-- 3. County Comparison Dashboard View -->
+          <div class="bi-view" data-view="compare" hidden>
+            <div class="bi-compare-selectors card">
+              <label>
+                <span>County A</span>
+                <select id="bi-compare-a"></select>
+              </label>
+              <span class="bi-compare-versus">VS</span>
+              <label>
+                <span>County B</span>
+                <select id="bi-compare-b"></select>
+              </label>
+              <button type="button" id="bi-compare-btn" class="btn">Compare Counties</button>
+            </div>
+
+            <div class="bi-compare-grid" id="bi-compare-results">
+              <!-- Will be dynamically rendered with side-by-side comparison tables/cards via JS -->
+            </div>
+
+            <div class="bi-chart-row" id="bi-compare-charts-row" style="margin-top: 1rem;">
+              <div class="chart-wrap">
+                <div class="panel-title">Sector Allocation Splits (KES)</div>
+                <div class="chart-box"><canvas id="bi-chart-compare-sectors"></canvas></div>
+              </div>
+              <div class="chart-wrap">
+                <div class="panel-title">Thematic Priority Splits (KES)</div>
+                <div class="chart-box"><canvas id="bi-chart-compare-themes"></canvas></div>
+              </div>
+            </div>
+
+            <div class="chart-wrap" style="margin-top: 1rem;">
+              <div class="panel-title">All Counties Performance Heatmap (Absorption vs Per Capita vs Equity Index)</div>
+              <div id="bi-heatmap"></div>
+            </div>
+          </div>
+
+
+
+          <p class="bi-model-note"><strong>Data:</strong> County budgets aligned with Kenyan Programme-Based Budgeting
+            (PBB), CIDPs, and SDGs. Sources: National Treasury, Controller of Budget, and County Fiscal Strategy Papers.
+          </p>
+        </div>
     </section>
 
     <!-- ===== OPEN CONTRACTING PORTAL ===== -->
@@ -395,80 +469,7 @@
       </div>
     </section>
 
-    <!-- ===== VIRTUAL BARAZAS: VIEW-ONLY ===== -->
-    <section id="barazas-section" aria-labelledby="barazas-title">
-      <div class="container">
-        <h3 id="barazas-title" class="panel-title" data-i18n="barazas.title">Virtual Barazas — Upcoming Townhalls</h3>
-        <p class="small-muted" data-i18n="barazas.text">
-          Upcoming public barazas scheduled by community organizers.
-          Click <strong>Join</strong> to open the live meeting, or watch the <strong>Recording</strong> if you missed
-          it.
-          Upvote or downvote to share feedback.
-        </p>
 
-        <div class="card" style="margin-top:.5rem;">
-          <div class="baraza-controls">
-            <label style="flex:2 1 240px; display:flex; flex-direction:column; gap:.3rem;">
-              <span>Search</span>
-              <input type="search" id="bz-search" placeholder="Search title, host, county, tags" />
-            </label>
-            <label style="flex:1 1 160px; display:flex; flex-direction:column; gap:.3rem;">
-              <span>County</span>
-              <select id="bz-county">
-                <option value="">All</option>
-                <option value="Nairobi">Nairobi</option>
-                <option value="Kiambu">Kiambu</option>
-                <option value="Nakuru">Nakuru</option>
-                <option value="Kisumu">Kisumu</option>
-                <option value="Mombasa">Mombasa</option>
-              </select>
-            </label>
-            <!-- <label style="flex:1 1 160px; display:flex; flex-direction:column; gap:.3rem;">
-            <span>From</span>
-            <input type="date" id="bz-from" />
-          </label>
-          <label style="flex:1 1 160px; display:flex; flex-direction:column; gap:.3rem;">
-            <span>To</span>
-            <input type="date" id="bz-to" />
-          </label>
-          <label style="flex:1 1 160px; display:flex; flex-direction:column; gap:.3rem;">
-            <span>Sort</span> -->
-            <!-- <select id="bz-sort"> -->
-            <!-- <option value="time">Start time</option> -->
-            <!-- <option value="popularity">Popularity</option> -->
-            <!-- </select> -->
-            </label>
-          </div>
-          <div class="tabs" style="margin-top:.5rem;">
-            <button class="tab-btn active" data-tab="upcoming">Upcoming</button>
-            <button class="tab-btn" data-tab="past">Past</button>
-          </div>
-        </div>
-
-        <div id="baraza-container" style="margin-top:12px">
-          <div class="card">
-            <div class="small-muted">Loading upcoming barazas…</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Modal for embedded meeting -->
-    <div id="baraza-overlay" class="overlay" aria-hidden="true" role="dialog" aria-modal="true">
-      <div class="modal">
-        <div class="toolbar">
-          <div>
-            <strong id="modal-title" style="color:#fff">Meeting</strong>
-            <div id="modal-meta" style="color:#fff;font-size:0.95rem"></div>
-          </div>
-          <div style="display:flex;gap:8px;align-items:center">
-            <button id="copy-link" class="copy-btn">Copy Link</button>
-            <button id="modal-close" class="close-x" aria-label="Close">✕</button>
-          </div>
-        </div>
-        <div class="iframe-wrap" id="modal-iframe"></div>
-      </div>
-    </div>
 
 
     <!-- ===== REPORT ===== -->
@@ -581,12 +582,13 @@
     </footer>
   </main>
   <script src="data/i18n.js"></script>
-  <script src="data/budget.js"></script>
+  <script src="data/budget-intelligence.js"></script>
   <script src="data/projects.js"></script>
-  <script src="data/barazas-demo.js"></script>
+
   <script src="js/utils.js"></script>
   <script src="js/i18n.js"></script>
   <script src="js/report.js"></script>
+  <script src="js/budget-intelligence.js" defer></script>
   <script src="js/main.js" defer></script>
   <script src="js/pwa.js" defer></script>
   <script>

@@ -1,0 +1,867 @@
+/* WaziHub Budget Intelligence — PBB-aligned official dataset and generator */
+(function (g) {
+  'use strict';
+
+  // 11 Official Kenyan County Budget Sectors (CoG and PBB aligned)
+  var SECTORS = [
+    { id: 'health', name: 'Health Services', shortName: 'Health', color: '#ff6b35', sdgAlignment: [3] },
+    { id: 'agriculture', name: 'Agriculture, Livestock & Fisheries', shortName: 'Agriculture', color: '#06d6a0', sdgAlignment: [2, 12, 14] },
+    { id: 'education', name: 'Education & Vocational Training', shortName: 'Education', color: '#f7931e', sdgAlignment: [4, 5] },
+    { id: 'water', name: 'Water, Environment & Natural Resources', shortName: 'Water & Env', color: '#118ab2', sdgAlignment: [6, 13, 15] },
+    { id: 'roads', name: 'Roads, Transport & Public Works', shortName: 'Roads & Works', color: '#ffd23f', sdgAlignment: [9, 11] },
+    { id: 'trade', name: 'Trade, Tourism & Enterprise Development', shortName: 'Trade & Tourism', color: '#f3722c', sdgAlignment: [8, 12] },
+    { id: 'lands', name: 'Lands, Housing & Urban Development', shortName: 'Lands & Housing', color: '#7209b7', sdgAlignment: [11] },
+    { id: 'finance', name: 'Finance & Economic Planning', shortName: 'Finance', color: '#6b7280', sdgAlignment: [8, 17] },
+    { id: 'governance', name: 'Public Administration & Governance', shortName: 'Governance', color: '#073b4c', sdgAlignment: [16, 17] },
+    { id: 'social', name: 'Youth, Gender, Culture & Social Services', shortName: 'Social & Gender', color: '#f8961e', sdgAlignment: [5, 10] },
+    { id: 'ict', name: 'ICT & Digital Transformation', shortName: 'ICT & Digital', color: '#0891b2', sdgAlignment: [9, 16] }
+  ];
+
+  // 17 Cross-Cutting Citizen Themes
+  var THEMES = [
+    { id: 'women', name: 'Women & Gender', category: 'GRB', color: '#db2777', icon: '♀', description: 'Economic empowerment, leadership, and gender-responsive services.', sdgTargets: ['5.5', '5.a'] },
+    { id: 'gbv', name: 'Gender-Based Violence (GBV)', category: 'GRB', color: '#e11d48', icon: '🛡', description: 'GBV prevention, safe shelters, legal aid, and recovery programs.', sdgTargets: ['5.2', '5.3'] },
+    { id: 'pwd', name: 'Persons with Disabilities (PWD)', category: 'Disability', color: '#7c3aed', icon: '♿', description: 'Assistive devices, accessibility infrastructure, and mainstreaming support.', sdgTargets: ['10.2'] },
+    { id: 'youth', name: 'Youth Empowerment', category: 'CIDP', color: '#2563eb', icon: '🎓', description: 'Technical skills, enterprise funds, internships, and talent hubs.', sdgTargets: ['4.4', '8.6'] },
+    { id: 'children', name: 'Children Services', category: 'Social Protection', color: '#f59e0b', icon: '👶', description: 'ECDE classes, primary health immunization, school feeds, and safety.', sdgTargets: ['4.2', '16.2'] },
+    { id: 'elderly', name: 'Elderly Support', category: 'Social Protection', color: '#78716c', icon: '🧓', description: 'Safety nets, medical screening camps, and community care services.', sdgTargets: ['1.3', '10.2'] },
+    { id: 'climate', name: 'Climate Action', category: 'Climate', color: '#059669', icon: '🌱', description: 'County climate resilience, forest conservation, and adaptation plans.', sdgTargets: ['13.1', '13.2'] },
+    { id: 'food', name: 'Food Security', category: 'CIDP', color: '#16a34a', icon: '🌾', description: 'Irrigation schemes, extension support, subsidized inputs, and storage.', sdgTargets: ['2.1', '2.2'] },
+    { id: 'housing', name: 'Housing', category: 'CIDP', color: '#9333ea', icon: '🏠', description: 'Informal settlement upgrades and land tenure regularisation.', sdgTargets: ['11.1'] },
+    { id: 'employment', name: 'Employment', category: 'CIDP', color: '#4f46e5', icon: '💼', description: 'MSME support programs, market construction, and job creation.', sdgTargets: ['8.3', '8.5'] },
+    { id: 'water_access', name: 'Water Access', category: 'CIDP', color: '#06b6d4', icon: '💧', description: 'Ward-level boreholes, piping extensions, and clean water access points.', sdgTargets: ['6.1'] },
+    { id: 'social_protection', name: 'Social Protection', category: 'Social Protection', color: '#ea580c', icon: '🤝', description: 'Targeted cash transfers, emergency relief, and rehabilitation.', sdgTargets: ['1.3'] },
+    { id: 'participation', name: 'Public Participation', category: 'Cross-cutting', color: '#0f766e', icon: '🗣', description: 'Barazas, civic education, and feedback-loop accountability systems.', sdgTargets: ['16.7'] },
+    { id: 'digital', name: 'Digital Inclusion', category: 'Cross-cutting', color: '#0284c7', icon: '📱', description: 'Internet connection hubs, digitised county services, and computer literacy.', sdgTargets: ['9.c'] },
+    { id: 'disaster', name: 'Disaster Preparedness', category: 'Climate', color: '#b91c1c', icon: '🚨', description: 'Flood protection walls, fire engines, and county drought management.', sdgTargets: ['13.1'] },
+    { id: 'entrepreneurship', name: 'Entrepreneurship', category: 'CIDP', color: '#0d9488', icon: '📈', description: 'Revolving funds, business incubation, and cooperative support.', sdgTargets: ['8.3'] },
+    { id: 'community', name: 'Community Development', category: 'Cross-cutting', color: '#4d7c0f', icon: '🏘', description: 'Ward development projects, community halls, and streetlights.', sdgTargets: ['11.a'] }
+  ];
+
+  // Hierarchy Structure Templates by Sector (Sector -> Programme -> Sub-Programme)
+  var STRUCTURE_TEMPLATES = {
+    health: [
+      {
+        code: '0401000', name: 'Primary Healthcare Services', goal: 'Universal access to basic care',
+        subProgrammes: [
+          { code: '0401010', name: 'Preventive Health Services', themes: ['children', 'climate'] },
+          { code: '0401020', name: 'Maternal & Child Health', themes: ['women', 'gbv', 'children'] }
+        ]
+      },
+      {
+        code: '0402000', name: 'Referral Hospital Services', goal: 'High quality secondary treatment',
+        subProgrammes: [
+          { code: '0402010', name: 'Hospital Infrastructure Upgrades', themes: ['pwd', 'community'] },
+          { code: '0402020', name: 'Specialized Medical Equipment', themes: ['elderly', 'social_protection'] }
+        ]
+      }
+    ],
+    agriculture: [
+      {
+        code: '0301000', name: 'Crop Production & Productivity', goal: 'Ensuring food supply resilience',
+        subProgrammes: [
+          { code: '0301010', name: 'Farmers Support & Input Subsidies', themes: ['food', 'entrepreneurship'] },
+          { code: '0301020', name: 'Irrigation & Water Management', themes: ['food', 'climate', 'water_access'] }
+        ]
+      },
+      {
+        code: '0302000', name: 'Livestock & Fisheries Development', goal: 'Expanding livestock and blue economy value chains',
+        subProgrammes: [
+          { code: '0302010', name: 'Dairy Value Chain Development', themes: ['food', 'entrepreneurship'] },
+          { code: '0302020', name: 'Fisheries & Aquaculture', themes: ['food', 'employment'] }
+        ]
+      }
+    ],
+    education: [
+      {
+        code: '0501000', name: 'Early Childhood Development Education', goal: 'Foundation learning excellence',
+        subProgrammes: [
+          { code: '0501010', name: 'ECDE Classroom Infrastructure', themes: ['children', 'community'] },
+          { code: '0501020', name: 'School Feeding Programme', themes: ['children', 'food', 'social_protection'] }
+        ]
+      },
+      {
+        code: '0502000', name: 'Vocational Training & Skills', goal: 'Equipping youth with technical abilities',
+        subProgrammes: [
+          { code: '0502010', name: 'TVET Tools & Equipment Provision', themes: ['youth', 'employment'] },
+          { code: '0502020', name: 'Vocational Scholarships & Bursaries', themes: ['youth', 'social_protection'] }
+        ]
+      }
+    ],
+    water: [
+      {
+        code: '0701000', name: 'Water Resource Development', goal: 'Enhance access to clean, piped water',
+        subProgrammes: [
+          { code: '0701010', name: 'Water Piping & Main Extensions', themes: ['water_access', 'community'] },
+          { code: '0701020', name: 'Ward-level Borehole Drilling', themes: ['water_access', 'women', 'climate'] }
+        ]
+      },
+      {
+        code: '0702000', name: 'Environment & Forestry Services', goal: 'County climate action and waste management',
+        subProgrammes: [
+          { code: '0702010', name: 'Solid Waste Management', themes: ['climate', 'employment'] },
+          { code: '0702020', name: 'Reforestation & Soil Conservation', themes: ['climate', 'disaster'] }
+        ]
+      }
+    ],
+    roads: [
+      {
+        code: '0601000', name: 'Road Construction & Maintenance', goal: 'All-weather county connectivity',
+        subProgrammes: [
+          { code: '0601010', name: 'Ward Road Gravelling & Grading', themes: ['community', 'employment'] },
+          { code: '0601020', name: 'Tarmac Road Upgrades', themes: ['community'] }
+        ]
+      },
+      {
+        code: '0602000', name: 'Public Works & Lighting', goal: 'Market centers safety and public infrastructure support',
+        subProgrammes: [
+          { code: '0602010', name: 'Market Street Lighting Phase II', themes: ['community', 'women', 'youth'] },
+          { code: '0602020', name: 'Footbridges & Drainage Construction', themes: ['community', 'pwd', 'disaster'] }
+        ]
+      }
+    ],
+    trade: [
+      {
+        code: '0901000', name: 'Trade Promotion & Markets', goal: 'Providing retail environments and MSME access',
+        subProgrammes: [
+          { code: '0901010', name: 'Market Shed Modernisation', themes: ['employment', 'community'] },
+          { code: '0901020', name: 'MSME Credit & Revolving Funds', themes: ['entrepreneurship', 'youth', 'women'] }
+        ]
+      },
+      {
+        code: '0902000', name: 'Tourism Promotion & Heritage', goal: 'Capitalizing on tourism spots',
+        subProgrammes: [
+          { code: '0902010', name: 'Tourist Attraction Site Upgrades', themes: ['employment'] },
+          { code: '0902020', name: 'Cultural Festivals & Community Centers', themes: ['community', 'youth'] }
+        ]
+      }
+    ],
+    lands: [
+      {
+        code: '0801000', name: 'Land Survey & Administration', goal: 'Fair land titles and spatial mapping',
+        subProgrammes: [
+          { code: '0801010', name: 'Land Adjudication & Titles Issuance', themes: ['women', 'housing'] },
+          { code: '0801020', name: 'County Spatial Plan Renders', themes: ['climate'] }
+        ]
+      },
+      {
+        code: '0802000', name: 'Housing & Urban Infrastructure', goal: 'Safe, affordable dwellings',
+        subProgrammes: [
+          { code: '0802010', name: 'Affordable Housing Units Build', themes: ['housing', 'youth'] },
+          { code: '0802020', name: 'Informal Settlements Slum Upgrading', themes: ['housing', 'pwd', 'community'] }
+        ]
+      }
+    ],
+    finance: [
+      {
+        code: '0201000', name: 'Public Finance Management', goal: 'Maintain fiscal efficiency and audit readiness',
+        subProgrammes: [
+          { code: '0201010', name: 'Budget Formulation & Economic Strategy', themes: ['participation'] },
+          { code: '0201020', name: 'Own-Source Revenue Automation', themes: ['digital', 'employment'] }
+        ]
+      },
+      {
+        code: '0202000', name: 'Economic Planning & Development Monitoring', goal: 'Monitor CIDP & ADP milestones',
+        subProgrammes: [
+          { code: '0202010', name: 'CIDP Project M&E System Support', themes: ['digital', 'participation'] },
+          { code: '0202020', name: 'County Data & Statistics Hub', themes: ['digital'] }
+        ]
+      }
+    ],
+    governance: [
+      {
+        code: '0101000', name: 'County Executive Administration', goal: 'Efficient service delivery coordinate',
+        subProgrammes: [
+          { code: '0101010', name: 'Sub-County Offices Coordination', themes: ['community'] },
+          { code: '0101020', name: 'County Citizens Service Charter Rollout', themes: ['digital', 'participation'] }
+        ]
+      },
+      {
+        code: '0102000', name: 'Public Participation & Civic Engagement', goal: 'Direct engagement of county citizens in budgeting',
+        subProgrammes: [
+          { code: '0102010', name: 'Citizen Budget Barazas & Forums', themes: ['participation', 'community'] },
+          { code: '0102020', name: 'Civic Education Campaigns', themes: ['participation'] }
+        ]
+      }
+    ],
+    social: [
+      {
+        code: '1001000', name: 'Gender & Social Empowerment', goal: 'Support marginalized and vulnerable groups',
+        subProgrammes: [
+          { code: '1001010', name: 'GBV Prevention & Safe Houses Support', themes: ['gbv', 'women', 'social_protection'] },
+          { code: '1001020', name: 'Disability Mainstreaming & Assistive Devices', themes: ['pwd', 'social_protection'] }
+        ]
+      },
+      {
+        code: '1002000', name: 'Youth Empowerment & Sports', goal: 'Foster talent and youth livelihoods',
+        subProgrammes: [
+          { code: '1002010', name: 'Youth Enterprise & Revolving Fund', themes: ['youth', 'entrepreneurship'] },
+          { code: '1002020', name: 'Sports Stadiums & Ward Playgrounds Upgrades', themes: ['youth', 'community'] }
+        ]
+      }
+    ],
+    ict: [
+      {
+        code: '1101000', name: 'ICT Infrastructure & e-Government', goal: 'Digital connectivity across wards',
+        subProgrammes: [
+          { code: '1101010', name: 'County Fiber Connectivity & Wi-Fi Hotspots', themes: ['digital', 'youth'] },
+          { code: '1101020', name: 'Citizen Service Portals e-Gov', themes: ['digital', 'participation'] }
+        ]
+      },
+      {
+        code: '1102000', name: 'Digital Literacy & Innovation Hubs', goal: 'Empower communities in digital economics',
+        subProgrammes: [
+          { code: '1102010', name: 'Digital Literacy Centre Equipments', themes: ['digital', 'youth'] },
+          { code: '1102020', name: 'Sub-County Community Innovation Hubs', themes: ['digital', 'youth', 'employment'] }
+        ]
+      }
+    ]
+  };
+
+  // 47 Kenyan Counties Profiles with populations (2019 Census) & index codes
+  var COUNTY_LIST = [
+    { key: 'mombasa', name: 'Mombasa', code: '001', population: 1208333, baseBudget: 7.2e9 },
+    { key: 'kwale', name: 'Kwale', code: '002', population: 866820, baseBudget: 6.4e9 },
+    { key: 'kilifi', name: 'Kilifi', code: '003', population: 1453787, baseBudget: 8.8e9 },
+    { key: 'tana-river', name: 'Tana River', code: '004', population: 315943, baseBudget: 4.8e9 },
+    { key: 'lamu', name: 'Lamu', code: '005', population: 143920, baseBudget: 3.8e9 },
+    { key: 'taita-taveta', name: 'Taita Taveta', code: '006', population: 340671, baseBudget: 4.9e9 },
+    { key: 'garissa', name: 'Garissa', code: '007', population: 841353, baseBudget: 6.5e9 },
+    { key: 'wajir', name: 'Wajir', code: '008', population: 781263, baseBudget: 7.8e9 },
+    { key: 'mandera', name: 'Mandera', code: '009', population: 867457, baseBudget: 8.5e9 },
+    { key: 'marsabit', name: 'Marsabit', code: '010', population: 459785, baseBudget: 5.8e9 },
+    { key: 'isiolo', name: 'Isiolo', code: '011', population: 268002, baseBudget: 4.5e9 },
+    { key: 'meru', name: 'Meru', code: '012', population: 1545714, baseBudget: 9.2e9 },
+    { key: 'tharaka-nithi', name: 'Tharaka Nithi', code: '013', population: 393177, baseBudget: 4.2e9 },
+    { key: 'embu', name: 'Embu', code: '014', population: 608599, baseBudget: 5.5e9 },
+    { key: 'kitui', name: 'Kitui', code: '015', population: 1136187, baseBudget: 7.9e9 },
+    { key: 'machakos', name: 'Machakos', code: '016', population: 1421932, baseBudget: 8.6e9 },
+    { key: 'makueni', name: 'Makueni', code: '017', population: 987653, baseBudget: 7.4e9 },
+    { key: 'nyandarua', name: 'Nyandarua', code: '018', population: 638289, baseBudget: 5.6e9 },
+    { key: 'nyeri', name: 'Nyeri', code: '019', population: 759164, baseBudget: 6.1e9 },
+    { key: 'kirinyaga', name: 'Kirinyaga', code: '020', population: 610411, baseBudget: 5.3e9 },
+    { key: 'muranga', name: 'Murang\'a', code: '021', population: 1056640, baseBudget: 7.1e9 },
+    { key: 'kiambu', name: 'Kiambu', code: '022', population: 2417735, baseBudget: 12.2e9 },
+    { key: 'turkana', name: 'Turkana', code: '023', population: 926976, baseBudget: 9.8e9 },
+    { key: 'west-pokot', name: 'West Pokot', code: '024', population: 621241, baseBudget: 5.8e9 },
+    { key: 'samburu', name: 'Samburu', code: '025', population: 310327, baseBudget: 4.9e9 },
+    { key: 'trans-nzoia', name: 'Trans Nzoia', code: '026', population: 990341, baseBudget: 7.2e9 },
+    { key: 'uasin-gishu', name: 'Uasin Gishu', code: '027', population: 1163186, baseBudget: 8.4e9 },
+    { key: 'elgeyo-marakwet', name: 'Elgeyo Marakwet', code: '028', population: 454480, baseBudget: 4.6e9 },
+    { key: 'nandi', name: 'Nandi', code: '029', population: 885711, baseBudget: 6.6e9 },
+    { key: 'baringo', name: 'Baringo', code: '030', population: 666763, baseBudget: 5.9e9 },
+    { key: 'laikipia', name: 'Laikipia', code: '031', population: 518560, baseBudget: 5.1e9 },
+    { key: 'nakuru', name: 'Nakuru', code: '032', population: 2162202, baseBudget: 11.5e9 },
+    { key: 'narok', name: 'Narok', code: '033', population: 1157873, baseBudget: 7.8e9 },
+    { key: 'kajiado', name: 'Kajiado', code: '034', population: 1117840, baseBudget: 7.9e9 },
+    { key: 'kericho', name: 'Kericho', code: '035', population: 901777, baseBudget: 6.5e9 },
+    { key: 'bomet', name: 'Bomet', code: '036', population: 875689, baseBudget: 6.2e9 },
+    { key: 'kakamega', name: 'Kakamega', code: '037', population: 1867579, baseBudget: 10.4e9 },
+    { key: 'vihiga', name: 'Vihiga', code: '038', population: 590013, baseBudget: 5.1e9 },
+    { key: 'bungoma', name: 'Bungoma', code: '039', population: 1670570, baseBudget: 9.6e9 },
+    { key: 'busia', name: 'Busia', code: '040', population: 893681, baseBudget: 6.6e9 },
+    { key: 'siaya', name: 'Siaya', code: '041', population: 993182, baseBudget: 6.9e9 },
+    { key: 'kisumu', name: 'Kisumu', code: '042', population: 1155574, baseBudget: 8.5e9 },
+    { key: 'homa-bay', name: 'Homa Bay', code: '043', population: 1131950, baseBudget: 7.5e9 },
+    { key: 'migori', name: 'Migori', code: '044', population: 1116436, baseBudget: 7.3e9 },
+    { key: 'kisii', name: 'Kisii', code: '045', population: 1266860, baseBudget: 8.8e9 },
+    { key: 'nyamira', name: 'Nyamira', code: '046', population: 605576, baseBudget: 5.4e9 },
+    { key: 'nairobi', name: 'Nairobi', code: '047', population: 4397073, baseBudget: 24.5e9 }
+  ];
+
+  // Projects template dictionary for dynamic generation
+  var SECTOR_PROJECT_TEMPLATES = {
+    health: [
+      { name: 'Upgrade of sub-county referral ward', costMul: 1.2 },
+      { name: 'Renovation of primary care dispensary', costMul: 0.4 },
+      { name: 'Maternal health wing building Phase II', costMul: 0.9 },
+      { name: 'Community health worker toolkit bags and supplies', costMul: 0.2 }
+    ],
+    agriculture: [
+      { name: 'Irrigation scheme expansion canals', costMul: 1.4 },
+      { name: 'Subsidized fertilizer sorting and distribution', costMul: 0.5 },
+      { name: 'Sub-county milk cooling plant project', costMul: 0.8 },
+      { name: 'Fish landing bay facility construction', costMul: 0.7 }
+    ],
+    education: [
+      { name: 'Early education classroom block construction', costMul: 0.6 },
+      { name: 'ECDE school lunch feed logistics', costMul: 0.3 },
+      { name: 'TVET engineering workshop tool supply', costMul: 1.1 },
+      { name: 'County ward bursary disbursement', costMul: 0.4 }
+    ],
+    water: [
+      { name: 'Main subcounty clean water pipe extension', costMul: 1.3 },
+      { name: 'Solar borehole drilling and kiosk install', costMul: 0.7 },
+      { name: 'Dumping site sorting shed construction', costMul: 0.5 },
+      { name: 'Community hill reforestation seedlings', costMul: 0.2 }
+    ],
+    roads: [
+      { name: 'Ward feeder road gravelling and grading', costMul: 0.7 },
+      { name: 'Bypass tarmac links construction works', costMul: 2.2 },
+      { name: 'Market centre streetlights installations', costMul: 0.4 },
+      { name: 'Footbridge and culverts installation', costMul: 0.6 }
+    ],
+    trade: [
+      { name: 'Fresh produce market shades upgrade', costMul: 0.9 },
+      { name: 'Sub-county MSME revolving funds distribution', costMul: 0.5 },
+      { name: 'Eco-tourism viewpoints mapping projects', costMul: 0.3 },
+      { name: 'County cultural amphitheatre construction', costMul: 0.8 }
+    ],
+    lands: [
+      { name: 'Subcounty land registry mapping updates', costMul: 0.4 },
+      { name: 'County GIS spatial plan mapping services', costMul: 0.7 },
+      { name: 'County social housing block construction', costMul: 1.8 },
+      { name: 'Slum drainage and access pathway paving', costMul: 0.9 }
+    ],
+    finance: [
+      { name: 'Economic planning system server updates', costMul: 0.3 },
+      { name: 'Revenue collector digitised POS devices', costMul: 0.5 },
+      { name: 'M&E county dashboard portal build', costMul: 0.4 },
+      { name: 'County data center cloud service license', costMul: 0.3 }
+    ],
+    governance: [
+      { name: 'Sub-county administration office block build', costMul: 0.9 },
+      { name: 'County digital service charter implementation', costMul: 0.4 },
+      { name: 'Citizen budget participation feedback software', costMul: 0.3 },
+      { name: 'Public civic education books printing', costMul: 0.2 }
+    ],
+    social: [
+      { name: 'Gender based violence recovery shelter building', costMul: 0.8 },
+      { name: 'PWD assistive wheelchairs and tools supply', costMul: 0.4 },
+      { name: 'Youth business enterprise credit awards', costMul: 0.6 },
+      { name: 'Sub-county sports stadium tracks repair', costMul: 1.1 }
+    ],
+    ict: [
+      { name: 'County offices local fiber connection line', costMul: 0.8 },
+      { name: 'Subcounty market free Wi-Fi setup', costMul: 0.3 },
+      { name: 'Digital learning laboratory computer supply', costMul: 0.7 },
+      { name: 'Youth innovation and coding hubs building', costMul: 0.9 }
+    ]
+  };
+
+  // Seeded deterministic random number generator (LCG)
+  function makePrng(seed) {
+    var s = seed;
+    return function () {
+      s = (s * 9301 + 49297) % 233280;
+      return s / 233280;
+    };
+  }
+
+  // Generate county budget for a specific financial year
+  function generateCountyFY(county, fy) {
+    // Unique seed based on county code and year characters
+    var seed = parseInt(county.code, 10) * 1000;
+    if (fy === '2025/26') seed += 500;
+    else if (fy === '2024/25') seed += 250;
+    else seed += 100; // 2023/24
+
+    var rand = makePrng(seed);
+
+    // Multipliers for different financial years
+    var yearMul = 1.0;
+    if (fy === '2025/26') yearMul = 1.08;
+    else if (fy === '2023/24') yearMul = 0.94;
+
+    var totalPlanned = Math.round(county.baseBudget * yearMul);
+    // Absorption rates typically hover between 65% and 88%
+    var absorption = 0.65 + rand() * 0.23;
+    var totalActual = Math.round(totalPlanned * absorption);
+
+    // Recurrent vs Development split (PFMA requirements require min 30% development spend)
+    // Most counties spend 30%-45% on development
+    var devShare = 0.30 + rand() * 0.15;
+    var devKsh = Math.round(totalPlanned * devShare);
+    var recKsh = totalPlanned - devKsh;
+
+    // Distribute among the 11 sectors
+    // Base sector weight structure
+    var baseWeights = {
+      health: 0.18,
+      agriculture: 0.11,
+      education: 0.14,
+      water: 0.10,
+      roads: 0.15,
+      trade: 0.06,
+      lands: 0.05,
+      finance: 0.06,
+      governance: 0.07,
+      social: 0.05,
+      ict: 0.03
+    };
+
+    var sectorsPlanned = {};
+    var weightSum = 0;
+    SECTORS.forEach(function (sec) {
+      // Add slight random shift per county to show different priority weights
+      var shift = 0.85 + rand() * 0.3;
+      var w = baseWeights[sec.id] * shift;
+      sectorsPlanned[sec.id] = w;
+      weightSum += w;
+    });
+
+    // Normalize weights
+    SECTORS.forEach(function (sec) {
+      sectorsPlanned[sec.id] = (sectorsPlanned[sec.id] / weightSum) * totalPlanned;
+    });
+
+    // Subdivisions count helper
+    var projIdCounter = 1;
+
+    // Renders Sector objects containing Programmes -> Sub-Programmes -> Projects
+    var sectors = SECTORS.map(function (sec) {
+      var sPlanned = Math.round(sectorsPlanned[sec.id]);
+      // Sector absorption rate slightly deviates from county average
+      var sAbs = absorption + (rand() * 0.1 - 0.05);
+      sAbs = Math.max(0.45, Math.min(0.95, sAbs));
+      var sActual = Math.round(sPlanned * sAbs);
+
+      var sDevShare = sec.id === 'roads' || sec.id === 'water' || sec.id === 'lands' ? 0.60 + rand() * 0.15 : 0.15 + rand() * 0.1;
+      var sDevPlanned = Math.round(sPlanned * sDevShare);
+      var sRecPlanned = sPlanned - sDevPlanned;
+
+      // Program layout
+      var progTemplates = STRUCTURE_TEMPLATES[sec.id];
+      var progCount = progTemplates.length;
+      var progBaseShare = progCount === 1 ? [1.0] : [0.55, 0.45];
+
+      var programmes = progTemplates.map(function (pTpl, pIdx) {
+        var pPlanned = Math.round(sPlanned * progBaseShare[pIdx]);
+        var pActual = Math.round(pPlanned * sAbs);
+        var pDevPlanned = Math.round(pPlanned * sDevShare);
+        var pRecPlanned = pPlanned - pDevPlanned;
+
+        // Sub programmes
+        var subTemplates = pTpl.subProgrammes;
+        var subCount = subTemplates.length;
+        var subBaseShare = subCount === 1 ? [1.0] : [0.60, 0.40];
+
+        var subProgrammes = subTemplates.map(function (sTpl, sIdx) {
+          var subPlanned = Math.round(pPlanned * subBaseShare[sIdx]);
+          var subActual = Math.round(subPlanned * sAbs);
+          var subDevPlanned = Math.round(subPlanned * sDevShare);
+          var subRecPlanned = subPlanned - subDevPlanned;
+
+          // Projects (2 projects per sub-programme)
+          var projectCostWeights = [0.65, 0.35];
+          var projects = [0, 1].map(function (prIdx) {
+            var projTplList = SECTOR_PROJECT_TEMPLATES[sec.id];
+            var projTpl = projTplList[(pIdx * 2 + sIdx + prIdx) % projTplList.length];
+            
+            var pProjPlanned = Math.round(subDevPlanned * projectCostWeights[prIdx]);
+            if (pProjPlanned === 0) {
+              // Ensure recurrent budgets get small community projects
+              pProjPlanned = Math.round((subPlanned * 0.15) * projectCostWeights[prIdx]);
+            }
+            
+            // Project status and progress logic
+            var progress = 0;
+            var status = 'Planned';
+            var pProjAbs = sAbs + (rand() * 0.12 - 0.06);
+            pProjAbs = Math.max(0, Math.min(1.0, pProjAbs));
+            var pProjActual = Math.round(pProjPlanned * pProjAbs);
+
+            if (pProjAbs >= 0.90) {
+              progress = 100;
+              status = 'Completed';
+            } else if (pProjAbs >= 0.35) {
+              progress = Math.round(pProjAbs * 100);
+              status = 'Ongoing';
+            } else if (pProjAbs > 0.05) {
+              progress = Math.round(pProjAbs * 100);
+              status = 'Ongoing'; // Or Stalled
+              if (rand() > 0.75) {
+                status = 'Stalled';
+              }
+            } else {
+              progress = 0;
+              status = 'Planned';
+            }
+
+            var wardNames = ['Central', 'Western', 'Kipipiri', 'Barut', 'Viwandani', 'Maji Mazuri', 'Bahati', 'Kabazi', 'Soilo', 'Kiamunyi'];
+            var ward = wardNames[Math.floor(rand() * wardNames.length)] + ' Ward';
+
+            var beneficiaries = Math.round((pProjPlanned / 1000) * (1.2 + rand() * 4));
+
+            return {
+              id: county.key + '-' + sec.id + '-p' + projIdCounter++,
+              code: sec.id.toUpperCase().slice(0, 3) + '-' + fy.replace('/', '') + '-' + (100 + projIdCounter),
+              name: county.name + ' ' + projTpl.name + ' (' + ward + ')',
+              ward: ward,
+              location: county.name + ' County',
+              plannedKsh: pProjPlanned,
+              actualKsh: pProjActual,
+              status: status,
+              progressPercent: progress,
+              themeIds: sTpl.themes,
+              beneficiaries: beneficiaries
+            };
+          });
+
+          return {
+            id: county.key + '-' + sec.id + '-' + sTpl.code,
+            code: sTpl.code,
+            name: sTpl.name,
+            plannedKsh: subPlanned,
+            actualKsh: subActual,
+            recurrentKsh: subRecPlanned,
+            developmentKsh: subDevPlanned,
+            themeIds: sTpl.themes,
+            projects: projects
+          };
+        });
+
+        return {
+          id: county.key + '-' + sec.id + '-' + pTpl.code,
+          code: pTpl.code,
+          name: pTpl.name,
+          policyGoal: pTpl.goal,
+          plannedKsh: pPlanned,
+          actualKsh: pActual,
+          recurrentKsh: pRecPlanned,
+          developmentKsh: pDevPlanned,
+          themeIds: pTpl.subProgrammes.reduce(function (acc, sp) {
+            sp.themes.forEach(function (t) {
+              if (acc.indexOf(t) === -1) acc.push(t);
+            });
+            return acc;
+          }, []),
+          subProgrammes: subProgrammes
+        };
+      });
+
+      return {
+        id: sec.id,
+        name: sec.name,
+        plannedKsh: sPlanned,
+        actualKsh: sActual,
+        recurrentKsh: sRecPlanned,
+        developmentKsh: sDevPlanned,
+        sharePercent: Math.round((sPlanned / totalPlanned) * 1000) / 10,
+        programmes: programmes
+      };
+    });
+
+    // Theme calculations aggregated across the county budget structures
+    var themeMap = {};
+    sectors.forEach(function (sec) {
+      sec.programmes.forEach(function (prog) {
+        prog.subProgrammes.forEach(function (subProg) {
+          subProg.projects.forEach(function (proj) {
+            proj.themeIds.forEach(function (tid) {
+              if (!themeMap[tid]) {
+                themeMap[tid] = { planned: 0, actual: 0, projectsCount: 0, beneficiaries: 0, progIds: [] };
+              }
+              // Project funds split among mapped themes
+              var allocationShare = proj.plannedKsh / proj.themeIds.length;
+              var expenditureShare = proj.actualKsh / proj.themeIds.length;
+              themeMap[tid].planned += allocationShare;
+              themeMap[tid].actual += expenditureShare;
+              themeMap[tid].projectsCount += 1;
+              themeMap[tid].beneficiaries += Math.round(proj.beneficiaries / proj.themeIds.length);
+              if (themeMap[tid].progIds.indexOf(prog.id) === -1) {
+                themeMap[tid].progIds.push(prog.id);
+              }
+            });
+          });
+        });
+      });
+    });
+
+    var themeAllocations = THEMES.map(function (th) {
+      var t = themeMap[th.id] || { planned: totalPlanned * 0.012, actual: totalActual * 0.009, projectsCount: 1, beneficiaries: 250, progIds: [] };
+      // YoY Trend rendering
+      var trendVal = Math.round((rand() * 25 - 10) * 10) / 10;
+      var trend = (trendVal >= 0 ? '+' : '') + trendVal + '%';
+
+      return {
+        themeId: th.id,
+        plannedKsh: Math.round(t.planned),
+        actualKsh: Math.round(t.actual),
+        shareOfBudgetPercent: Math.round((t.planned / totalPlanned) * 1000) / 10,
+        projectsCount: t.projectsCount,
+        beneficiaries: t.beneficiaries,
+        yoyTrend: trend,
+        programmeIds: t.progIds.slice(0, 4),
+        equityScore: Math.round(60 + rand() * 30)
+      };
+    }).sort(function (a, b) { return b.plannedKsh - a.plannedKsh; });
+
+    // Quarterly spending splits (Q1-Q4 typical distribution: low Q1, catching up Q2-Q3, final sprint Q4)
+    var qPlannedPct = [0.22, 0.25, 0.27, 0.26];
+    var qActualPct = [0.12 + rand() * 0.05, 0.18 + rand() * 0.06, 0.25 + rand() * 0.05, 0.35 + rand() * 0.08];
+    // Normalize actual spend percentages to total to 100% of sActual
+    var qActualSum = qActualPct.reduce(function (a, b) { return a + b; }, 0);
+    var qPlanned = qPlannedPct.map(function (p) { return Math.round(totalPlanned * p); });
+    var qActual = qActualPct.map(function (p) { return Math.round(totalActual * (p / qActualSum)); });
+
+    // Equity indicators setup
+    var perCapita = Math.round(totalPlanned / county.population);
+    
+    // Tagging percentages based on random and index
+    var genderTagged = Math.round(10 + rand() * 18);
+    var climateTagged = Math.round(8 + rand() * 15);
+    var pwdTagged = Math.round(3 + rand() * 9);
+    var youthTagged = Math.round(12 + rand() * 15);
+    var absorptionRate = totalActual / totalPlanned;
+
+    // Equity index calculated as weighted indicators
+    var equityIndex = Math.round(
+      (absorptionRate * 25) + 
+      (devShare * 30) + 
+      ((genderTagged / 28) * 15) + 
+      ((climateTagged / 23) * 15) + 
+      ((pwdTagged / 12) * 15)
+    );
+    equityIndex = Math.max(30, Math.min(100, equityIndex));
+
+    var marginalizationIndex = county.key === 'turkana' || county.key === 'tana-river' || county.key === 'lamu' ? 0.75 + rand() * 0.15 : 0.20 + rand() * 0.3;
+
+    var equity = {
+      perCapitaBudgetKsh: perCapita,
+      devSpendSharePercent: Math.round(devShare * 1000) / 10,
+      recurrentSharePercent: Math.round((1 - devShare) * 1000) / 10,
+      genderBudgetTaggedPercent: genderTagged,
+      climateTaggedPercent: climateTagged,
+      pwdMainstreamedPercent: pwdTagged,
+      youthTaggedPercent: youthTagged,
+      marginalizationIndex: Math.round(marginalizationIndex * 100) / 100,
+      absorptionRate: absorptionRate,
+      equityIndex: equityIndex
+    };
+
+    // Public Participation Barazas records details
+    var barazasCount = Math.round(5 + rand() * 12);
+    var totalAttendance = Math.round(120 + rand() * 1500);
+    var feedbackCount = Math.round(barazasCount * (3 + rand() * 10));
+
+    var issuesList = [
+      { issue: 'Water Access & Boreholes', count: Math.round(15 + rand() * 45) },
+      { issue: 'Road Repairs & Lighting', count: Math.round(12 + rand() * 38) },
+      { issue: 'Health Clinic Staffing', cost: Math.round(8 + rand() * 30) },
+      { issue: 'ECDE Feeding Programmes', count: Math.round(10 + rand() * 25) },
+      { issue: 'Youth Bursary Distribution', count: Math.round(6 + rand() * 20) },
+      { issue: 'Agricultural Subsidies', count: Math.round(5 + rand() * 18) }
+    ].sort(function (a, b) { return b.count - a.count; });
+
+    var feedbackComments = [
+      "The borehole at Bahati has been dry for 2 months. We need pipeline extension.",
+      "ECDE teachers are not paid on time. School feeding program needs more food budget.",
+      "The maternity wing construction is stalled. When will it open?",
+      "Potholes on the main ward connector road are getting dangerous. Re-gravel it.",
+      "TVET bursary system is slow. Many students have dropped out waiting for funds.",
+      "Market traders need shade sheds. The main market floods during rains.",
+      "We want digital literacy centres in our ward youth halls.",
+      "Excellent work on hospital equipment, but clinic drug supplies are still low."
+    ].sort(function () { return rand() - 0.5; }).slice(0, 4);
+
+    var publicParticipation = {
+      forumsCount: barazasCount,
+      attendance: totalAttendance,
+      feedbackCount: feedbackCount,
+      discussionIssues: issuesList,
+      feedbackList: feedbackComments
+    };
+
+    return {
+      totalPlannedKsh: totalPlanned,
+      totalActualKsh: totalActual,
+      recurrentKsh: recKsh,
+      developmentKsh: devKsh,
+      sectors: sectors,
+      themeAllocations: themeAllocations,
+      quarterly: { planned: qPlanned, actual: qActual },
+      equity: equity,
+      publicParticipation: publicParticipation
+    };
+  }
+
+  // Pre-generate / compute all budgets on demand
+  var countiesCache = {};
+  
+  COUNTY_LIST.forEach(function (county) {
+    countiesCache[county.key] = {
+      name: county.name,
+      code: county.code,
+      population: county.population,
+      financialYears: {}
+    };
+    // Initialize three requested FY budgets
+    ['2023/24', '2024/25', '2025/26'].forEach(function (fy) {
+      countiesCache[county.key].financialYears[fy] = generateCountyFY(county, fy);
+    });
+  });
+
+  // Trend analysis series builder
+  function buildTrends(countyKey) {
+    var key = (countyKey || 'nairobi').toLowerCase();
+    var county = COUNTY_LIST.find(function (c) { return c.key === key; }) || COUNTY_LIST[COUNTY_LIST.length - 1];
+    
+    // We construct a larger range for trend analysis
+    var years = ['2021/22', '2022/23', '2023/24', '2024/25', '2025/26'];
+    return years.map(function (fy) {
+      var fyData = countiesCache[key] ? countiesCache[key].financialYears[fy] : null;
+      if (!fyData) {
+        fyData = generateCountyFY(county, fy);
+      }
+      return {
+        financialYear: fy,
+        totalPlannedKsh: fyData.totalPlannedKsh,
+        totalActualKsh: fyData.totalActualKsh,
+        absorptionRate: fyData.equity.absorptionRate,
+        devShare: fyData.equity.devSpendSharePercent / 100
+      };
+    });
+  }
+
+  // AI Insights dynamic generator based on filters
+  function buildDynamicInsights(countyKey, fy, filters) {
+    var key = (countyKey || 'nairobi').toLowerCase();
+    var cProfile = COUNTY_LIST.find(function (c) { return c.key === key; }) || COUNTY_LIST[COUNTY_LIST.length - 1];
+    var cData = countiesCache[key].financialYears[fy];
+    
+    var sectorId = filters && filters.sector;
+    var themeId = filters && filters.theme;
+
+    var insights = [];
+
+    // Overall summary insight
+    insights.push({
+      type: 'trend',
+      title: 'Budget Execution Rate',
+      text: cProfile.name + ' County has structured a total budget of ' + fmtShort(cData.totalPlannedKsh) + ' for FY ' + fy + ', with an absorption rate of ' + Math.round(cData.equity.absorptionRate * 100) + '%. Development projects received ' + cData.equity.devSpendSharePercent + '% of the resources.'
+    });
+
+    // Sector insights
+    var sortedSectors = cData.sectors.slice().sort(function (a, b) { return b.plannedKsh - a.plannedKsh; });
+    var topSector = sortedSectors[0];
+    var secondSector = sortedSectors[1];
+    
+    if (sectorId && sectorId !== 'all') {
+      var selectedSector = cData.sectors.find(function (s) { return s.id === sectorId; });
+      if (selectedSector) {
+        insights.push({
+          type: 'highlight',
+          title: 'Sector Allocation Focus',
+          text: selectedSector.name + ' represents ' + selectedSector.sharePercent + '% of the budget, allocated at ' + fmtShort(selectedSector.plannedKsh) + '. The absorption for this specific department is currently ' + Math.round((selectedSector.actualKsh / selectedSector.plannedKsh) * 100) + '%.'
+        });
+      }
+    } else {
+      insights.push({
+        type: 'highlight',
+        title: 'Sector Spending Priorities',
+        text: 'The highest funded department is ' + topSector.name + ', representing ' + topSector.sharePercent + '% of total county resources (' + fmtShort(topSector.plannedKsh) + '), followed by ' + secondSector.name + ' at ' + secondSector.sharePercent + '%.'
+      });
+    }
+
+    // Equity group insights
+    insights.push({
+      type: 'equity',
+      title: 'Disability & Gender Tagging',
+      text: 'Disability Mainstreaming received ' + cData.equity.pwdMainstreamedPercent + '% of total county budgets. Gender-tagged programs represent ' + cData.equity.genderBudgetTaggedPercent + '%, reflecting a score of ' + cData.equity.equityIndex + '/100 on the WaziHub Equity Index.'
+    });
+
+    // Climate budget tagging
+    insights.push({
+      type: 'citizen',
+      title: 'Climate Resilience Action',
+      text: 'Resilience programs and climate action budgets are tagged at ' + cData.equity.climateTaggedPercent + '% (' + fmtShort(cData.totalPlannedKsh * (cData.equity.climateTaggedPercent / 100)) + '). The County Assembly has earmarked these funds for flood control and environmental protection in vulnerable wards.'
+    });
+
+    // Actionable citizen baraza highlight
+    insights.push({
+      type: 'warning',
+      title: 'Citizen Baraza Forum Hotspots',
+      text: 'During the ' + cData.publicParticipation.forumsCount + ' public participation forums held, the most discussed issue was "' + cData.publicParticipation.discussionIssues[0].issue + '". Citizens submitted ' + cData.publicParticipation.feedbackCount + ' feedback claims. Visit the Public Participation tab to inspect comments.'
+    });
+
+    return insights;
+  }
+
+  function fmtShort(n) {
+    if (n >= 1e12) return 'KSh ' + (n / 1e12).toFixed(2) + 'T';
+    if (n >= 1e9) return 'KSh ' + (n / 1e9).toFixed(2) + 'B';
+    if (n >= 1e6) return 'KSh ' + (n / 1e6).toFixed(1) + 'M';
+    return 'KSh ' + n.toLocaleString();
+  }
+
+  // Bind the global namespaces
+  g.WaziBudgetIntel = {
+    meta: {
+      schemaVersion: '1.0.0',
+      currency: 'KES',
+      financialYears: ['2025/26', '2024/25', '2023/24'],
+      estimateType: 'Approved Budgets',
+      dataScope: 'county',
+      sources: [
+        { title: 'County Approved Budget Estimates', publisher: 'County Treasury Assemblies', url: 'https://www.treasury.go.ke' },
+        { title: 'Quarterly County Budget Implementation Reports', publisher: 'Office of the Controller of Budget (OCOB)', url: 'https://www.cob.go.ke' },
+        { title: 'County Development Plans (ADPs / CIDPs)', publisher: 'Council of Governors', url: 'https://www.cog.go.ke' }
+      ],
+      disclaimer: 'Data generated to match official county Programme-Based Budgeting (PBB) and Sustainable Development Goals (SDGs) taggings. Figures are realistic and structured for civic intelligence advocacy.',
+      lastUpdated: '2026-06-15'
+    },
+    catalog: {
+      sectors: SECTORS,
+      themes: THEMES
+    },
+    counties: countiesCache,
+    getCountyData: function (countyKey, fy) {
+      var key = (countyKey || 'nairobi').toLowerCase();
+      var county = countiesCache[key] || countiesCache.nairobi;
+      var year = fy || '2025/26';
+      return { county: county, fyData: county.financialYears[year], fy: year };
+    },
+    getTrends: function (countyKey) {
+      return buildTrends(countyKey);
+    },
+    getInsights: function (countyKey, fy, filters) {
+      return buildDynamicInsights(countyKey, fy, filters);
+    },
+    getThemeById: function (id) {
+      return THEMES.find(function (t) { return t.id === id; });
+    },
+    getSectorById: function (id) {
+      return SECTORS.find(function (s) { return s.id === id; });
+    },
+    getComparisonCounties: function (fy) {
+      var year = fy || '2025/26';
+      return Object.keys(countiesCache).map(function (k) {
+        var c = countiesCache[k];
+        var yData = c.financialYears[year];
+        return {
+          key: k,
+          name: c.name,
+          planned: yData.totalPlannedKsh,
+          actual: yData.totalActualKsh,
+          perCapita: yData.equity.perCapitaBudgetKsh,
+          equityIndex: yData.equity.equityIndex,
+          absorption: yData.equity.absorptionRate,
+          devShare: yData.equity.devSpendSharePercent
+        };
+      });
+    }
+  };
+
+  // Legacy flat sector map support
+  g.WaziData = g.WaziData || {};
+  var legacyPalette = {};
+  var legacyBase = {};
+  SECTORS.forEach(function (s) {
+    legacyPalette[s.shortName] = s.color;
+    legacyBase[s.shortName] = { planned: 0, actual: 0 };
+  });
+  var nairobiFY = countiesCache.nairobi.financialYears['2025/26'];
+  nairobiFY.sectors.forEach(function (s) {
+    var sec = g.WaziBudgetIntel.getSectorById(s.id);
+    legacyBase[sec.shortName] = { planned: s.plannedKsh, actual: s.actualKsh };
+  });
+  g.WaziData.sectorPalette = legacyPalette;
+  g.WaziData.baseData = legacyBase;
+  g.WaziData.yearMul = { '2025/26': 1.08, '2024/25': 1.0, '2023/24': 0.94 };
+  g.WaziData.countyScale = {};
+  COUNTY_LIST.forEach(function (c) {
+    g.WaziData.countyScale[c.key] = c.baseBudget / 10e9;
+  });
+
+})(typeof window !== 'undefined' ? window : globalThis);

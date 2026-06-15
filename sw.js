@@ -1,18 +1,20 @@
 /* WaziHub service worker — offline shell */
-const CACHE_NAME = 'wazihub-v2';
+const CACHE_NAME = 'wazihub-v3';
 const ASSETS = [
   './',
   './index.html',
   './manifest.json',
   './css/styles.css',
+  './css/budget-intelligence.css',
   './icons/icon.svg',
   './data/i18n.js',
-  './data/budget.js',
+  './data/budget-intelligence.js',
   './data/projects.js',
   './data/barazas-demo.js',
   './js/i18n.js',
   './js/utils.js',
   './js/report.js',
+  './js/budget-intelligence.js',
   './js/main.js',
   './js/pwa.js'
 ];

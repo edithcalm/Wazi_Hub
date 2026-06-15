@@ -13,7 +13,7 @@
       "hl.b.title":"Who won the latest tenders?","hl.b.text":"Search contractors, awards, and red flags.",
       "hl.c.title":"Is that road really 80% complete?","hl.c.text":"Project statuses, photos, and community updates.",
       "lang.label":"Language / Lugha:","lang.beta":"Translation (Beta)","lang.apply":"Apply",
-      "budget.title":"Open Budget Tracker",
+      "budget.title":"Budget Intelligence",
       "filters.year":"Year","filters.sector":"Sector","filters.county":"County","filters.allSectors":"All sectors","filters.allCounties":"All counties","filters.update":"Update Data",
       "chart.pieTitle":"Budget Allocation by Sector","chart.barTitle":"Planned vs Actual — Quarterly","chart.tip":"Tip: Tap a legend item to hide/show a series.",
       "sum.totalBudget":"Total Budget (selected)","sum.totalSpent":"Total Spent (~63%)","sum.pending":"Pending (~37%)",

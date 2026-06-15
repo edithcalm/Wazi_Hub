@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>WaziHub — Budget Intelligence (Redesign)</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- Chart.js v4 and treemap plugin -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-treemap@3.0.0/dist/chartjs-chart-treemap.min.js"></script>
+</head>
+<body>
+  <main id="wh-redesign" class="container">
+    <header class="wh-header">
+      <h1>WaziHub — Budget Intelligence</h1>
+      <p class="wh-desc">County budgeting aligned to PBB & CIDP, plus citizen-friendly thematic analysis.</p>
+    </header>
+
+    <section class="controls">
+      <label>County
+        <select id="wh-county">
+          <option value="nairobi">Nairobi</option>
+          <option value="turkana">Turkana</option>
+        </select>
+      </label>
+      <label>Financial year
+        <select id="wh-year"><option>2025/26</option></select>
+      </label>
+      <button id="wh-refresh">Refresh</button>
+    </section>
+
+    <section class="summary" aria-labelledby="summary-heading">
+      <h2 id="summary-heading">Overview</h2>
+      <div class="cards">
+        <div class="card"><div class="card-title">Total budget</div><div class="card-value" id="sum-total">—</div></div>
+        <div class="card"><div class="card-title">Spending (actual)</div><div class="card-value" id="sum-actual">—</div></div>
+        <div class="card"><div class="card-title">Absorption</div><div class="card-value" id="sum-abs">—</div></div>
+        <div class="card"><div class="card-title">Dev share</div><div class="card-value" id="sum-dev">—</div></div>
+      </div>
+    </section>
+
+    <nav class="tabs" role="tablist">
+      <button class="tab active" data-view="sector">Sector allocation</button>
+      <button class="tab" data-view="theme">Thematic allocation</button>
+      <button class="tab" data-view="equity">Budget equity</button>
+      <button class="tab" data-view="trends">Trends & comparison</button>
+    </nav>
+
+    <section class="view" data-view="sector">
+      <div class="grid">
+        <div class="chart card">
+          <canvas id="chart-sector-pie" aria-label="Sector allocations" role="img"></canvas>
+        </div>
+        <div class="chart card tall">
+          <canvas id="chart-rec-dev" aria-label="Recurrent vs Development by sector" role="img"></canvas>
+        </div>
+      </div>
+      <div class="card" id="sector-legend"></div>
+      <div class="card" id="sector-list-card">
+        <h3>County sectors (demo list)</h3>
+        <div id="sector-list" class="sector-list">
+          <!-- JS will populate a responsive table here -->
+        </div>
+      </div>
+    </section>
+
+    <section class="view" data-view="theme" hidden>
+      <div class="grid">
+        <div class="chart card tall"><canvas id="chart-theme-treemap"></canvas></div>
+        <div class="card">
+          <h3>Thematic snapshot</h3>
+          <div id="theme-cards" class="theme-cards"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="view" data-view="equity" hidden>
+      <div class="card">
+        <h3>Equity indicators</h3>
+        <div id="equity-grid" class="equity-grid"></div>
+      </div>
+      <div class="card chart"><canvas id="chart-equity"></canvas></div>
+    </section>
+
+    <section class="view" data-view="trends" hidden>
+      <div class="card chart"><canvas id="chart-trends"></canvas></div>
+      <div class="card">
+        <h3>County comparison heatmap</h3>
+        <div id="heatmap"></div>
+      </div>
+    </section>
+
+    <aside class="ai-panel card">
+      <h3>AI Budget Insights</h3>
+      <div id="ai-insights">Loading insights…</div>
+      <small class="muted">(auto-generated highlights from budget structure)</small>
+    </aside>
+
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
