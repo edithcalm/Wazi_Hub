@@ -1,0 +1,245 @@
+{
+  "meta": {
+    "financialYear": "2025/26",
+    "currency": "KES",
+    "estimateType": "Original Estimates",
+    "totalBudgetKsh": 4239000000000,
+    "recurrentTotalKsh": 1790000000000,
+    "developmentTotalKsh": 707800000000,
+    "consolidatedFundServicesKsh": 1337000000000,
+    "sources": [
+      {
+        "title": "Budget Statement for FY 2025/26",
+        "publisher": "National Treasury",
+        "url": "https://www.treasury.go.ke/budget-books"
+      },
+      {
+        "title": "Parliament – CS Mbadi presents KSh 4.239 trillion budget",
+        "publisher": "Parliament of Kenya",
+        "url": "https://www.parliament.go.ke/node/24053"
+      },
+      {
+        "title": "Budget Highlights – Mwananchi Guide FY 2025/26",
+        "publisher": "National Treasury",
+        "url": "https://www.treasury.go.ke/wp-content/uploads/2025/06/Budget-Highlights-The-Mwananchi-Guide-for-the-FY-2025-26-Budget.pdf"
+      }
+    ],
+    "disclaimer": "Sample subset for WaziHub schema demonstration. Full Programme Based Budget Book requires PDF extraction from Treasury. Programme amounts below are from published budget highlights, not the complete PBB volume.",
+    "lastUpdated": "2026-06-04"
+  },
+  "sectors": [
+    {
+      "sectorName": "Education",
+      "sectorTotalKsh": 702700000000,
+      "shareOfTotalPercent": 16.6,
+      "votes": [
+        {
+          "voteCode": "1064",
+          "voteName": "State Department for Basic Education",
+          "stateDepartments": [
+            {
+              "stateDepartmentName": "Basic Education",
+              "programmes": [
+                {
+                  "programmeCode": "0502000",
+                  "programmeName": "Primary Education",
+                  "policyGoal": "Universal access to free quality primary education",
+                  "recurrentKsh": 58900000000,
+                  "developmentKsh": 7000000000,
+                  "subProgrammes": [
+                    {
+                      "subProgrammeCode": "0502001",
+                      "subProgrammeName": "Free Day Secondary Education",
+                      "recurrentKsh": 51900000000
+                    },
+                    {
+                      "subProgrammeCode": "0502002",
+                      "subProgrammeName": "Free Primary Education",
+                      "recurrentKsh": 7000000000
+                    },
+                    {
+                      "subProgrammeCode": "0502003",
+                      "subProgrammeName": "School Feeding Programme",
+                      "recurrentKsh": 3000000000
+                    }
+                  ]
+                },
+                {
+                  "programmeCode": "0503000",
+                  "programmeName": "Junior Secondary Education",
+                  "policyGoal": "Capitation and infrastructure for Junior Secondary",
+                  "recurrentKsh": 28900000000,
+                  "developmentKsh": 700000000,
+                  "subProgrammes": [
+                    {
+                      "subProgrammeCode": "0503001",
+                      "subProgrammeName": "Junior Secondary School Capitation",
+                      "recurrentKsh": 28900000000
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "voteCode": "1065",
+          "voteName": "State Department for Higher Education and Research",
+          "stateDepartments": [
+            {
+              "stateDepartmentName": "Higher Education",
+              "programmes": [
+                {
+                  "programmeCode": "0504000",
+                  "programmeName": "University Education and Research",
+                  "policyGoal": "Affordable higher education and scholarships",
+                  "recurrentKsh": 58500000000,
+                  "developmentKsh": 0,
+                  "subProgrammes": [
+                    {
+                      "subProgrammeCode": "0504001",
+                      "subProgrammeName": "HELB and University Scholarships",
+                      "recurrentKsh": 58500000000
+                    }
+                  ]
+                },
+                {
+                  "programmeCode": "0505000",
+                  "programmeName": "Technical and Vocational Education",
+                  "policyGoal": "TVET capitation and skills development",
+                  "recurrentKsh": 7700000000,
+                  "developmentKsh": 0,
+                  "subProgrammes": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "voteCode": "1066",
+          "voteName": "Teachers Service Commission",
+          "stateDepartments": [
+            {
+              "stateDepartmentName": "Teachers Service Commission",
+              "programmes": [
+                {
+                  "programmeCode": "0501000",
+                  "programmeName": "Teacher Resource Management",
+                  "policyGoal": "Teacher employment, deployment and remuneration",
+                  "recurrentKsh": 387200000000,
+                  "developmentKsh": 7200000000,
+                  "subProgrammes": [
+                    {
+                      "subProgrammeCode": "0501001",
+                      "subProgrammeName": "Teachers Service Commission Operations",
+                      "recurrentKsh": 387200000000
+                    },
+                    {
+                      "subProgrammeCode": "0501002",
+                      "subProgrammeName": "Recruitment of Intern Teachers",
+                      "recurrentKsh": 7200000000
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sectorName": "Health",
+      "sectorTotalKsh": 138100000000,
+      "shareOfTotalPercent": 3.3,
+      "votes": [
+        {
+          "voteCode": "1081",
+          "voteName": "State Department for Medical Services",
+          "stateDepartments": [
+            {
+              "stateDepartmentName": "Medical Services",
+              "programmes": [
+                {
+                  "programmeCode": "0402000",
+                  "programmeName": "National Referral and Specialized Services",
+                  "policyGoal": "Quality referral hospital services",
+                  "recurrentKsh": 42400000000,
+                  "developmentKsh": 0,
+                  "subProgrammes": [
+                    {
+                      "subProgrammeCode": "0402001",
+                      "subProgrammeName": "Kenyatta National Hospital",
+                      "recurrentKsh": 18700000000
+                    },
+                    {
+                      "subProgrammeCode": "0402002",
+                      "subProgrammeName": "Moi Teaching and Referral Hospital",
+                      "recurrentKsh": 10800000000
+                    }
+                  ]
+                },
+                {
+                  "programmeCode": "0403000",
+                  "programmeName": "Universal Health Coverage",
+                  "policyGoal": "SHA coordination and primary healthcare financing",
+                  "recurrentKsh": 19300000000,
+                  "developmentKsh": 0,
+                  "subProgrammes": [
+                    {
+                      "subProgrammeCode": "0403001",
+                      "subProgrammeName": "Primary Healthcare Fund",
+                      "recurrentKsh": 13100000000
+                    },
+                    {
+                      "subProgrammeCode": "0403002",
+                      "subProgrammeName": "UHC Coordination and Management",
+                      "recurrentKsh": 6200000000
+                    }
+                  ]
+                },
+                {
+                  "programmeCode": "0404000",
+                  "programmeName": "Public Health Programmes",
+                  "policyGoal": "Disease prevention, vaccines and Global Fund programmes",
+                  "recurrentKsh": 17300000000,
+                  "developmentKsh": 0,
+                  "subProgrammes": [
+                    {
+                      "subProgrammeCode": "0404001",
+                      "subProgrammeName": "Global Fund (HIV, Malaria, TB)",
+                      "recurrentKsh": 17300000000
+                    },
+                    {
+                      "subProgrammeCode": "0404002",
+                      "subProgrammeName": "Vaccines and Immunization",
+                      "recurrentKsh": 4600000000
+                    }
+                  ]
+                },
+                {
+                  "programmeCode": "0405000",
+                  "programmeName": "Health Workforce Development",
+                  "policyGoal": "Medical training and intern support",
+                  "recurrentKsh": 12700000000,
+                  "developmentKsh": 0,
+                  "subProgrammes": [
+                    {
+                      "subProgrammeCode": "0405001",
+                      "subProgrammeName": "Kenya Medical Training Centres",
+                      "recurrentKsh": 8900000000
+                    },
+                    {
+                      "subProgrammeCode": "0405002",
+                      "subProgrammeName": "Medical Interns",
+                      "recurrentKsh": 4300000000
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

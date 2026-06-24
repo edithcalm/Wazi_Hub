@@ -1,0 +1,278 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://wazihub.or.ke/schemas/budget-intelligence/v1",
+  "title": "WaziHub Budget Intelligence Model",
+  "description": "County → Sector → Programme → Theme → Project hierarchy aligned with Kenyan Programme-Based Budgeting (PBB), CIDPs, SDGs, and cross-cutting development themes.",
+  "type": "object",
+  "required": ["meta", "catalog", "counties"],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "required": ["schemaVersion", "currency", "disclaimer"],
+      "properties": {
+        "schemaVersion": { "type": "string", "const": "1.0.0" },
+        "currency": { "type": "string", "const": "KES" },
+        "financialYear": { "type": "string", "pattern": "^\\d{4}/\\d{2}$" },
+        "estimateType": {
+          "type": "string",
+          "enum": ["Original Estimates", "Revised Estimates", "Supplementary I", "Supplementary II", "Supplementary III", "Approved Budget"]
+        },
+        "dataScope": { "type": "string", "enum": ["national", "county", "combined"] },
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["title", "publisher"],
+            "properties": {
+              "title": { "type": "string" },
+              "publisher": { "type": "string" },
+              "url": { "type": "string", "format": "uri" },
+              "documentDate": { "type": "string", "format": "date" }
+            }
+          }
+        },
+        "disclaimer": { "type": "string" },
+        "lastUpdated": { "type": "string", "format": "date" }
+      }
+    },
+    "catalog": {
+      "type": "object",
+      "required": ["sectors", "themes"],
+      "properties": {
+        "sectors": {
+          "type": "array",
+          "description": "Official Kenyan county executive sectors (CoG / PBB aligned)",
+          "items": { "$ref": "#/$defs/SectorDefinition" }
+        },
+        "themes": {
+          "type": "array",
+          "description": "Cross-cutting development themes (CIDP, SDG, GRB, climate tagging)",
+          "items": { "$ref": "#/$defs/ThemeDefinition" }
+        }
+      }
+    },
+    "counties": {
+      "type": "object",
+      "additionalProperties": { "$ref": "#/$defs/CountyBudget" }
+    },
+    "national": {
+      "type": "object",
+      "description": "Optional national aggregate for comparison benchmarks",
+      "properties": {
+        "financialYears": {
+          "type": "object",
+          "additionalProperties": { "$ref": "#/$defs/FinancialYearBudget" }
+        }
+      }
+    },
+    "trends": {
+      "type": "array",
+      "description": "Multi-year trend series for analysis views",
+      "items": {
+        "type": "object",
+        "required": ["financialYear", "totalPlannedKsh", "totalActualKsh"],
+        "properties": {
+          "financialYear": { "type": "string" },
+          "totalPlannedKsh": { "type": "integer", "minimum": 0 },
+          "totalActualKsh": { "type": "integer", "minimum": 0 },
+          "absorptionRate": { "type": "number", "minimum": 0, "maximum": 1 },
+          "sectorBreakdown": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "sectorId": { "type": "string" },
+                "plannedKsh": { "type": "integer" },
+                "actualKsh": { "type": "integer" }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "MoneyKsh": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Amount in Kenya Shillings (whole units)"
+    },
+    "SpendingRecord": {
+      "type": "object",
+      "required": ["plannedKsh", "actualKsh"],
+      "properties": {
+        "plannedKsh": { "$ref": "#/$defs/MoneyKsh" },
+        "actualKsh": { "$ref": "#/$defs/MoneyKsh" },
+        "recurrentKsh": { "$ref": "#/$defs/MoneyKsh" },
+        "developmentKsh": { "$ref": "#/$defs/MoneyKsh" },
+        "absorptionRate": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "SectorDefinition": {
+      "type": "object",
+      "required": ["id", "name", "color"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "shortName": { "type": "string" },
+        "color": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" },
+        "description": { "type": "string" },
+        "pbbVoteRange": { "type": "string", "description": "Typical national vote code range mapping" },
+        "sdgAlignment": { "type": "array", "items": { "type": "integer", "minimum": 1, "maximum": 17 } }
+      }
+    },
+    "ThemeDefinition": {
+      "type": "object",
+      "required": ["id", "name", "category", "color"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "category": {
+          "type": "string",
+          "enum": ["CIDP", "SDG", "GRB", "Climate", "Disability", "Cross-cutting", "Social Protection"]
+        },
+        "color": { "type": "string" },
+        "icon": { "type": "string" },
+        "description": { "type": "string" },
+        "sdgTargets": { "type": "array", "items": { "type": "string" } },
+        "keywords": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "Project": {
+      "type": "object",
+      "required": ["id", "name", "plannedKsh", "actualKsh", "status"],
+      "properties": {
+        "id": { "type": "string" },
+        "code": { "type": "string" },
+        "name": { "type": "string" },
+        "ward": { "type": "string" },
+        "location": { "type": "string" },
+        "plannedKsh": { "$ref": "#/$defs/MoneyKsh" },
+        "actualKsh": { "$ref": "#/$defs/MoneyKsh" },
+        "status": {
+          "type": "string",
+          "enum": ["Planned", "Ongoing", "Completed", "Stalled", "Cancelled"]
+        },
+        "progressPercent": { "type": "number", "minimum": 0, "maximum": 100 },
+        "startDate": { "type": "string", "format": "date" },
+        "endDate": { "type": "string", "format": "date" },
+        "contractor": { "type": "string" },
+        "themeIds": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "Programme": {
+      "type": "object",
+      "required": ["id", "code", "name", "plannedKsh", "actualKsh", "themeIds"],
+      "properties": {
+        "id": { "type": "string" },
+        "code": { "type": "string", "description": "PBB programme code e.g. 0403000" },
+        "name": { "type": "string" },
+        "policyGoal": { "type": "string" },
+        "plannedKsh": { "$ref": "#/$defs/MoneyKsh" },
+        "actualKsh": { "$ref": "#/$defs/MoneyKsh" },
+        "recurrentKsh": { "$ref": "#/$defs/MoneyKsh" },
+        "developmentKsh": { "$ref": "#/$defs/MoneyKsh" },
+        "themeIds": { "type": "array", "items": { "type": "string" } },
+        "projects": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/Project" }
+        }
+      }
+    },
+    "SectorBudget": {
+      "type": "object",
+      "required": ["id", "name", "plannedKsh", "actualKsh", "programmes"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "plannedKsh": { "$ref": "#/$defs/MoneyKsh" },
+        "actualKsh": { "$ref": "#/$defs/MoneyKsh" },
+        "recurrentKsh": { "$ref": "#/$defs/MoneyKsh" },
+        "developmentKsh": { "$ref": "#/$defs/MoneyKsh" },
+        "sharePercent": { "type": "number" },
+        "programmes": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/Programme" }
+        }
+      }
+    },
+    "ThemeAllocation": {
+      "type": "object",
+      "required": ["themeId", "plannedKsh", "actualKsh"],
+      "properties": {
+        "themeId": { "type": "string" },
+        "plannedKsh": { "$ref": "#/$defs/MoneyKsh" },
+        "actualKsh": { "$ref": "#/$defs/MoneyKsh" },
+        "shareOfBudgetPercent": { "type": "number" },
+        "programmeIds": { "type": "array", "items": { "type": "string" } },
+        "equityScore": { "type": "number", "minimum": 0, "maximum": 100 }
+      }
+    },
+    "EquityMetrics": {
+      "type": "object",
+      "properties": {
+        "perCapitaBudgetKsh": { "type": "number" },
+        "devSpendSharePercent": { "type": "number" },
+        "recurrentSharePercent": { "type": "number" },
+        "genderBudgetTaggedPercent": { "type": "number" },
+        "climateTaggedPercent": { "type": "number" },
+        "pwdMainstreamedPercent": { "type": "number" },
+        "youthTaggedPercent": { "type": "number" },
+        "marginalizationIndex": { "type": "number", "minimum": 0, "maximum": 1 },
+        "absorptionRate": { "type": "number", "minimum": 0, "maximum": 1 },
+        "equityIndex": { "type": "number", "minimum": 0, "maximum": 100 }
+      }
+    },
+    "QuarterlySpending": {
+      "type": "object",
+      "required": ["planned", "actual"],
+      "properties": {
+        "planned": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/MoneyKsh" },
+          "minItems": 4,
+          "maxItems": 4
+        },
+        "actual": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/MoneyKsh" },
+          "minItems": 4,
+          "maxItems": 4
+        }
+      }
+    },
+    "FinancialYearBudget": {
+      "type": "object",
+      "required": ["totalPlannedKsh", "totalActualKsh", "sectors", "themeAllocations"],
+      "properties": {
+        "totalPlannedKsh": { "$ref": "#/$defs/MoneyKsh" },
+        "totalActualKsh": { "$ref": "#/$defs/MoneyKsh" },
+        "recurrentKsh": { "$ref": "#/$defs/MoneyKsh" },
+        "developmentKsh": { "$ref": "#/$defs/MoneyKsh" },
+        "sectors": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/SectorBudget" }
+        },
+        "themeAllocations": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/ThemeAllocation" }
+        },
+        "quarterly": { "$ref": "#/$defs/QuarterlySpending" },
+        "equity": { "$ref": "#/$defs/EquityMetrics" }
+      }
+    },
+    "CountyBudget": {
+      "type": "object",
+      "required": ["name", "code", "population", "financialYears"],
+      "properties": {
+        "name": { "type": "string" },
+        "code": { "type": "string", "pattern": "^\\d{3}$" },
+        "population": { "type": "integer", "minimum": 0 },
+        "financialYears": {
+          "type": "object",
+          "additionalProperties": { "$ref": "#/$defs/FinancialYearBudget" }
+        }
+      }
+    }
+  }
+}

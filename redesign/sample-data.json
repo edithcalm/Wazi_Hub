@@ -1,0 +1,307 @@
+{
+  "meta": {
+    "schemaVersion": "1.0.0",
+    "currency": "KES",
+    "financialYear": "2025/26",
+    "estimateType": "Approved Budget",
+    "dataScope": "county",
+    "lastUpdated": "2026-06-15"
+  },
+  "catalog": {
+    "sectors": [
+      { "id": "health", "name": "Health Services", "shortName": "Health", "color": "#ff6b35", "description": "Hospitals, dispensaries, public health" },
+      { "id": "agriculture", "name": "Agriculture, Livestock & Fisheries", "shortName": "Agriculture", "color": "#06d6a0", "description": "Farming support, extension services" },
+      { "id": "education", "name": "Education & Vocational Training", "shortName": "Education", "color": "#f7931e", "description": "ECDE, vocational training centers" },
+      { "id": "water", "name": "Water & Sanitation", "shortName": "Water & Sanitation", "color": "#118ab2", "description": "Water supply, sewer systems" },
+      { "id": "infrastructure", "name": "Roads, Transport & Public Works", "shortName": "Roads & Works", "color": "#ffd23f", "description": "Roads, bridges, infrastructure" },
+      { "id": "trade", "name": "Trade, Tourism & Industrialization", "shortName": "Trade & Tourism", "color": "#f3722c", "description": "Markets, SMEs, tourism promotion" },
+      { "id": "environment", "name": "Environment, Natural Resources & Climate Change", "shortName": "Environment", "color": "#059669", "description": "Conservation, waste management" },
+      { "id": "lands", "name": "Lands, Housing & Urban Development", "shortName": "Lands & Housing", "color": "#7209b7", "description": "Planning, housing projects" },
+      { "id": "governance", "name": "Public Administration & Governance", "shortName": "Governance", "color": "#073b4c", "description": "Governor's office, county administration" },
+      { "id": "finance", "name": "Finance & Economic Planning", "shortName": "Finance", "color": "#6b7280", "description": "Revenue collection, budgeting" },
+      { "id": "social", "name": "Social Protection, Youth, Gender & Culture", "shortName": "Social & Youth", "color": "#f8961e", "description": "Youth programs, social services" },
+      { "id": "ict", "name": "ICT & Digital Transformation", "shortName": "ICT & Digital", "color": "#0891b2", "description": "Technology services and systems" }
+    ],
+    "themes": [
+      { "id": "gbv", "name": "GBV Prevention & Response", "category": "GRB", "color": "#e11d48" },
+      { "id": "women", "name": "Women & Girls Empowerment", "category": "GRB", "color": "#db2777" },
+      { "id": "youth", "name": "Youth Employment & Skills", "category": "CIDP", "color": "#577590" },
+      { "id": "pwd", "name": "Persons with Disabilities", "category": "Disability", "color": "#7c3aed" },
+      { "id": "climate", "name": "Climate Action & Resilience", "category": "Climate", "color": "#059669" },
+      { "id": "children", "name": "Children & ECD", "category": "Social Protection", "color": "#f59e0b" },
+      { "id": "elderly", "name": "Elderly Care & Social Protection", "category": "Social Protection", "color": "#78716c" },
+      { "id": "food", "name": "Food Security & Nutrition", "category": "CIDP", "color": "#16a34a" },
+      { "id": "employment", "name": "Employment & Livelihoods", "category": "CIDP", "color": "#2563eb" },
+      { "id": "housing", "name": "Affordable Housing & Upgrading", "category": "CIDP", "color": "#9333ea" }
+    ]
+  },
+  "counties": {
+    "nairobi": {
+      "name": "Nairobi",
+      "code": "047",
+      "population": 4397073,
+      "financialYears": {
+        "2025/26": {
+          "totalPlannedKsh": 25000000000,
+          "totalActualKsh": 16800000000,
+          "recurrentKsh": 14000000000,
+          "developmentKsh": 11000000000,
+          "sectors": [
+            { "id": "governance", "name": "Governance, Public Administration & ICT", "plannedKsh": 1800000000, "actualKsh": 1250000000, "recurrentKsh": 700000000, "developmentKsh": 1100000000, "sharePercent": 7.2, "programmes": [] },
+            { "id": "finance", "name": "Finance & Economic Planning", "plannedKsh": 1500000000, "actualKsh": 980000000, "recurrentKsh": 900000000, "developmentKsh": 60000000, "sharePercent": 6.0, "programmes": [] },
+            { "id": "agriculture", "name": "Agriculture", "plannedKsh": 1700000000, "actualKsh": 1100000000, "recurrentKsh": 800000000, "developmentKsh": 900000000, "sharePercent": 6.8, "programmes": [] },
+            {
+              "id": "health",
+              "name": "Health Services",
+              "plannedKsh": 3500000000,
+              "actualKsh": 2300000000,
+              "recurrentKsh": 1500000000,
+              "developmentKsh": 2000000000,
+              "sharePercent": 14.0,
+              "programmes": [
+                {
+                  "id": "nairobi-health-0401000",
+                  "code": "0401000",
+                  "name": "County Referral & Hospital Services",
+                  "policyGoal": "Improve secondary and referral care capacity",
+                  "plannedKsh": 1600000000,
+                  "actualKsh": 1050000000,
+                  "recurrentKsh": 450000000,
+                  "developmentKsh": 1150000000,
+                  "themeIds": ["uhc","pwd"],
+                  "projects": [
+                    {
+                      "id": "nairobi-health-p1",
+                      "code": "HLT-101",
+                      "name": "Maternity Wing Expansion - Level 5 Hospital",
+                      "ward": "Central Ward",
+                      "location": "Nairobi County",
+                      "plannedKsh": 800000000,
+                      "actualKsh": 720000000,
+                      "status": "Ongoing",
+                      "progressPercent": 90,
+                      "themeIds": ["children","women"]
+                    },
+                    {
+                      "id": "nairobi-health-p2",
+                      "code": "HLT-102",
+                      "name": "ICU / Emergency Services Upgrade",
+                      "ward": "West Ward",
+                      "location": "Nairobi County",
+                      "plannedKsh": 480000000,
+                      "actualKsh": 330000000,
+                      "status": "Ongoing",
+                      "progressPercent": 68,
+                      "themeIds": ["pwd","uhc"]
+                    }
+                  ]
+                },
+                {
+                  "id": "nairobi-health-0402000",
+                  "code": "0402000",
+                  "name": "Primary Health & Community Services",
+                  "policyGoal": "Expand primary care access and community health programmes",
+                  "plannedKsh": 1100000000,
+                  "actualKsh": 700000000,
+                  "recurrentKsh": 650000000,
+                  "developmentKsh": 450000000,
+                  "themeIds": ["uhc","women","children"],
+                  "projects": [
+                    {
+                      "id": "nairobi-health-p3",
+                      "code": "HLT-201",
+                      "name": "CHP Kits Distribution",
+                      "ward": "Multiple Wards",
+                      "location": "County-wide",
+                      "plannedKsh": 300000000,
+                      "actualKsh": 240000000,
+                      "status": "Completed",
+                      "progressPercent": 100,
+                      "themeIds": ["children","women"]
+                    },
+                    {
+                      "id": "nairobi-health-p4",
+                      "code": "HLT-202",
+                      "name": "Primary Health Facility Rehabilitation",
+                      "ward": "East Ward",
+                      "location": "Nairobi County",
+                      "plannedKsh": 200000000,
+                      "actualKsh": 120000000,
+                      "status": "Ongoing",
+                      "progressPercent": 60,
+                      "themeIds": ["uhc"]
+                    }
+                  ]
+                },
+                {
+                  "id": "nairobi-health-0403000",
+                  "code": "0403000",
+                  "name": "Public Health, Disease Control & GBV Response",
+                  "policyGoal": "Strengthen public health interventions and GBV survivor support",
+                  "plannedKsh": 800000000,
+                  "actualKsh": 550000000,
+                  "recurrentKsh": 400000000,
+                  "developmentKsh": 400000000,
+                  "themeIds": ["gbv","women","climate"],
+                  "projects": [
+                    {
+                      "id": "nairobi-health-p5",
+                      "code": "HLT-301",
+                      "name": "GBV Survivor Support Centres Upgrade",
+                      "ward": "South Ward",
+                      "location": "Nairobi County",
+                      "plannedKsh": 200000000,
+                      "actualKsh": 160000000,
+                      "status": "Ongoing",
+                      "progressPercent": 80,
+                      "themeIds": ["gbv","women"]
+                    },
+                    {
+                      "id": "nairobi-health-p6",
+                      "code": "HLT-302",
+                      "name": "Vaccination Outreach Campaign",
+                      "ward": "Multiple Wards",
+                      "location": "County-wide",
+                      "plannedKsh": 240000000,
+                      "actualKsh": 190000000,
+                      "status": "Ongoing",
+                      "progressPercent": 79,
+                      "themeIds": ["children"]
+                    }
+                  ]
+                }
+              ]
+            },
+            { "id": "education", "name": "Education", "plannedKsh": 3800000000, "actualKsh": 2600000000, "recurrentKsh": 2200000000, "developmentKsh": 1600000000, "sharePercent": 15.2, "programmes": [] },
+            { "id": "infrastructure", "name": "Infrastructure", "plannedKsh": 4500000000, "actualKsh": 3000000000, "recurrentKsh": 1200000000, "developmentKsh": 3300000000, "sharePercent": 18.0, "programmes": [] },
+            { "id": "water", "name": "Water & Environment", "plannedKsh": 2200000000, "actualKsh": 1400000000, "recurrentKsh": 900000000, "developmentKsh": 1300000000, "sharePercent": 8.8, "programmes": [] },
+            { "id": "lands", "name": "Lands & Housing", "plannedKsh": 1300000000, "actualKsh": 820000000, "recurrentKsh": 500000000, "developmentKsh": 800000000, "sharePercent": 5.2, "programmes": [] },
+            { "id": "trade", "name": "Trade & Tourism", "plannedKsh": 1500000000, "actualKsh": 980000000, "recurrentKsh": 700000000, "developmentKsh": 800000000, "sharePercent": 6.0, "programmes": [] },
+            { "id": "social", "name": "Social Services", "plannedKsh": 1200000000, "actualKsh": 820000000, "recurrentKsh": 600000000, "developmentKsh": 600000000, "sharePercent": 4.8, "programmes": [] }
+          ],
+          "themeAllocations": [
+            { "themeId": "education", "plannedKsh": 3800000000, "actualKsh": 2600000000, "shareOfBudgetPercent": 15.2 },
+            { "themeId": "health", "plannedKsh": 3500000000, "actualKsh": 2300000000, "shareOfBudgetPercent": 14.0 },
+            { "themeId": "infrastructure", "plannedKsh": 4500000000, "actualKsh": 3000000000, "shareOfBudgetPercent": 18.0 },
+            { "themeId": "climate", "plannedKsh": 600000000, "actualKsh": 380000000, "shareOfBudgetPercent": 2.4 },
+            { "themeId": "women", "plannedKsh": 450000000, "actualKsh": 300000000, "shareOfBudgetPercent": 1.8 }
+          ],
+          "quarterly": { "planned": [5500000000, 6500000000, 7500000000, 5500000000], "actual": [4300000000, 5200000000, 6400000000, 3700000000] },
+          "equity": { "perCapitaBudgetKsh": 5681, "devSpendSharePercent": 44.0, "recurrentSharePercent": 56.0, "genderBudgetTaggedPercent": 12, "climateTaggedPercent": 9, "pwdMainstreamedPercent": 6, "youthTaggedPercent": 11, "marginalizationIndex": 0.32, "absorptionRate": 0.67, "equityIndex": 72 }
+        }
+      }
+    },
+    "turkana": {
+      "name": "Turkana",
+      "code": "046",
+      "population": 926976,
+      "financialYears": {
+        "2025/26": {
+          "totalPlannedKsh": 6000000000,
+          "totalActualKsh": 3600000000,
+          "recurrentKsh": 3400000000,
+          "developmentKsh": 2600000000,
+          "sectors": [
+            { "id": "governance", "name": "Governance, Public Administration & ICT", "plannedKsh": 420000000, "actualKsh": 260000000, "recurrentKsh": 250000000, "developmentKsh": 170000000, "sharePercent": 7.0, "programmes": [] },
+            {
+              "id": "health",
+              "name": "Health Services",
+              "plannedKsh": 900000000,
+              "actualKsh": 540000000,
+              "recurrentKsh": 340000000,
+              "developmentKsh": 560000000,
+              "sharePercent": 15.0,
+              "programmes": [
+                {
+                  "id": "turkana-health-0401000",
+                  "code": "0401000",
+                  "name": "County Referral Services",
+                  "policyGoal": "Strengthen referral and emergency care",
+                  "plannedKsh": 400000000,
+                  "actualKsh": 240000000,
+                  "recurrentKsh": 140000000,
+                  "developmentKsh": 260000000,
+                  "themeIds": ["uhc","pwd"],
+                  "projects": [
+                    {
+                      "id": "turkana-health-p1",
+                      "code": "HLT-T01",
+                      "name": "Level 4 Hospital Wing Construction",
+                      "ward": "Central",
+                      "location": "Turkana County",
+                      "plannedKsh": 220000000,
+                      "actualKsh": 160000000,
+                      "status": "Ongoing",
+                      "progressPercent": 72,
+                      "themeIds": ["uhc"]
+                    }
+                  ]
+                },
+                {
+                  "id": "turkana-health-0402000",
+                  "code": "0402000",
+                  "name": "Primary Health & Community Programmes",
+                  "policyGoal": "Expand primary health access in remote areas",
+                  "plannedKsh": 300000000,
+                  "actualKsh": 150000000,
+                  "recurrentKsh": 220000000,
+                  "developmentKsh": 80000000,
+                  "themeIds": ["children","women"],
+                  "projects": [
+                    {
+                      "id": "turkana-health-p2",
+                      "code": "HLT-T02",
+                      "name": "Community Health Worker Stipends",
+                      "ward": "Multiple",
+                      "location": "County-wide",
+                      "plannedKsh": 120000000,
+                      "actualKsh": 90000000,
+                      "status": "Ongoing",
+                      "progressPercent": 75,
+                      "themeIds": ["children"]
+                    }
+                  ]
+                },
+                {
+                  "id": "turkana-health-0403000",
+                  "code": "0403000",
+                  "name": "Public Health & Disease Control",
+                  "policyGoal": "Improve disease surveillance and outbreak response",
+                  "plannedKsh": 200000000,
+                  "actualKsh": 150000000,
+                  "recurrentKsh":  50000000,
+                  "developmentKsh": 200000000,
+                  "themeIds": ["climate","gbv"],
+                  "projects": [
+                    {
+                      "id": "turkana-health-p3",
+                      "code": "HLT-T03",
+                      "name": "Vaccination Cold Chain Upgrade",
+                      "ward": "South",
+                      "location": "Turkana County",
+                      "plannedKsh": 90000000,
+                      "actualKsh": 60000000,
+                      "status": "Planned",
+                      "progressPercent": 30,
+                      "themeIds": ["children","climate"]
+                    }
+                  ]
+                }
+              ]
+            },
+            { "id": "education", "name": "Education", "plannedKsh": 1000000000, "actualKsh": 600000000, "recurrentKsh": 600000000, "developmentKsh": 400000000, "sharePercent": 16.7, "programmes": [] },
+            { "id": "water", "name": "Water & Environment", "plannedKsh": 900000000, "actualKsh": 540000000, "recurrentKsh": 300000000, "developmentKsh": 600000000, "sharePercent": 15.0, "programmes": [] },
+            { "id": "infrastructure", "name": "Infrastructure", "plannedKsh": 1100000000, "actualKsh": 650000000, "recurrentKsh": 300000000, "developmentKsh": 800000000, "sharePercent": 18.3, "programmes": [] }
+          ],
+          "themeAllocations": [
+            { "themeId": "food", "plannedKsh": 400000000, "actualKsh": 240000000, "shareOfBudgetPercent": 6.7 },
+            { "themeId": "climate", "plannedKsh": 350000000, "actualKsh": 210000000, "shareOfBudgetPercent": 5.8 },
+            { "themeId": "pwd", "plannedKsh": 150000000, "actualKsh": 90000000, "shareOfBudgetPercent": 2.5 }
+          ],
+          "quarterly": { "planned": [1400000000, 1500000000, 1500000000, 1600000000], "actual": [900000000, 950000000, 1000000000, 850000000] },
+          "equity": { "perCapitaBudgetKsh": 6477, "devSpendSharePercent": 43.3, "recurrentSharePercent": 56.7, "genderBudgetTaggedPercent": 9, "climateTaggedPercent": 12, "pwdMainstreamedPercent": 8, "youthTaggedPercent": 10, "marginalizationIndex": 0.62, "absorptionRate": 0.60, "equityIndex": 64 }
+        }
+      }
+    }
+  }
+}

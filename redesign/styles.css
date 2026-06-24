@@ -1,0 +1,35 @@
+:root{--accent:#00853F;--muted:#6b7280;--card:#fff;--border:#e6edf0}
+*{box-sizing:border-box}body{font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;margin:0;background:#f7faf9;color:#0b1220}
+.container{max-width:1100px;margin:18px auto;padding:16px}
+.wh-header h1{margin:0;font-size:1.25rem}
+.wh-desc{margin:6px 0 0;color:var(--muted)}
+.controls{display:flex;gap:8px;align-items:center;margin:12px 0}
+.controls label{font-size:0.9rem;color:var(--muted)}
+.controls select{margin-left:8px;padding:6px;border-radius:6px;border:1px solid var(--border)}
+.controls button{background:var(--accent);color:#fff;border:0;padding:8px 12px;border-radius:8px;cursor:pointer}
+.summary .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:8px}
+.card{background:var(--card);border:1px solid var(--border);padding:12px;border-radius:10px}
+.card-title{font-size:0.85rem;color:var(--muted)}
+.card-value{font-weight:800;font-size:1.05rem;margin-top:6px}
+.tabs{display:flex;gap:8px;margin:14px 0}
+.tab{background:#fff;padding:8px 12px;border-radius:999px;border:1px solid var(--border);cursor:pointer}
+.tab.active{background:var(--accent);color:#fff}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.chart{height:320px}
+.card.tall{height:420px}
+.theme-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.theme-card{padding:8px;border-radius:8px;background:#fff;border:1px solid var(--border)}
+.equity-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.ai-panel{position:fixed;right:18px;bottom:18px;width:320px;max-height:60vh;overflow:auto}
+.muted{color:var(--muted);font-size:0.85rem}
+#sector-legend{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px}
+.legend-item{display:flex;align-items:center;gap:8px;padding:6px;border-radius:8px;background:#fff;border:1px solid var(--border);cursor:pointer}
+.legend-swatch{width:12px;height:12px;border-radius:3px}
+#heatmap{margin-top:8px}
+.sector-list table{width:100%;border-collapse:collapse;font-size:0.95rem}
+.sector-list th,.sector-list td{padding:8px;border-bottom:1px solid #eef3f5;text-align:left}
+.sector-list th{background:#fbfcfd;font-weight:700;color:#223}
+.sector-list .muted{color:#6b7280;font-size:0.9rem}
+.sector-row{cursor:pointer}
+.sector-row:hover{background:#fbfffb}
+@media(max-width:900px){.grid{grid-template-columns:1fr}.summary .cards{grid-template-columns:repeat(2,1fr)}.equity-grid{grid-template-columns:repeat(2,1fr)}.ai-panel{position:static;width:auto;margin-top:12px}}
