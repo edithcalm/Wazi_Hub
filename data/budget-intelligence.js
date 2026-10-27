@@ -2,6 +2,7 @@
 (function (g) {
   'use strict';
 
+<<<<<<< HEAD
   // 11 Official Kenyan County Budget Sectors (CoG and PBB aligned)
   var SECTORS = [
     { id: 'health', name: 'Health Services', shortName: 'Health', color: '#ff6b35', sdgAlignment: [3] },
@@ -15,6 +16,32 @@
     { id: 'governance', name: 'Public Administration & Governance', shortName: 'Governance', color: '#073b4c', sdgAlignment: [16, 17] },
     { id: 'social', name: 'Youth, Gender, Culture & Social Services', shortName: 'Social & Gender', color: '#f8961e', sdgAlignment: [5, 10] },
     { id: 'ict', name: 'ICT & Digital Transformation', shortName: 'ICT & Digital', color: '#0891b2', sdgAlignment: [9, 16] }
+=======
+  // 22 Official Kenyan Ministries (Integrated as system sectors)
+  var SECTORS = [
+    { id: 'interior', name: 'Ministry of Interior and National Administration', shortName: 'Interior & Admin', color: '#073b4c', sdgAlignment: [16] },
+    { id: 'treasury', name: 'Ministry of National Treasury and Economic Planning', shortName: 'National Treasury', color: '#6b7280', sdgAlignment: [8, 17] },
+    { id: 'foreign_affairs', name: 'Ministry of Foreign and Diaspora Affairs', shortName: 'Foreign Affairs', color: '#3a86c8', sdgAlignment: [17] },
+    { id: 'defence', name: 'Ministry of Defence', shortName: 'Defence', color: '#991b1b', sdgAlignment: [16] },
+    { id: 'health', name: 'Ministry of Health', shortName: 'Health', color: '#ff6b35', sdgAlignment: [3] },
+    { id: 'education', name: 'Ministry of Education', shortName: 'Education', color: '#f7931e', sdgAlignment: [4] },
+    { id: 'energy', name: 'Ministry of Energy and Petroleum', shortName: 'Energy & Petroleum', color: '#d97706', sdgAlignment: [7, 13] },
+    { id: 'agriculture', name: 'Ministry of Agriculture and Livestock Development', shortName: 'Agriculture & Livestock', color: '#16a34a', sdgAlignment: [2, 15] },
+    { id: 'ict', name: 'Ministry of Information, Communication and the Digital Economy', shortName: 'ICT & Digital Economy', color: '#0891b2', sdgAlignment: [9, 16] },
+    { id: 'lands', name: 'Ministry of Lands, Public Works, Housing and Urban Development', shortName: 'Lands & Urban Dev', color: '#7209b7', sdgAlignment: [11] },
+    { id: 'roads', name: 'Ministry of Roads and Transport', shortName: 'Roads & Transport', color: '#2b6cb0', sdgAlignment: [9, 11] },
+    { id: 'cooperatives', name: 'Ministry of Co-operatives and Micro, Small and Medium Enterprises (MSMEs)', shortName: 'Co-operatives & MSMEs', color: '#f59e0b', sdgAlignment: [8, 10] },
+    { id: 'tourism', name: 'Ministry of Tourism and Wildlife', shortName: 'Tourism & Wildlife', color: '#a16207', sdgAlignment: [8, 15] },
+    { id: 'mining', name: 'Ministry of Mining, Blue Economy and Maritime Affairs', shortName: 'Mining & Blue Economy', color: '#0f766e', sdgAlignment: [14] },
+    { id: 'youth', name: 'Ministry of Youth Affairs, Creative Economy and Sports', shortName: 'Youth & Sports', color: '#ec4899', sdgAlignment: [5, 8] },
+    { id: 'water', name: 'Ministry of Water, Sanitation and Irrigation', shortName: 'Water & Irrigation', color: '#06b6d4', sdgAlignment: [6] },
+    { id: 'investments', name: 'Ministry of Investments, Trade and Industry', shortName: 'Investments & Industry', color: '#dc2626', sdgAlignment: [8, 9] },
+    { id: 'labour', name: 'Ministry of Labour and Social Protection', shortName: 'Labour & Social Protection', color: '#d946ef', sdgAlignment: [1, 10] },
+    { id: 'public_service', name: 'Ministry of Public Service and Human Capital Development', shortName: 'Public Service', color: '#4b5563', sdgAlignment: [16] },
+    { id: 'environment', name: 'Ministry of Environment, Climate Change and Forestry', shortName: 'Environment & Forestry', color: '#15803d', sdgAlignment: [13, 15] },
+    { id: 'gender', name: 'Ministry of Gender, Culture, the Arts and Heritage', shortName: 'Gender & Culture', color: '#be185d', sdgAlignment: [5, 10] },
+    { id: 'eac', name: 'Ministry of East African Community (EAC), Arid and Semi-Arid Lands (ASALs) and Regional Development', shortName: 'EAC & ASALs', color: '#4338ca', sdgAlignment: [1, 17] }
+>>>>>>> ac9fdc6e420ea733f8eb9bd19d2231883dec34a6
   ];
 
   // 17 Cross-Cutting Citizen Themes
@@ -40,6 +67,7 @@
 
   // Hierarchy Structure Templates by Sector (Sector -> Programme -> Sub-Programme)
   var STRUCTURE_TEMPLATES = {
+<<<<<<< HEAD
     health: [
       {
         code: '0401000', name: 'Primary Healthcare Services', goal: 'Universal access to basic care',
@@ -69,11 +97,56 @@
         subProgrammes: [
           { code: '0302010', name: 'Dairy Value Chain Development', themes: ['food', 'entrepreneurship'] },
           { code: '0302020', name: 'Fisheries & Aquaculture', themes: ['food', 'employment'] }
+=======
+    interior: [
+      {
+        code: '0101000', name: 'National Administration & Security Coordination', goal: 'Enhance public safety and county administration',
+        subProgrammes: [
+          { code: '0101010', name: 'County Administrative Policing', themes: ['community', 'participation'] },
+          { code: '0101020', name: 'Disaster Coordination & Peace Building', themes: ['disaster', 'social_protection'] }
+        ]
+      }
+    ],
+    treasury: [
+      {
+        code: '0201000', name: 'Public Finance Management & Economic Policy', goal: 'Ensuring fiscal sustainability and resource allocation',
+        subProgrammes: [
+          { code: '0201010', name: 'County Planning & Budget formulation', themes: ['participation', 'digital'] },
+          { code: '0201020', name: 'Revenue Automation & Audit', themes: ['digital', 'employment'] }
+        ]
+      }
+    ],
+    foreign_affairs: [
+      {
+        code: '0301000', name: 'Diaspora Engagement & Trade Promotion', goal: 'Unlocking remittances and cultural networks',
+        subProgrammes: [
+          { code: '0301010', name: 'Diaspora Investment Schemes', themes: ['entrepreneurship', 'employment'] },
+          { code: '0301020', name: 'Regional Cultural Exchange Programs', themes: ['community'] }
+        ]
+      }
+    ],
+    defence: [
+      {
+        code: '0401000', name: 'National Defence & Civil Outreach', goal: 'Territorial integrity and emergency humanitarian aid',
+        subProgrammes: [
+          { code: '0401010', name: 'Disaster Relief Support Operations', themes: ['disaster', 'climate'] },
+          { code: '0401020', name: 'Civic Security Outreach Clinics', themes: ['community'] }
+        ]
+      }
+    ],
+    health: [
+      {
+        code: '0501000', name: 'Preventive and Promotive Health Services', goal: 'Universal access to basic care',
+        subProgrammes: [
+          { code: '0501010', name: 'Dispensary Services & Medicine supply', themes: ['children', 'women'] },
+          { code: '0501020', name: 'Maternal Healthcare & Immunization', themes: ['women', 'gbv', 'children'] }
+>>>>>>> ac9fdc6e420ea733f8eb9bd19d2231883dec34a6
         ]
       }
     ],
     education: [
       {
+<<<<<<< HEAD
         code: '0501000', name: 'Early Childhood Development Education', goal: 'Foundation learning excellence',
         subProgrammes: [
           { code: '0501010', name: 'ECDE Classroom Infrastructure', themes: ['children', 'community'] },
@@ -197,11 +270,36 @@
         subProgrammes: [
           { code: '1002010', name: 'Youth Enterprise & Revolving Fund', themes: ['youth', 'entrepreneurship'] },
           { code: '1002020', name: 'Sports Stadiums & Ward Playgrounds Upgrades', themes: ['youth', 'community'] }
+=======
+        code: '0601000', name: 'Basic Education & TVET Development', goal: 'Excellence in early learning and vocational training',
+        subProgrammes: [
+          { code: '0601010', name: 'ECDE Classrooms & School feeding', themes: ['children', 'food'] },
+          { code: '0601020', name: 'Vocational TVET Training & Bursaries', themes: ['youth', 'employment'] }
+        ]
+      }
+    ],
+    energy: [
+      {
+        code: '0701000', name: 'Energy & Petroleum Development', goal: 'Expanding clean energy access',
+        subProgrammes: [
+          { code: '0701010', name: 'Rural Solar Mini-Grids & Electrification', themes: ['community', 'climate'] },
+          { code: '0701020', name: 'Renewable Power Options research', themes: ['climate', 'youth'] }
+        ]
+      }
+    ],
+    agriculture: [
+      {
+        code: '0801000', name: 'Agricultural Value Chain Development', goal: 'Ensuring county food resilience',
+        subProgrammes: [
+          { code: '0801010', name: 'Subsidized Seeds & extensions support', themes: ['food', 'entrepreneurship'] },
+          { code: '0801020', name: 'Livestock and Fisheries Development', themes: ['food', 'employment'] }
+>>>>>>> ac9fdc6e420ea733f8eb9bd19d2231883dec34a6
         ]
       }
     ],
     ict: [
       {
+<<<<<<< HEAD
         code: '1101000', name: 'ICT Infrastructure & e-Government', goal: 'Digital connectivity across wards',
         subProgrammes: [
           { code: '1101010', name: 'County Fiber Connectivity & Wi-Fi Hotspots', themes: ['digital', 'youth'] },
@@ -213,6 +311,129 @@
         subProgrammes: [
           { code: '1102010', name: 'Digital Literacy Centre Equipments', themes: ['digital', 'youth'] },
           { code: '1102020', name: 'Sub-County Community Innovation Hubs', themes: ['digital', 'youth', 'employment'] }
+=======
+        code: '0901000', name: 'Digital Economy & ICT Infrastructure', goal: 'Ward-level digital transformations',
+        subProgrammes: [
+          { code: '0901010', name: 'County Fiber & Free public Wi-Fi', themes: ['digital', 'youth'] },
+          { code: '0901020', name: 'e-Government Services & Literacy', themes: ['digital', 'participation'] }
+        ]
+      }
+    ],
+    lands: [
+      {
+        code: '1001000', name: 'Land Management & Affordable Housing', goal: 'Spatial zoning and sustainable dwellings',
+        subProgrammes: [
+          { code: '1001010', name: 'Land Surveying & Title deeds', themes: ['housing', 'women'] },
+          { code: '1001020', name: 'Affordable Housing & Public works', themes: ['housing', 'pwd'] }
+        ]
+      }
+    ],
+    roads: [
+      {
+        code: '1101000', name: 'Roads Infrastructure & Transport Management', goal: 'Bitumen and gravel connectivity networks',
+        subProgrammes: [
+          { code: '1101010', name: 'Feeder roads grading and gravelling', themes: ['community', 'employment'] },
+          { code: '1101020', name: 'Footbridges & Highway drainage systems', themes: ['community', 'pwd'] }
+        ]
+      }
+    ],
+    cooperatives: [
+      {
+        code: '1201000', name: 'Cooperative and MSME Development', goal: 'Providing credits and cooperative support to traders',
+        subProgrammes: [
+          { code: '1201010', name: 'MSME Business Revolving Credits', themes: ['entrepreneurship', 'youth'] },
+          { code: '1201020', name: 'Cooperative training & resources', themes: ['entrepreneurship', 'women'] }
+        ]
+      }
+    ],
+    tourism: [
+      {
+        code: '1301000', name: 'Tourism Promotion & Wildlife Conservation', goal: 'Maximize tourism and protect park ranges',
+        subProgrammes: [
+          { code: '1301010', name: 'Tourism site structures upgrades', themes: ['employment', 'community'] },
+          { code: '1301020', name: 'Wildlife and forest range protection', themes: ['climate', 'disaster'] }
+        ]
+      }
+    ],
+    mining: [
+      {
+        code: '1401000', name: 'Mining & Blue Economy Development', goal: 'Promoting aquaculture and mineral extraction safety',
+        subProgrammes: [
+          { code: '1401010', name: 'Miner safety & licensing systems', themes: ['employment', 'disaster'] },
+          { code: '1401020', name: 'Aquaculture and fingerling supply', themes: ['food', 'employment'] }
+        ]
+      }
+    ],
+    youth: [
+      {
+        code: '1501000', name: 'Youth Affairs & Creative Economy', goal: 'Support sports talents and digital arts',
+        subProgrammes: [
+          { code: '1501010', name: 'Sports Stadiums & Playground Upgrades', themes: ['youth', 'community'] },
+          { code: '1501020', name: 'Creative Hubs and Audio-Visual Studios', themes: ['youth', 'digital'] }
+        ]
+      }
+    ],
+    water: [
+      {
+        code: '1601000', name: 'Water Resources & Irrigation Development', goal: 'Clean piped water and agricultural irrigation',
+        subProgrammes: [
+          { code: '1601010', name: 'Boreholes and Ward Water kiosks', themes: ['water_access', 'community'] },
+          { code: '1601020', name: 'Community Irrigation Pipelines', themes: ['food', 'climate'] }
+        ]
+      }
+    ],
+    investments: [
+      {
+        code: '1701000', name: 'Investment Promotion & Industrialization', goal: 'Establish economic zones and trade facilitation',
+        subProgrammes: [
+          { code: '1701010', name: 'Industrial park utility routing', themes: ['employment', 'entrepreneurship'] },
+          { code: '1701020', name: 'Trade expos & exporter support', themes: ['entrepreneurship'] }
+        ]
+      }
+    ],
+    labour: [
+      {
+        code: '1801000', name: 'Labour and Social Protection Services', goal: 'Provide social safety nets and shelter services',
+        subProgrammes: [
+          { code: '1801010', name: 'Vulnerable Groups Cash transfers', themes: ['elderly', 'social_protection'] },
+          { code: '1801020', name: 'Child Rescue Centres & Safety', themes: ['children', 'social_protection'] }
+        ]
+      }
+    ],
+    public_service: [
+      {
+        code: '1901000', name: 'Public Service Reforms & Capacity building', goal: 'Empower human capital and automate systems',
+        subProgrammes: [
+          { code: '1901010', name: 'Staff training and development', themes: ['youth', 'digital'] },
+          { code: '1901020', name: 'Citizen charter service automation', themes: ['digital', 'participation'] }
+        ]
+      }
+    ],
+    environment: [
+      {
+        code: '2001000', name: 'Environment Protection & Forestry', goal: 'Climate change resilience and waste collection systems',
+        subProgrammes: [
+          { code: '2001010', name: 'Tree planting campaigns & seedlings', themes: ['climate', 'disaster'] },
+          { code: '2001020', name: 'Solid waste recycling systems', themes: ['climate', 'employment'] }
+        ]
+      }
+    ],
+    gender: [
+      {
+        code: '2101000', name: 'Gender, Culture & Heritage Conservation', goal: 'Protect heritage sites and promote gender parity',
+        subProgrammes: [
+          { code: '2101010', name: 'GBV prevention and safe houses', themes: ['women', 'gbv'] },
+          { code: '2101020', name: 'Museum & heritage site repairs', themes: ['community'] }
+        ]
+      }
+    ],
+    eac: [
+      {
+        code: '2201000', name: 'EAC Integration & ASAL Development', goal: 'Drought mitigation and regional trade partnerships',
+        subProgrammes: [
+          { code: '2201010', name: 'ASAL food aid & water relief', themes: ['disaster', 'social_protection'] },
+          { code: '2201020', name: 'Cross-border trade facilitations', themes: ['participation', 'entrepreneurship'] }
+>>>>>>> ac9fdc6e420ea733f8eb9bd19d2231883dec34a6
         ]
       }
     ]
@@ -271,6 +492,7 @@
 
   // Projects template dictionary for dynamic generation
   var SECTOR_PROJECT_TEMPLATES = {
+<<<<<<< HEAD
     health: [
       { name: 'Upgrade of sub-county referral ward', costMul: 1.2 },
       { name: 'Renovation of primary care dispensary', costMul: 0.4 },
@@ -336,6 +558,95 @@
       { name: 'Subcounty market free Wi-Fi setup', costMul: 0.3 },
       { name: 'Digital learning laboratory computer supply', costMul: 0.7 },
       { name: 'Youth innovation and coding hubs building', costMul: 0.9 }
+=======
+    interior: [
+      { name: 'Sub-county police post construction', costMul: 0.9 },
+      { name: 'Disaster management training seminars', costMul: 0.3 }
+    ],
+    treasury: [
+      { name: 'County treasury server database upgrade', costMul: 0.5 },
+      { name: 'Financial year budget publication books', costMul: 0.2 }
+    ],
+    foreign_affairs: [
+      { name: 'Diaspora investment handbook publications', costMul: 0.4 },
+      { name: 'Regional integration forum hosting', costMul: 0.3 }
+    ],
+    defence: [
+      { name: 'Military disaster response equipment supply', costMul: 1.2 },
+      { name: 'Civic-military clinic renovation works', costMul: 0.7 }
+    ],
+    health: [
+      { name: 'Primary dispensary ward renovation', costMul: 0.5 },
+      { name: 'Maternal clinic beds procurement', costMul: 0.4 }
+    ],
+    education: [
+      { name: 'ECDE classroom block construction', costMul: 0.6 },
+      { name: 'Vocational student bursary disbursements', costMul: 0.4 }
+    ],
+    energy: [
+      { name: 'Solar streetlights installation works', costMul: 0.4 },
+      { name: 'Renewable PV mini-grid powerhouse build', costMul: 1.5 }
+    ],
+    agriculture: [
+      { name: 'Subsidized crop fertilizer delivery', costMul: 0.5 },
+      { name: 'Dairy cow disease control vaccination', costMul: 0.3 }
+    ],
+    ict: [
+      { name: 'Community innovation hub computer kits', costMul: 0.7 },
+      { name: 'Public hotspot Wi-Fi router setup', costMul: 0.3 }
+    ],
+    lands: [
+      { name: 'Urban mapping and spatial planning survey', costMul: 0.4 },
+      { name: 'Social housing apartment frame erection', costMul: 1.8 }
+    ],
+    roads: [
+      { name: 'Feeder road grading and culvert installation', costMul: 0.7 },
+      { name: 'Pedestrian concrete footbridge construction', costMul: 1.1 }
+    ],
+    cooperatives: [
+      { name: 'MSME trade revolving fund loans', costMul: 0.5 },
+      { name: 'Cooperative SACCO training workshops', costMul: 0.2 }
+    ],
+    tourism: [
+      { name: 'Tourism information kiosk building', costMul: 0.4 },
+      { name: 'Wildlife conservation border fencing', costMul: 0.8 }
+    ],
+    mining: [
+      { name: 'Small-scale mining safety helmets supply', costMul: 0.3 },
+      { name: 'Fish pond excavation and fingerlings stocking', costMul: 0.5 }
+    ],
+    youth: [
+      { name: 'Sports stadium running track paving', costMul: 1.0 },
+      { name: 'Creative arts recording studio equipment', costMul: 0.6 }
+    ],
+    water: [
+      { name: 'Water pipeline supply trenching works', costMul: 0.8 },
+      { name: 'Communal solar water kiosk borehole', costMul: 0.7 }
+    ],
+    investments: [
+      { name: 'Industrial park access road grading', costMul: 0.9 },
+      { name: 'Trade show exhibition stalls building', costMul: 0.4 }
+    ],
+    labour: [
+      { name: 'Elderly citizen cash transfer logistics', costMul: 0.5 },
+      { name: 'Child protection rescue center build', costMul: 0.6 }
+    ],
+    public_service: [
+      { name: 'Public service portal software development', costMul: 0.6 },
+      { name: 'Staff training center computer lab setup', costMul: 0.4 }
+    ],
+    environment: [
+      { name: 'Community tree nursery seedling supplies', costMul: 0.3 },
+      { name: 'Solid waste garbage skip bins purchase', costMul: 0.4 }
+    ],
+    gender: [
+      { name: 'GBV recovery safe house ward partitions', costMul: 0.5 },
+      { name: 'Cultural museum artifact exhibit renovation', costMul: 0.4 }
+    ],
+    eac: [
+      { name: 'ASAL drought emergency relief food supply', costMul: 0.6 },
+      { name: 'Cross-border trade customs gate upgrade', costMul: 0.7 }
+>>>>>>> ac9fdc6e420ea733f8eb9bd19d2231883dec34a6
     ]
   };
 
@@ -377,6 +688,7 @@
     // Distribute among the 11 sectors
     // Base sector weight structure
     var baseWeights = {
+<<<<<<< HEAD
       health: 0.18,
       agriculture: 0.11,
       education: 0.14,
@@ -388,6 +700,30 @@
       governance: 0.07,
       social: 0.05,
       ict: 0.03
+=======
+      interior: 0.05,
+      treasury: 0.06,
+      foreign_affairs: 0.02,
+      defence: 0.04,
+      health: 0.12,
+      education: 0.12,
+      energy: 0.05,
+      agriculture: 0.08,
+      ict: 0.03,
+      lands: 0.04,
+      roads: 0.08,
+      cooperatives: 0.03,
+      tourism: 0.03,
+      mining: 0.03,
+      youth: 0.04,
+      water: 0.06,
+      investments: 0.03,
+      labour: 0.03,
+      public_service: 0.02,
+      environment: 0.03,
+      gender: 0.03,
+      eac: 0.02
+>>>>>>> ac9fdc6e420ea733f8eb9bd19d2231883dec34a6
     };
 
     var sectorsPlanned = {};

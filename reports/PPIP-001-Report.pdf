@@ -1,0 +1,243 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page
+   /Parent 2 0 R
+   /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >>
+   /MediaBox [0 0 595 842]
+   /Contents 6 0 R >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+6 0 obj
+<< /Length 3545 >>
+stream
+BT
+/F1 18 Tf
+50 790 Td
+(PPIP-001 - Official Procurement Audit Report) Tj
+ET
+BT
+/F1 12 Tf
+50 765 Td
+(Project: Nairobi Ward Road Upgrade) Tj
+ET
+0.5 w
+50 750 m 545 750 l S
+BT
+/F2 10 Tf
+50 730 Td
+(Contractor: ABC Builders Ltd) Tj
+0 -15 Td
+(Award Value: KSh 120,000,000) Tj
+0 -15 Td
+(Award Date: 2025-07-10) Tj
+0 -15 Td
+(Project Status: Ongoing) Tj
+0 -15 Td
+ET
+BT
+/F1 11 Tf
+50 660 Td
+(1. Executive Summary) Tj
+ET
+BT
+/F2 9.5 Tf
+55 645 Td
+(Comprehensive upgrade of key ward access roads to bituminous standard, complete with) Tj
+ET
+BT
+/F2 9.5 Tf
+55 633 Td
+(side drains, culverts, and solar street lighting to enhance commerce and neighborhood) Tj
+ET
+BT
+/F2 9.5 Tf
+55 621 Td
+(security.) Tj
+ET
+BT
+/F1 11 Tf
+50 599 Td
+(2. Project Scope) Tj
+ET
+BT
+/F2 9.5 Tf
+55 584 Td
+(Upgrade of 5.2km of tertiary ward roads, construction of 2.1km of stone-pitched storm) Tj
+ET
+BT
+/F2 9.5 Tf
+55 572 Td
+(drains, installation of 120 LED solar-powered streetlights, and paving of 800m of) Tj
+ET
+BT
+/F2 9.5 Tf
+55 560 Td
+(pedestrian walkways.) Tj
+ET
+BT
+/F1 11 Tf
+50 538 Td
+(3. Simplified Bill of Quantities \(BoQ\)) Tj
+ET
+BT
+/F1 9 Tf
+55 523 Td
+(Item     Description                                                   Quantity            Unit Rate (KES)         Total (KES)) Tj
+ET
+BT
+/F2 8.5 Tf
+55 511 Td
+(1     Site Clearance & Earthworks                             5.2 km         2,500,000        13,000,000) Tj
+ET
+BT
+/F2 8.5 Tf
+55 501 Td
+(2     Sub-base and Gravel Base Courses                     12,400 m³             2,800        34,720,000) Tj
+ET
+BT
+/F2 8.5 Tf
+55 491 Td
+(3     Asphalt Concrete Surfacing \(50mm\)                    36,400 m²             1,150        41,860,000) Tj
+ET
+BT
+/F2 8.5 Tf
+55 481 Td
+(4     Drainage structures & Culvert installation             2,100 m             7,500        15,750,000) Tj
+ET
+BT
+/F2 8.5 Tf
+55 471 Td
+(5     Solar Streetlights & Walkways                        120 Units           122,250        14,670,000) Tj
+ET
+BT
+/F1 11 Tf
+50 451 Td
+(4. Project Timeline) Tj
+ET
+BT
+/F2 9 Tf
+55 436 Td
+(Phase: Mobilization & Survey \(2025-07-20 to 2025-08-15\) - Status: Completed) Tj
+ET
+BT
+/F2 9 Tf
+55 424 Td
+(Phase: Drainage & Sub-grade works \(2025-08-16 to 2025-10-30\) - Status: Ongoing) Tj
+ET
+BT
+/F2 9 Tf
+55 412 Td
+(Phase: Base courses & Asphalt paving \(2025-11-01 to 2026-02-15\) - Status: Pending) Tj
+ET
+BT
+/F2 9 Tf
+55 400 Td
+(Phase: Street lighting & Pedestrian walks \(2026-02-16 to 2026-04-10\) - Status: Pending) Tj
+ET
+BT
+/F1 11 Tf
+50 378 Td
+(5. Procurement Information) Tj
+ET
+BT
+/F2 9 Tf
+55 363 Td
+(Method: National Competitive Bidding \(NCB\)) Tj
+ET
+BT
+/F2 9 Tf
+55 352 Td
+(Published: 2025-05-02) Tj
+ET
+BT
+/F2 9 Tf
+55 341 Td
+(Bids Received: 8 tenders) Tj
+ET
+BT
+/F2 9 Tf
+55 330 Td
+(Engineer Estimate: KSh 130,000,000) Tj
+ET
+BT
+/F1 11 Tf
+50 309 Td
+(6. Citizen Oversight Section) Tj
+ET
+BT
+/F2 9 Tf
+55 294 Td
+(Oversight Body: Nairobi Ward Roads Citizen Oversight Team) Tj
+ET
+BT
+/F2 9 Tf
+55 283 Td
+(Chairperson: John Kamau) Tj
+ET
+BT
+/F2 9 Tf
+55 272 Td
+(Citizen Members: 7) Tj
+ET
+BT
+/F2 9 Tf
+55 261 Td
+(Social Audit Meetings Held: 3 assemblies) Tj
+ET
+BT
+/F1 11 Tf
+50 240 Td
+(7. Disclaimer) Tj
+ET
+BT
+/F2 9.5 Tf
+55 225 Td
+(This document is a simulated data visualization report created for public) Tj
+ET
+BT
+/F2 9.5 Tf
+55 213 Td
+(transparency audit demonstration on the WaziHub Civic Tech platform. Calculations,) Tj
+ET
+BT
+/F2 9.5 Tf
+55 201 Td
+(milestones, and names are illustrative and do not constitute legal or binding) Tj
+ET
+BT
+/F2 9.5 Tf
+55 189 Td
+(national treasury statements.) Tj
+ET
+BT
+/F2 8 Tf
+270 30 Td
+(Page 1 of 1) Tj
+ET
+endstream
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000263 00000 n 
+0000000338 00000 n 
+0000000408 00000 n 
+trailer
+<< /Size 7 /Root 1 0 R >>
+startxref
+4005
+%%EOF

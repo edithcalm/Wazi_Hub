@@ -9,14 +9,28 @@ const ASSETS = [
   './icons/icon.svg',
   './data/i18n.js',
   './data/budget-intelligence.js',
+<<<<<<< HEAD
+=======
+  './data/contracts.js',
+>>>>>>> ac9fdc6e420ea733f8eb9bd19d2231883dec34a6
   './data/projects.js',
   './data/barazas-demo.js',
   './js/i18n.js',
   './js/utils.js',
   './js/report.js',
   './js/budget-intelligence.js',
+<<<<<<< HEAD
   './js/main.js',
   './js/pwa.js'
+=======
+  './js/contracts.js',
+  './js/main.js',
+  './js/pwa.js',
+  './reports/PPIP-001-Report.pdf',
+  './reports/PPIP-002-Report.pdf',
+  './reports/PPIP-003-Report.pdf',
+  './reports/PPIP-004-Report.pdf'
+>>>>>>> ac9fdc6e420ea733f8eb9bd19d2231883dec34a6
 ];
 
 self.addEventListener('install', function (event) {

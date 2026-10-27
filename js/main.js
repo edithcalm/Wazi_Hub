@@ -12,6 +12,7 @@
   if (mapEl && typeof L !== 'undefined') {
 
   const sectorColors = {
+<<<<<<< HEAD
     'Health':            '#e53e3e',
     'Transport':         '#3182ce',
     'Roads':             '#2b6cb0',
@@ -20,6 +21,39 @@
     'Agriculture':       '#16a34a',
     'Education':         '#7c3aed',
     'Governance':        '#6b7280',
+=======
+    'Ministry of Interior and National Administration': '#073b4c',
+    'Ministry of National Treasury and Economic Planning': '#6b7280',
+    'Ministry of Foreign and Diaspora Affairs': '#3a86c8',
+    'Ministry of Defence': '#991b1b',
+    'Ministry of Health': '#ff6b35',
+    'Ministry of Education': '#f7931e',
+    'Ministry of Energy and Petroleum': '#d97706',
+    'Ministry of Agriculture and Livestock Development': '#16a34a',
+    'Ministry of Information, Communication and the Digital Economy': '#0891b2',
+    'Ministry of Lands, Public Works, Housing and Urban Development': '#7209b7',
+    'Ministry of Roads and Transport': '#2b6cb0',
+    'Ministry of Co-operatives and Micro, Small and Medium Enterprises (MSMEs)': '#f59e0b',
+    'Ministry of Tourism and Wildlife': '#a16207',
+    'Ministry of Mining, Blue Economy and Maritime Affairs': '#0f766e',
+    'Ministry of Youth Affairs, Creative Economy and Sports': '#ec4899',
+    'Ministry of Water, Sanitation and Irrigation': '#06b6d4',
+    'Ministry of Investments, Trade and Industry': '#dc2626',
+    'Ministry of Labour and Social Protection': '#d946ef',
+    'Ministry of Public Service and Human Capital Development': '#4b5563',
+    'Ministry of Environment, Climate Change and Forestry': '#15803d',
+    'Ministry of Gender, Culture, the Arts and Heritage': '#be185d',
+    'Ministry of East African Community (EAC), Arid and Semi-Arid Lands (ASALs) and Regional Development': '#4338ca',
+    // Fallbacks
+    'Health':            '#ff6b35',
+    'Transport':         '#2b6cb0',
+    'Roads':             '#2b6cb0',
+    'Water & Sanitation':'#06b6d4',
+    'Energy':            '#d97706',
+    'Agriculture':       '#16a34a',
+    'Education':         '#f7931e',
+    'Governance':        '#4b5563',
+>>>>>>> ac9fdc6e420ea733f8eb9bd19d2231883dec34a6
     'default':           '#00853F'
   };
 

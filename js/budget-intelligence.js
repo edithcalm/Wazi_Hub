@@ -19,7 +19,11 @@
     sector: 'all',
     programme: 'all',
     subprogramme: 'all',
+<<<<<<< HEAD
     theme: 'climate',
+=======
+    theme: 'all',
+>>>>>>> ac9fdc6e420ea733f8eb9bd19d2231883dec34a6
     view: 'sector',
     compareA: 'nairobi',
     compareB: 'mombasa'
@@ -63,6 +67,7 @@
     };
   }
 
+<<<<<<< HEAD
   function sumProjects(projects, field) {
     return projects.reduce(function (total, project) {
       return total + project[field];
@@ -193,6 +198,41 @@
           });
         }).sort(function (a, b) { return b.plannedKsh - a.plannedKsh; })
       });
+=======
+  // Retrieve base budget data and filter it dynamically based on active selection states
+  function getActiveDataset() {
+    var raw = BI.getCountyData(state.county, state.year);
+    var fyData = raw.fyData;
+
+    // Filter projects based on sector, programme, sub-programme, and theme states
+    var allProjects = [];
+    fyData.sectors.forEach(function (sec) {
+      if (state.sector !== 'all' && sec.id !== state.sector) return;
+      sec.programmes.forEach(function (prog) {
+        if (state.programme !== 'all' && prog.code !== state.programme) return;
+        prog.subProgrammes.forEach(function (subProg) {
+          if (state.subprogramme !== 'all' && subProg.code !== state.subprogramme) return;
+          subProg.projects.forEach(function (proj) {
+            if (state.theme !== 'all' && proj.themeIds.indexOf(state.theme) === -1) return;
+            allProjects.push(proj);
+          });
+        });
+      });
+    });
+
+    // Recompute filtered KPIs
+    var plannedSum = 0;
+    var actualSum = 0;
+    allProjects.forEach(function (proj) {
+      plannedSum += proj.plannedKsh;
+      actualSum += proj.actualKsh;
+    });
+
+    // Fallback to sector values if no projects match or everything is "all" to match base values
+    if (state.sector === 'all' && state.programme === 'all' && state.subprogramme === 'all' && state.theme === 'all') {
+      plannedSum = fyData.totalPlannedKsh;
+      actualSum = fyData.totalActualKsh;
+>>>>>>> ac9fdc6e420ea733f8eb9bd19d2231883dec34a6
     }
 
     var pendingSum = Math.max(plannedSum - actualSum, 0);
@@ -200,7 +240,11 @@
 
     return {
       raw: raw,
+<<<<<<< HEAD
       fyData: filteredFyData,
+=======
+      fyData: fyData,
+>>>>>>> ac9fdc6e420ea733f8eb9bd19d2231883dec34a6
       projects: allProjects,
       summary: {
         planned: plannedSum,
@@ -230,12 +274,15 @@
     if (elRec) elRec.textContent = summary.recRatio + '%';
   }
 
+<<<<<<< HEAD
   function setSummaryLabels(labels) {
     $id('bi-total-budget-label').textContent = labels[0];
     $id('bi-total-spent-label').textContent = labels[1];
     $id('bi-pending-budget-label').textContent = labels[2];
   }
 
+=======
+>>>>>>> ac9fdc6e420ea733f8eb9bd19d2231883dec34a6
   function renderBreadcrumb() {
     var el = $id('bi-breadcrumb');
     if (!el) return;
@@ -477,6 +524,7 @@
   // ===== 2. THEMATIC DASHBOARD =====
   function renderThematicDashboard(dataset) {
     var fyData = dataset.fyData;
+<<<<<<< HEAD
     var allocation = fyData.themeAllocations.find(function (theme) {
       return theme.themeId === state.theme;
     });
@@ -510,11 +558,40 @@
           scales: {
             x: { grid: { display: false } },
             y: { beginAtZero: true, ticks: { callback: function (v) { return fmt(v); } } }
+=======
+
+    // Treemap fallback to horizontal bar chart
+    var ctxTree = $id('bi-chart-theme-treemap');
+    if (ctxTree) {
+      destroyChart('themeTree');
+      var labels = fyData.themeAllocations.slice(0, 10).map(function (t) { return BI.getThemeById(t.themeId).name; });
+      var values = fyData.themeAllocations.slice(0, 10).map(function (t) { return t.plannedKsh; });
+      var colors = fyData.themeAllocations.slice(0, 10).map(function (t) { return BI.getThemeById(t.themeId).color; });
+
+      charts.themeTree = new Chart(ctxTree, {
+        type: 'bar',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Planned Allocation (KES)',
+            data: values,
+            backgroundColor: colors,
+            borderRadius: 6
+          }]
+        },
+        options: Object.assign({}, chartDefaults(), {
+          indexAxis: 'y',
+          plugins: { legend: { display: false } },
+          scales: {
+            x: { ticks: { callback: function (v) { return (v / 1e6).toFixed(0) + 'M'; } } },
+            y: { grid: { display: false }, ticks: { font: { size: 9 } } }
+>>>>>>> ac9fdc6e420ea733f8eb9bd19d2231883dec34a6
           }
         })
       });
     }
 
+<<<<<<< HEAD
     var ctxThemeCounty = $id('bi-chart-theme-county-compare');
     if (ctxThemeCounty) {
       destroyChart('themeCounty');
@@ -538,6 +615,88 @@
           scales: {
             x: { beginAtZero: true, ticks: { callback: function (v) { return fmt(v); } } },
             y: { grid: { display: false } }
+=======
+    // Theme Beneficiaries Chart
+    var ctxBenef = $id('bi-chart-theme-beneficiaries');
+    if (ctxBenef) {
+      destroyChart('themeBenef');
+      var labelsB = fyData.themeAllocations.slice(0, 10).map(function (t) { return BI.getThemeById(t.themeId).name; });
+      var valuesB = fyData.themeAllocations.slice(0, 10).map(function (t) { return t.beneficiaries; });
+
+      charts.themeBenef = new Chart(ctxBenef, {
+        type: 'bar',
+        data: {
+          labels: labelsB,
+          datasets: [{
+            label: 'Estimated Beneficiaries',
+            data: valuesB,
+            backgroundColor: '#06b6d4',
+            borderRadius: 6
+          }]
+        },
+        options: Object.assign({}, chartDefaults(), {
+          indexAxis: 'y',
+          plugins: { legend: { display: false } },
+          scales: {
+            x: { ticks: { callback: function (v) { return v.toLocaleString(); } } },
+            y: { grid: { display: false }, ticks: { font: { size: 9 } } }
+          }
+        })
+      });
+    }
+
+    // Theme cards Overview
+    var themeCardsGrid = $id('bi-theme-cards');
+    if (themeCardsGrid) {
+      var targetThemes = fyData.themeAllocations;
+      if (state.theme !== 'all') {
+        targetThemes = targetThemes.filter(function (t) { return t.themeId === state.theme; });
+      }
+      themeCardsGrid.innerHTML = targetThemes.map(function (t) {
+        var th = BI.getThemeById(t.themeId);
+        return '<article class="bi-theme-card">' +
+          '<div class="bi-theme-icon" style="background:' + th.color + '1a;color:' + th.color + '">' + th.icon + '</div>' +
+          '<h4>' + th.name + '</h4>' +
+          '<p class="bi-theme-amt">' + fmt(t.plannedKsh) + '</p>' +
+          '<p class="bi-theme-meta">' + t.shareOfBudgetPercent + '% of Budget · ' + t.projectsCount + ' Projects<br/>👥 ' + t.beneficiaries.toLocaleString() + ' Beneficiaries</p>' +
+          '<div style="display:flex; justify-content:space-between; align-items:center;">' +
+            '<span class="bi-tag bi-tag-' + th.category.toLowerCase().replace(/\s+/g, '-') + '">' + th.category + '</span>' +
+            '<span style="font-size:0.8rem; font-weight:700; color:' + (t.yoyTrend.startsWith('+') ? '#059669' : '#e11d48') + '">' + t.yoyTrend + ' YoY</span>' +
+          '</div>' +
+          '</article>';
+      }).join('');
+    }
+
+    // Theme Budgets County Comparison Chart (e.g. comparing theme spend on current selected theme or top theme across top 8 counties)
+    var ctxThemeCounty = $id('bi-chart-theme-county-compare');
+    if (ctxThemeCounty) {
+      destroyChart('themeCounty');
+      var compareThemeId = state.theme !== 'all' ? state.theme : 'climate';
+      var compareThemeMeta = BI.getThemeById(compareThemeId);
+      
+      var comparisonCounties = BI.getComparisonCounties(state.year).slice(0, 10);
+      var countyLabels = comparisonCounties.map(function (c) { return c.name; });
+      var thematicValues = comparisonCounties.map(function (c) {
+        var cData = BI.counties[c.key].financialYears[state.year];
+        var allocation = cData.themeAllocations.find(function (ta) { return ta.themeId === compareThemeId; });
+        return allocation ? allocation.plannedKsh : 0;
+      });
+
+      charts.themeCounty = new Chart(ctxThemeCounty, {
+        type: 'bar',
+        data: {
+          labels: countyLabels,
+          datasets: [{
+            label: compareThemeMeta.name + ' Allocation (KES)',
+            data: thematicValues,
+            backgroundColor: compareThemeMeta.color
+          }]
+        },
+        options: Object.assign({}, chartDefaults(), {
+          scales: {
+            x: { grid: { display: false } },
+            y: { ticks: { callback: function (v) { return (v / 1e6).toFixed(1) + 'M'; } } }
+>>>>>>> ac9fdc6e420ea733f8eb9bd19d2231883dec34a6
           }
         })
       });
@@ -684,12 +843,15 @@
 
   function setActiveView(view) {
     state.view = view;
+<<<<<<< HEAD
     if (state.theme === 'all') state.theme = 'climate';
     root.setAttribute('data-view', view);
     $id('bi-sector-filters').hidden = view !== 'sector';
     $id('bi-county-filter').hidden = view === 'compare';
     $id('bi-summary').hidden = view === 'compare';
     $id('bi-breadcrumb').hidden = view !== 'sector';
+=======
+>>>>>>> ac9fdc6e420ea733f8eb9bd19d2231883dec34a6
     root.querySelectorAll('.bi-tab').forEach(function (tab) {
       tab.classList.toggle('active', tab.getAttribute('data-view') === view);
       tab.setAttribute('aria-selected', tab.getAttribute('data-view') === view ? 'true' : 'false');
@@ -742,6 +904,7 @@
     }
 
     // 3. Themes (Populate 17 themes)
+<<<<<<< HEAD
     var tSel = $id('bi-theme-select');
     if (tSel && tSel.options.length === 0) {
       var groups = {};
@@ -755,6 +918,15 @@
         opt.value = t.id;
         opt.textContent = t.name;
         groups[t.category].appendChild(opt);
+=======
+    var tSel = $id('bi-theme');
+    if (tSel && tSel.options.length <= 1) {
+      BI.catalog.themes.forEach(function (t) {
+        var opt = document.createElement('option');
+        opt.value = t.id;
+        opt.textContent = t.name;
+        tSel.appendChild(opt);
+>>>>>>> ac9fdc6e420ea733f8eb9bd19d2231883dec34a6
       });
       tSel.value = state.theme;
     }
@@ -806,6 +978,7 @@
     spSel.value = state.subprogramme;
   }
 
+<<<<<<< HEAD
   function applySelectedFilters() {
     state.year = $id('bi-year').value;
     state.county = $id('bi-county').value;
@@ -840,12 +1013,29 @@
         });
       }
       renderThematicDashboard({ fyData: countyData });
+=======
+
+  function renderAll() {
+    var dataset = getActiveDataset();
+    
+    updateSummaryCards(dataset.summary);
+    renderBreadcrumb();
+
+    if (state.view === 'sector') {
+      renderSectorDashboard(dataset);
+    } else if (state.view === 'theme') {
+      renderThematicDashboard(dataset);
+>>>>>>> ac9fdc6e420ea733f8eb9bd19d2231883dec34a6
     } else if (state.view === 'compare') {
       renderCompareDashboard();
     }
   }
 
   function bindEvents() {
+<<<<<<< HEAD
+=======
+    var updateBtn = $id('bi-update');
+>>>>>>> ac9fdc6e420ea733f8eb9bd19d2231883dec34a6
     var resetBtn = $id('bi-reset');
 
     var yearSel = $id('bi-year');
@@ -853,16 +1043,25 @@
     var sectorSel = $id('bi-sector');
     var progSel = $id('bi-programme');
     var subprogSel = $id('bi-subprogramme');
+<<<<<<< HEAD
     var themeSel = $id('bi-theme-select');
 
     // Apply filter changes immediately after refreshing dependent programme options.
+=======
+    var themeSel = $id('bi-theme');
+
+    // Filter event bindings
+>>>>>>> ac9fdc6e420ea733f8eb9bd19d2231883dec34a6
     if (sectorSel) {
       sectorSel.addEventListener('change', function () {
         state.sector = sectorSel.value;
         state.programme = 'all';
         state.subprogramme = 'all';
         updateCascadeSelectors();
+<<<<<<< HEAD
         applySelectedFilters();
+=======
+>>>>>>> ac9fdc6e420ea733f8eb9bd19d2231883dec34a6
       });
     }
 
@@ -871,13 +1070,17 @@
         state.programme = progSel.value;
         state.subprogramme = 'all';
         updateCascadeSelectors();
+<<<<<<< HEAD
         applySelectedFilters();
+=======
+>>>>>>> ac9fdc6e420ea733f8eb9bd19d2231883dec34a6
       });
     }
 
     if (subprogSel) {
       subprogSel.addEventListener('change', function () {
         state.subprogramme = subprogSel.value;
+<<<<<<< HEAD
         applySelectedFilters();
       });
     }
@@ -888,12 +1091,28 @@
     if (themeSel) {
       themeSel.addEventListener('change', function () {
         state.theme = themeSel.value;
+=======
+      });
+    }
+
+    if (updateBtn) {
+      updateBtn.addEventListener('click', function () {
+        state.year = yearSel.value;
+        state.county = countySel.value;
+        state.sector = sectorSel.value;
+        state.programme = progSel.value;
+        state.subprogramme = subprogSel.value;
+        state.theme = themeSel.value;
+        
+        destroyAllCharts();
+>>>>>>> ac9fdc6e420ea733f8eb9bd19d2231883dec34a6
         renderAll();
       });
     }
 
     if (resetBtn) {
       resetBtn.addEventListener('click', function () {
+<<<<<<< HEAD
         yearSel.value = '2025/26';
         countySel.value = 'nairobi';
         sectorSel.value = 'all';
@@ -910,6 +1129,24 @@
         state.compareB = 'mombasa';
         updateCascadeSelectors();
         applySelectedFilters();
+=======
+        state.sector = 'all';
+        state.programme = 'all';
+        state.subprogramme = 'all';
+        state.theme = 'all';
+        
+        yearSel.value = '2025/26';
+        countySel.value = 'nairobi';
+        sectorSel.value = 'all';
+        themeSel.value = 'all';
+        
+        state.year = '2025/26';
+        state.county = 'nairobi';
+
+        updateCascadeSelectors();
+        destroyAllCharts();
+        renderAll();
+>>>>>>> ac9fdc6e420ea733f8eb9bd19d2231883dec34a6
       });
     }
 
