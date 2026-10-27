@@ -149,39 +149,22 @@
         <div class="bi-header">
           <div>
             <h3 id="budget-title" class="panel-title" style="font-size:1.8rem;">WaziHub Public Finance Intelligence</h3>
-<<<<<<< HEAD
             <p class="bi-subtitle">Explore county budgets by sector, follow a citizen theme, or compare county performance. Choose a view to see the filters and insights that matter for that question.</p>
-=======
-            <p class="bi-subtitle">Official county budget analytics, programme-based allocations, vulnerable group
-              equity index, project monitoring, and citizen participation metrics.</p>
->>>>>>> ac9fdc6e420ea733f8eb9bd19d2231883dec34a6
           </div>
         </div>
 
         <!-- Dashboard Selection Tabs -->
         <div class="bi-tabs" role="tablist" aria-label="Budget views">
           <button type="button" class="bi-tab active" role="tab" data-view="sector"
-<<<<<<< HEAD
-          aria-selected="true">Explore sectors</button>
+            aria-selected="true">Explore sectors</button>
           <button type="button" class="bi-tab" role="tab" data-view="theme" aria-selected="false">Explore a theme</button>
           <button type="button" class="bi-tab" role="tab" data-view="compare" aria-selected="false">Compare counties</button>
-=======
-            aria-selected="true">Sectors</button>
-          <button type="button" class="bi-tab" role="tab" data-view="theme" aria-selected="false">Thematic
-            Focus</button>
-          <button type="button" class="bi-tab" role="tab" data-view="compare" aria-selected="false">County
-            Comparison</button>
->>>>>>> ac9fdc6e420ea733f8eb9bd19d2231883dec34a6
         </div>
 
         <!-- Global Filters Form -->
         <form id="bi-filters" class="bi-filters-card">
           <div class="bi-filters-grid">
-<<<<<<< HEAD
             <label id="bi-year-filter">
-=======
-            <label>
->>>>>>> ac9fdc6e420ea733f8eb9bd19d2231883dec34a6
               <span>Financial Year</span>
               <select id="bi-year">
                 <option value="2025/26">FY 2025/26</option>
@@ -189,17 +172,12 @@
                 <option value="2023/24">FY 2023/24</option>
               </select>
             </label>
-<<<<<<< HEAD
             <label id="bi-county-filter">
-=======
-            <label>
->>>>>>> ac9fdc6e420ea733f8eb9bd19d2231883dec34a6
               <span>County (All 47)</span>
               <select id="bi-county">
                 <!-- Will be dynamically populated with 47 counties via JS -->
               </select>
             </label>
-<<<<<<< HEAD
             <div id="bi-sector-filters" class="bi-sector-filters">
               <label>
                 <span>Sector</span>
@@ -224,78 +202,32 @@
           <div class="bi-filters-actions">
             <p>Results update as you change a filter.</p>
             <button type="button" id="bi-reset" class="btn secondary">Reset filters</button>
-=======
-            <label>
-              <span>Sector (CoG aligned)</span>
-              <select id="bi-sector">
-                <option value="all">All Sectors</option>
-              </select>
-            </label>
-            <label>
-              <span>Programme</span>
-              <select id="bi-programme">
-                <option value="all">All Programmes</option>
-              </select>
-            </label>
-            <label>
-              <span>Sub-Programme</span>
-              <select id="bi-subprogramme">
-                <option value="all">All Sub-Programmes</option>
-              </select>
-            </label>
-            <label>
-              <span>Thematic Focus</span>
-              <select id="bi-theme">
-                <option value="all">All Citizen Themes</option>
-              </select>
-            </label>
-          </div>
-          <div class="bi-filters-actions">
-            <button type="button" id="bi-update" class="btn">Apply Filters</button>
-            <button type="button" id="bi-reset" class="btn secondary">Reset Filters</button>
->>>>>>> ac9fdc6e420ea733f8eb9bd19d2231883dec34a6
           </div>
         </form>
 
         <nav id="bi-breadcrumb" class="bi-breadcrumb" aria-label="Budget drill-down path"></nav>
 
         <!-- Summary KPIs Row -->
-<<<<<<< HEAD
         <div id="bi-summary" class="grid bi-summary">
-=======
-        <div class="grid bi-summary">
->>>>>>> ac9fdc6e420ea733f8eb9bd19d2231883dec34a6
           <div class="card bi-summary-card">
             <span class="bi-sum-icon">💰</span>
             <div>
               <div id="bi-total-budget" class="summary-value">—</div>
-<<<<<<< HEAD
               <div id="bi-total-budget-label" class="mute">Total Budget</div>
-=======
-              <div class="mute">Total Budget</div>
->>>>>>> ac9fdc6e420ea733f8eb9bd19d2231883dec34a6
             </div>
           </div>
           <div class="card bi-summary-card">
             <span class="bi-sum-icon">💸</span>
             <div>
               <div id="bi-total-spent" class="summary-value">—</div>
-<<<<<<< HEAD
               <div id="bi-total-spent-label" class="mute">Total Spent</div>
-=======
-              <div class="mute">Total Spent</div>
->>>>>>> ac9fdc6e420ea733f8eb9bd19d2231883dec34a6
             </div>
           </div>
           <div class="card bi-summary-card">
             <span class="bi-sum-icon">⏳</span>
             <div>
               <div id="bi-pending-budget" class="summary-value">—</div>
-<<<<<<< HEAD
               <div id="bi-pending-budget-label" class="mute">Unspent / Pending</div>
-=======
-              <div class="mute">Unspent / Pending</div>
->>>>>>> ac9fdc6e420ea733f8eb9bd19d2231883dec34a6
             </div>
           </div>
 
@@ -304,18 +236,13 @@
 
         <!-- 1. Sector Dashboard View -->
         <div class="bi-view" data-view="sector">
-<<<<<<< HEAD
           <div class="bi-chart-row bi-sector-charts">
-=======
-          <div class="bi-chart-row">
->>>>>>> ac9fdc6e420ea733f8eb9bd19d2231883dec34a6
             <div class="chart-wrap">
               <div class="panel-title">Sector Allocations (KES)</div>
               <div class="chart-box"><canvas id="bi-chart-sector-pie"></canvas></div>
               <div id="bi-sector-legend" class="bi-legend"></div>
               <p class="chart-tip">Click a sector or legend to drill down to programme levels.</p>
             </div>
-<<<<<<< HEAD
             <div class="chart-wrap">
               <div class="panel-title">Planned vs Actual — Quarterly Execution</div>
               <div class="chart-box"><canvas id="bi-chart-quarterly"></canvas></div>
@@ -343,44 +270,10 @@
                   </thead>
                   <tbody id="bi-drill-tbody"></tbody>
                 </table>
-=======
-
-
-            <div class="bi-chart-row">
-              <div class="chart-wrap">
-                <div class="panel-title">Planned vs Actual — Quarterly Execution</div>
-                <div class="chart-box"><canvas id="bi-chart-quarterly"></canvas></div>
-              </div>
-            </div>
-
-            <div id="bi-drill-panel" hidden>
-              <div class="chart-wrap" style="margin-top: 1rem;">
-                <div id="bi-drill-title" class="panel-title">Programme drill-down</div>
-                <div class="chart-box"><canvas id="bi-chart-programme-stack"></canvas></div>
-                <div class="panel-title" style="margin-top: 1.5rem;">Associated Project Hierarchy</div>
-                <div class="bi-drill-table-wrap table-scroll" tabindex="0">
-                  <table>
-                    <thead>
-                      <tr>
-                        <th scope="col">Code</th>
-                        <th scope="col">Sub-Programme</th>
-                        <th scope="col">Project</th>
-                        <th scope="col">Ward</th>
-                        <th scope="col">Planned</th>
-                        <th scope="col">Actual</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Progress</th>
-                      </tr>
-                    </thead>
-                    <tbody id="bi-drill-tbody"></tbody>
-                  </table>
-                </div>
->>>>>>> ac9fdc6e420ea733f8eb9bd19d2231883dec34a6
               </div>
             </div>
           </div>
 
-<<<<<<< HEAD
         </div>
 
         <!-- 2. Thematic Dashboard View -->
@@ -414,31 +307,6 @@
             </div>
           </div>
         </div>
-=======
-          <!-- 2. Thematic Dashboard View -->
-          <div class="bi-view" data-view="theme" hidden>
-            <div class="bi-chart-row">
-              <div class="chart-wrap">
-                <div class="panel-title">Thematic Budget Tree Analysis</div>
-                <div class="chart-box tall"><canvas id="bi-chart-theme-treemap"></canvas></div>
-                <p class="chart-tip">Citizen themes filter allocations matching marginalized groups, food, climate, and
-                  more.</p>
-              </div>
-              <div class="chart-wrap">
-                <div class="panel-title">Theme Beneficiary Analysis (Persons Benefit)</div>
-                <div class="chart-box tall"><canvas id="bi-chart-theme-beneficiaries"></canvas></div>
-              </div>
-            </div>
-
-            <div class="panel-title" style="margin-top: 1.5rem;">Thematic Allocations Overview</div>
-            <div id="bi-theme-cards" class="bi-theme-grid"></div>
-
-            <div class="chart-wrap" style="margin-top: 1.5rem;">
-              <div class="panel-title">Theme Budgets County Comparison (FY 2025/26)</div>
-              <div class="chart-box"><canvas id="bi-chart-theme-county-compare"></canvas></div>
-            </div>
-          </div>
->>>>>>> ac9fdc6e420ea733f8eb9bd19d2231883dec34a6
 
           <!-- 3. County Comparison Dashboard View -->
           <div class="bi-view" data-view="compare" hidden>
@@ -487,16 +355,6 @@
     <!-- ===== OPEN CONTRACTING PORTAL ===== -->
     <section id="open-contracting" aria-labelledby="contracts-title" style="margin-top:.5rem;">
       <div class="container">
-<<<<<<< HEAD
-        <h3 id="contracts-title" class="panel-title" style="font-size:1.6rem;" data-i18n="contracts.title">Open
-          Contracting Portal</h3>
-        <form role="search" class="grid search-row">
-          <label><span data-i18n="contracts.search">Search</span>
-            <input type="search" name="q" placeholder="Project, contractor, tender ID" aria-label="Search contracts" />
-          </label>
-          <button class="btn" type="button" data-i18n="contracts.filter">Filter</button>
-        </form>
-=======
         <h3 id="contracts-title" class="panel-title" style="font-size:1.8rem;" data-i18n="contracts.title">Open Contracting Portal</h3>
         <p class="bi-subtitle" style="margin-bottom: 1.5rem;">Official registry of public procurement awards, tender statuses, citizen oversight details, and project audit reports.</p>
 
@@ -561,17 +419,11 @@
             </label>
           </div>
         </div>
->>>>>>> ac9fdc6e420ea733f8eb9bd19d2231883dec34a6
 
         <p class="table-scroll-hint">Swipe left to see all columns →</p>
         <div class="table-scroll" role="region" aria-label="Contracts table" tabindex="0">
           <table aria-describedby="contracts-help">
-<<<<<<< HEAD
-            <caption id="contracts-help" class="mute" data-i18n="contracts.caption">Browse, sort, and flag contracts.
-              (Sample structure)</caption>
-=======
             <caption id="contracts-help" class="mute" data-i18n="contracts.caption">Browse, filter, and inspect public contracts. Click any row for details.</caption>
->>>>>>> ac9fdc6e420ea733f8eb9bd19d2231883dec34a6
             <thead>
               <tr>
                 <th scope="col" data-i18n="contracts.tender">Tender ID</th>
@@ -580,66 +432,17 @@
                 <th scope="col" data-i18n="contracts.award">Award Value (KSh)</th>
                 <th scope="col" data-i18n="contracts.date">Award Date</th>
                 <th scope="col" data-i18n="contracts.status">Status</th>
-<<<<<<< HEAD
-                <th scope="col" data-i18n="contracts.flags">Flags</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>PPIP-001</td>
-                <td>Nairobi Ward Road Upgrade</td>
-                <td>ABC Builders Ltd</td>
-                <td>120,000,000</td>
-                <td>2025-07-10</td>
-                <td><span class="badge" data-status="ongoing" data-i18n="status.ongoing">Ongoing</span></td>
-                <td><a href="#" style="color:var(--kenya-red); font-weight:700;" data-i18n="contracts.report">Report</a>
-                </td>
-              </tr>
-              <tr>
-                <td>PPIP-002</td>
-                <td>County Hospital Wing</td>
-                <td>HealthWorks KE</td>
-                <td>340,000,000</td>
-                <td>2025-06-02</td>
-                <td><span class="badge" data-status="awarded" data-i18n="status.awarded">Awarded</span></td>
-                <td><a href="#" style="color:var(--kenya-red); font-weight:700;" data-i18n="contracts.report">Report</a>
-                </td>
-              </tr>
-              <tr>
-                <td>PPIP-003</td>
-                <td>Garissa Solar Mini-Grid Phase 1</td>
-                <td>SunGrid Africa</td>
-                <td>210,000,000</td>
-                <td>2025-05-18</td>
-                <td><span class="badge" data-status="ongoing" data-i18n="status.ongoing">Ongoing</span></td>
-                <td><a href="#" style="color:var(--kenya-red); font-weight:700;" data-i18n="contracts.report">Report</a>
-                </td>
-              </tr>
-              <tr>
-                <td>PPIP-004</td>
-                <td>Kiambu Community Water Project</td>
-                <td>AquaWorks Consortium</td>
-                <td>85,000,000</td>
-                <td>2025-04-11</td>
-                <td><span class="badge" data-status="awarded" data-i18n="status.awarded">Awarded</span></td>
-                <td><a href="#" style="color:var(--kenya-red); font-weight:700;" data-i18n="contracts.report">Report</a>
-                </td>
-              </tr>
-=======
                 <th scope="col">Report</th>
               </tr>
             </thead>
             <tbody id="contracts-tbody">
               <!-- Dynamically populated -->
->>>>>>> ac9fdc6e420ea733f8eb9bd19d2231883dec34a6
             </tbody>
           </table>
         </div>
       </div>
     </section>
 
-<<<<<<< HEAD
-=======
     <!-- ===== CONTRACT DETAIL MODAL ===== -->
     <div id="contract-modal-overlay" class="overlay" role="presentation"></div>
     <div id="contract-detail-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-project-name" style="background:#fff; color:#0d0f10; display:none; flex-direction:column; padding: 0; border: 1px solid var(--border);">
@@ -727,7 +530,6 @@
     </div>
 
 
->>>>>>> ac9fdc6e420ea733f8eb9bd19d2231883dec34a6
     <!-- ===== PROJECT MONITORING ===== -->
     <section id="projects" aria-labelledby="projects-title">
       <div class="container">
@@ -883,20 +685,14 @@
   </main>
   <script src="data/i18n.js"></script>
   <script src="data/budget-intelligence.js"></script>
-<<<<<<< HEAD
-=======
   <script src="data/contracts.js"></script>
->>>>>>> ac9fdc6e420ea733f8eb9bd19d2231883dec34a6
   <script src="data/projects.js"></script>
 
   <script src="js/utils.js"></script>
   <script src="js/i18n.js"></script>
   <script src="js/report.js"></script>
   <script src="js/budget-intelligence.js" defer></script>
-<<<<<<< HEAD
-=======
   <script src="js/contracts.js" defer></script>
->>>>>>> ac9fdc6e420ea733f8eb9bd19d2231883dec34a6
   <script src="js/main.js" defer></script>
   <script src="js/pwa.js" defer></script>
   <script>
