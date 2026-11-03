@@ -85,7 +85,7 @@ canvas {
 .site-header {
   position: sticky;
   top: 0;
-  z-index: 20;
+  z-index: 2000;
   background: var(--kenya-green);
   box-shadow: 0 2px 10px rgba(0, 0, 0, .12);
 }
@@ -522,10 +522,11 @@ progress {
 }
 
 /* ===== MAP ===== */
-#map {
-  height: 280px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
+#projects .card[aria-label="Interactive map"] {
+  overflow: hidden;
+  isolation: isolate;
+  position: relative;
+  z-index: 0;
 }
 
 #map {
@@ -533,6 +534,14 @@ progress {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   touch-action: pan-y;
+  overflow: hidden;
+  isolation: isolate;
+  position: relative;
+  z-index: 0;
+}
+
+#map.leaflet-container {
+  z-index: 0;
 }
 
 /* ===== FOOTER ===== */
@@ -891,7 +900,7 @@ footer a {
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 40;
+  z-index: 2000;
   background: #fff;
   border-top: 1px solid var(--border);
   padding: .35rem .25rem calc(.35rem + env(safe-area-inset-bottom, 0px));
